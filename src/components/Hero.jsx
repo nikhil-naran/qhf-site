@@ -55,67 +55,104 @@ function Word({ word, delay=0 }){
 }
 
 function TypingParagraph({ mounted }){
-  const text = 'Empowering students with real-world investment experience and financial expertise.';
-  const [display, setDisplay] = useState('');
-  const [done, setDone] = useState(false);
+  const base = 'Empowering students with ';
+  const variants = [
+    'real-world investment experience.',
+    'financial expertise.',
+    'practical portfolio management skills.',
+    'industry connections and mentorship.'
+  ];
+  const [display, setDisplay] = useState(base + variants[0]);
+  const [isTyping, setIsTyping] = useState(true);
   const spanRef = React.useRef(null);
   const reduce = prefersReducedMotion();
   const ref = React.useRef(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!mounted) return;
-    if (reduce) { setDisplay(text); return; }
+    if (reduce) { setDisplay(base + variants[0]); return; }
 
-    let handle = null;
-    let started = false;
-    const startTyping = () => {
-      if (started) return; started = true;
-      let i = 0;
-      const speed = 28; // ms per char
-      handle = setInterval(()=>{
-        i += 1;
-        setDisplay(text.slice(0, i));
-        if (i >= text.length) {
-          clearInterval(handle);
-          handle = null;
-          // ensure the span starts from gold color so the fade animates
-          const el = spanRef.current;
-          if (el) {
-            el.style.color = '#C5A16D';
-            el.style.webkitTextFillColor = '#C5A16D';
-            // force reflow before adding class
-            // eslint-disable-next-line no-unused-expressions
-            el.offsetWidth;
-          }
-          setDone(true);
+    const typeSpeed = 40; // ms per char
+    const deleteSpeed = 30; // ms per char
+    const pauseAfterType = 1200; // ms
+    const shortGap = 160; // ms between cycles
+
+    const cancelRef = { current: false };
+    const currentVariant = { current: 0 };
+
+    const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+
+    const runLoop = async () => {
+      while (!cancelRef.current) {
+        const idx = currentVariant.current;
+        const variant = variants[idx];
+        const full = base + variant;
+
+        // type
+        for (let i = base.length; i <= full.length; i++) {
+          if (cancelRef.current) return;
+          setDisplay(full.slice(0, i));
+          // eslint-disable-next-line no-await-in-loop
+          await sleep(typeSpeed);
         }
-      }, speed);
+
+        if (cancelRef.current) return;
+        // pause
+        // eslint-disable-next-line no-await-in-loop
+        await sleep(pauseAfterType);
+
+        // delete
+        for (let j = full.length; j >= base.length; j--) {
+          if (cancelRef.current) return;
+          setDisplay(full.slice(0, j));
+          // eslint-disable-next-line no-await-in-loop
+          await sleep(deleteSpeed);
+        }
+
+        if (cancelRef.current) return;
+        // advance
+        currentVariant.current = (currentVariant.current + 1) % variants.length;
+        // small gap before next typing
+        // eslint-disable-next-line no-await-in-loop
+        await sleep(shortGap);
+      }
     };
 
-    const el = ref.current;
-    if (el && 'IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e => {
-          if (e.isIntersecting) startTyping();
-        });
-      }, { threshold: 0.25 });
-      io.observe(el);
-      return () => { io.disconnect(); if (handle) clearInterval(handle); };
-    }
+    const startWhenVisible = () => {
+      const el = ref.current;
+      if (el && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              io.disconnect();
+              runLoop();
+            }
+          });
+        }, { threshold: 0.25 });
+        io.observe(el);
+        return () => io.disconnect();
+      }
+      // fallback start immediately
+      runLoop();
+      return () => {};
+    };
 
-    // fallback: start immediately
-    startTyping();
-    return () => { if (handle) clearInterval(handle); };
-  }, [mounted, reduce, text]);
+    const disconnect = startWhenVisible();
+    return () => {
+      cancelRef.current = true;
+      if (disconnect) disconnect();
+    };
+  }, [mounted, reduce]);
 
-  // while typing: show gold (typing-gold). When done, apply keyframe-driven fade class 'typing-fade'.
-  const spanClass = reduce ? 'typing-done' : (done ? 'typing-fade typing-done' : 'typing-gold');
+  // Don't use the gold->white animation classes to avoid visual glitches.
+  const spanClass = '';
+
   return (
     <p
       ref={ref}
       className={`mt-5 max-w-2xl text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}
     >
-      <span ref={spanRef} className={spanClass}>{display}</span>
+  <span ref={spanRef} className={spanClass} style={{ color: '#C5A16D' }}>{display}</span>
     </p>
   );
 }

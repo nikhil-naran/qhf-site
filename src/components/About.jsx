@@ -7,7 +7,7 @@ export default function About(){
   useEffect(()=> revealOnScroll(ref.current), []);
   return (
     <section id="about" ref={ref} className="relative py-20 scroll-mt-24">
-      <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-10 items-start">
+  <div className="mx-auto max-w-7xl px-4 grid gap-10 items-start">
         <div className="glass rounded-2xl p-8 border border-white/10">
           <h2 className="text-3xl font-bold">What We Do</h2>
           <p className="mt-3 text-slate-200/90">Queen’s Hedge Fund (QHF) is a student-managed North American investment fund based in Kingston, Ontario. We run a concentrated, macro-driven portfolio while developing the next generation of investors through hands-on training, workshops, research reviews, and live stock pitches.</p>
@@ -32,7 +32,7 @@ export default function About(){
 
         <div className="space-y-6">
           <div className="glass rounded-2xl p-8 border border-white/10">
-            <h3 className="text-2xl font-semibold">Why QHF</h3>
+            <h3 className="text-3xl font-bold">Why QHF</h3>
             <p className="mt-4 text-slate-200/90">QHF is designed for students who want more than just theory — we offer the structure, discipline, and accountability of a real hedge fund environment.</p>
 
             <ul className="mt-4 list-disc list-inside space-y-3 text-slate-200/90">
