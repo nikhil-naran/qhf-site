@@ -20,10 +20,9 @@ export const TEAMS = {
       { ticker: 'MSFT', company: 'Microsoft', allocation: 16, performance: 12 },
       { ticker: 'SHOP', company: 'Shopify', allocation: 22, performance: 18 }
     ],
-    portfolioManager: { name: 'Maya Patel', headshot: '', bio: 'Drives concentrated tech exposure with quality bias.' },
     coPortfolioManagers: [
-      { name: 'Nikhil Naran', headshot: '', bio: 'Co-PM: platform & infra.' },
-      { name: 'Anson El-Ayari', headshot: '', bio: 'Co-PM: applied data & research.' }
+      { name: 'Anson El-Ayari', headshot: '', bio: 'Co-PM: applied data & research.' },
+      { name: 'Nikhil Naran', headshot: '', bio: 'Co-PM: platform & infra.' }
     ],
     analysts: [
       { name: 'James Simone', headshot: '', bio: 'Semis & AI infra.' },

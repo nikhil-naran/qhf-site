@@ -61,9 +61,29 @@ export default function TeamPage(){
           <div className="mt-4">
             {(() => {
               // Do not show a Portfolio Manager block for teams that explicitly list `members`.
-              const pm = team.portfolioManager || (team.coPortfolioManagers && team.coPortfolioManagers[0]) || null;
-              const showPM = !team.members && pm;
+              const hasCoPMs = team.coPortfolioManagers && team.coPortfolioManagers.length;
+              const pm = team.portfolioManager || (hasCoPMs ? null : null);
+              const showPM = !team.members && (pm || hasCoPMs);
               if (!showPM) return null;
+              if (hasCoPMs) {
+                return (
+                  <>
+                    <h3 className="text-lg font-medium">Co-Portfolio Managers</h3>
+                    <div className="mt-3 grid sm:grid-cols-2 gap-4">
+                      {team.coPortfolioManagers.map((cpm, idx) => (
+                        <div key={idx} className="flex items-center gap-4">
+                          <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10" aria-label="Headshot placeholder" />
+                          <div>
+                            <div className="font-semibold">{cpm.name}</div>
+                            <p className="text-sm text-slate-300">To Be Filled out</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                );
+              }
+              // Fallback single PM
               return (
                 <>
                   <h3 className="text-lg font-medium">Portfolio Manager</h3>
