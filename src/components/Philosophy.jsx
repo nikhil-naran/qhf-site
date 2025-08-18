@@ -2,18 +2,17 @@ import React, { useRef, useEffect } from 'react';
 import { revealOnScroll } from '../lib/animation.js';
 
 function TiltCard({ title, children }){
-  const onMove = (e) => {
-    const el = e.currentTarget; const r = el.getBoundingClientRect();
-    const dx = (e.clientX - (r.left + r.width/2)) / r.width;
-    const dy = (e.clientY - (r.top + r.height/2)) / r.height;
-    el.style.transform = `rotateX(${dy*-6}deg) rotateY(${dx*6}deg)`;
-  };
-  const onLeave = (e) => { e.currentTarget.style.transform = 'rotateX(0) rotateY(0)'; };
+  // Disable tilt interactions: replace pointer handlers with no-ops to prevent elements following the cursor
+  const innerRef = React.useRef(null);
+  const onMove = () => { /* no-op: tilt disabled */ };
+  const onLeave = () => { /* no-op: tilt disabled */ };
   return (
     <div onPointerMove={onMove} onPointerLeave={onLeave} className="glass rounded-2xl p-6 border border-white/10 transition-transform will-change-transform">
-      <div className="text-xl font-semibold">{title}</div>
-      <div className="mt-2 text-slate-200/90">{children}</div>
-      <div className="mt-3 h-[2px] bg-gradient-to-r from-transparent via-goldA to-transparent"/>
+      <div ref={innerRef} className="will-change-transform transition-transform">
+        <div className="text-xl font-semibold">{title}</div>
+        <div className="mt-2 text-slate-200/90">{children}</div>
+        <div className="mt-3 h-[2px] bg-gradient-to-r from-transparent via-goldA to-transparent"/>
+      </div>
     </div>
   );
 }

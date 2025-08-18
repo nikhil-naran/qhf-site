@@ -14,15 +14,7 @@ export default function Hero(){
       <ParticleCanvas />
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 w-full">
         <div className="flex flex-col items-center">
-          <div className="flex justify-center">
-            <img
-              src="/QHF-home.png"
-              alt="Queens Hedge Fund"
-              loading="eager"
-              style={{ clipPath: 'inset(0 0 25% 0)' }}
-              className="w-[98%] max-w-none h-auto md:w-[90%] lg:w-[80%] object-contain drop-shadow-2xl"
-            />
-          </div>
+          <ParallaxImage />
           <TypingParagraph mounted={mounted} />
         </div>
         <div className="mt-10 flex items-center gap-4 justify-center">
@@ -57,6 +49,7 @@ function Word({ word, delay=0 }){
 function TypingParagraph({ mounted }){
   const text = 'Empowering students with real-world investment experience and financial expertise.';
   const [display, setDisplay] = useState('');
+  const [done, setDone] = useState(false);
   const reduce = prefersReducedMotion();
   const ref = React.useRef(null);
 
@@ -73,7 +66,7 @@ function TypingParagraph({ mounted }){
       handle = setInterval(()=>{
         i += 1;
         setDisplay(text.slice(0, i));
-        if (i >= text.length) { clearInterval(handle); handle = null; }
+        if (i >= text.length) { clearInterval(handle); handle = null; setDone(true); }
       }, speed);
     };
 
@@ -93,9 +86,52 @@ function TypingParagraph({ mounted }){
     return () => { if (handle) clearInterval(handle); };
   }, [mounted, reduce, text]);
 
+  // while typing: show gold (typing-gold). When done, switch to typing-done which fades to white.
+  const spanClass = reduce ? 'typing-done' : (done ? 'typing-done' : 'typing-gold');
   return (
-    <p ref={ref} className={`mt-5 max-w-2xl text-slate-200/90 text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}>
-      {display}
+    <p
+      ref={ref}
+      className={`mt-5 max-w-2xl text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}
+    >
+      <span className={spanClass}>{display}</span>
     </p>
+  );
+}
+
+function ParallaxImage(){
+  const ref = useRef(null);
+  const ticking = useRef(false);
+  useEffect(()=>{
+    const el = ref.current; if (!el) return;
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(()=>{
+        const y = window.scrollY || window.pageYOffset;
+        // small parallax: move image up to 40px based on scroll position within first 600px
+        const t = Math.min(1, y / 600);
+        el.style.transform = `translateY(${t * -40}px)`;
+        ticking.current = false;
+      });
+    };
+    const onMove = (ev) => {
+      // pointer parallax subtle tilt
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width/2; const cy = r.top + r.height/2;
+      const dx = (ev.clientX - cx) / r.width; const dy = (ev.clientY - cy) / r.height;
+      const tx = dx * 8; const ty = dy * 6;
+      el.style.transform = `translateY(${ty}px) translateX(${tx}px)`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('pointermove', onMove);
+    return ()=>{ window.removeEventListener('scroll', onScroll); window.removeEventListener('pointermove', onMove); };
+  }, []);
+
+  return (
+    <div className="w-full flex justify-center overflow-hidden" aria-hidden>
+      <div ref={ref} className="parallax-image-wrap transition-transform duration-700 will-change-transform">
+        <img src="/QHF-home.png" alt="Queens Hedge Fund" loading="eager" style={{ clipPath: 'inset(0 0 25% 0)' }} className="w-[98%] max-w-none h-auto md:w-[90%] lg:w-[80%] object-contain drop-shadow-2xl" />
+      </div>
+    </div>
   );
 }

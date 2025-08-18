@@ -45,7 +45,7 @@ export default function Nav(){
               )}
             </li>
             <li><a href="/#events" className="hover:text-goldB transition-colors">Events</a></li>
-            <li><a href="/#alumni" className="hover:text-goldB transition-colors">Alumni</a></li>
+            <li><a href="/#alumni" className="hover:text-goldB transition-colors">Current Placements</a></li>
             <li><a href="/#join" className="hover:text-goldB transition-colors">Join Us</a></li>
           </ul>
           <div className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export default function Nav(){
                 <NavLink key={t.slug} to={`/teams/${t.slug}`} onClick={()=> setOpen(false)} className="px-4 py-2 rounded hover:bg-white/10">{t.name}</NavLink>
               ))}
               <a href="/#events" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Events</a>
-              <a href="/#alumni" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Alumni</a>
+              <a href="/#alumni" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Current Placements</a>
               <a href="/#join" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Join</a>
               {/* motion toggle removed */}
             </div>

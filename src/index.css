@@ -84,6 +84,17 @@ body {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.04"/></svg>');
 }
 
+/* Disable parallax/pointer-driven transform on hero image: override inline transforms */
+#hero .parallax-image-wrap,
+#hero .parallax-image-wrap img,
+#hero img[alt*="Queens Hedge Fund"],
+#hero img {
+  transform: none !important;
+  -webkit-transform: none !important;
+  transition: none !important;
+  will-change: auto !important;
+}
+
 /* Focus ring aligned with brand */
 :focus-visible { outline: 2px solid #E2C784; outline-offset: 3px; border-radius: 6px; }
 
@@ -139,6 +150,22 @@ body {
   .type-cursor::after { animation: none; opacity: 0; }
 }
 
+/* Typing color states: gold while typing, fade to white when done */
+.typing-gold { color: #C5A16D; transition: color 6600ms cubic-bezier(0.22,1,0.36,1); }
+.typing-done { color: rgba(255,255,255,0.95); transition: color 6600ms cubic-bezier(0.22,1,0.36,1); }
+
+/* Stronger specificity for hero to override other utilities */
+#hero .typing-gold, .typing-gold { 
+  color: #C5A16D;
+  -webkit-text-fill-color: #C5A16D;
+  transition: color 6600ms cubic-bezier(0.22,1,0.36,1), -webkit-text-fill-color 6600ms cubic-bezier(0.22,1,0.36,1);
+}
+#hero .typing-done, .typing-done {
+  color: rgba(255,255,255,0.95);
+  -webkit-text-fill-color: rgba(255,255,255,0.95);
+  transition: color 6600ms cubic-bezier(0.22,1,0.36,1), -webkit-text-fill-color 6600ms cubic-bezier(0.22,1,0.36,1);
+}
+
 /* Team card hover interaction for Our Teams */
 .team-card {
   transition: transform 220ms cubic-bezier(0.22,1,0.36,1), box-shadow 220ms cubic-bezier(0.22,1,0.36,1), border-color 220ms;
@@ -155,6 +182,23 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .team-card, .team-card:hover, .team-card:focus-within, .team-card:active { transition: none !important; transform: none !important; box-shadow: none !important; }
 }
+
+/* Grid card style used by TeamsHub and Our Teams */
+.team-grid-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 260ms cubic-bezier(0.22,1,0.36,1), box-shadow 260ms;
+}
+.team-grid-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 48px rgba(2,6,23,0.6); }
+.team-logo { width: 64px; height: 64px; min-width: 64px; min-height: 64px; border-radius: 10px; display:inline-flex; align-items:center; justify-content:center; overflow:hidden; }
+
 
 /* Marquee: show 3 tiles at a time, fill the panel width, and loop smoothly */
 .marquee-wrapper {

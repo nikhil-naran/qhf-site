@@ -21,7 +21,7 @@ export default function Alumni(){
   return (
     <section id="alumni" ref={ref} className="py-20">
       <div className="mx-auto max-w-7xl px-4">
-        <h2 className="text-3xl font-bold">Placements — Current & Past</h2>
+  <h2 className="text-3xl font-bold">Current Placements</h2>
         <div className="mt-6">
           <div className="glass rounded-2xl p-6 border border-white/10 overflow-hidden">
             <h3 className="text-xl font-semibold mb-4">Current Placements</h3>

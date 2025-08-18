@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Nav from './components/Nav.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
+import Stats from './components/Stats.jsx';
 import Philosophy from './components/Philosophy.jsx';
 import Founders from './components/Founders.jsx';
 import Industries from './components/Industries.jsx';
@@ -42,6 +43,7 @@ function Home(){
     <main id="main">
       <Hero />
       <About />
+  <Stats />
   <Founders />
       <Philosophy />
   <Industries />

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { revealOnScroll } from '../lib/animation.js';
-import { TEAM_CATEGORIES } from '../data.js';
+import { TEAM_CATEGORIES, TEAMS } from '../data.js';
 import { Link } from 'react-router-dom';
 
 export default function Industries(){
@@ -13,12 +13,25 @@ export default function Industries(){
         <h2 className="text-3xl font-bold">Our Teams</h2>
         <p className="text-slate-300 mt-2 max-w-2xl">Explore QHF’s specialized teams — click any team to view holdings, members, and research.</p>
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TEAM_CATEGORIES.map((c) => (
-            <Link key={c.slug} to={`/teams/${c.slug}`} className="glass rounded-2xl p-6 border border-white/10 team-card">
-              <div className="text-xl font-semibold">{c.name}</div>
-              <div className="text-sm text-slate-300 mt-1">View team, holdings, and research</div>
-            </Link>
-          ))}
+          {TEAM_CATEGORIES.map((c) => {
+            const meta = TEAMS[c.slug] || {};
+            const blurb = meta.portfolioManager?.bio || 'View team, holdings, and research';
+            return (
+              <Link key={c.slug} to={`/teams/${c.slug}`} className="team-grid-card group">
+                <div className="flex items-center gap-4">
+                  <div className="team-logo bg-white/5 rounded-md flex items-center justify-center overflow-hidden">
+                    {/* placeholder initials if no logo */}
+                    <span className="text-xl font-bold text-goldB">{c.name.split(' ').map(s=>s[0]).slice(0,2).join('')}</span>
+                  </div>
+                  <div>
+                    <div className="text-xl font-semibold group-hover:text-goldB transition-colors">{c.name}</div>
+                    <div className="text-sm text-slate-300 mt-1">{blurb}</div>
+                  </div>
+                </div>
+                <div className="mt-4 text-sm text-slate-200/90">Explore →</div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
