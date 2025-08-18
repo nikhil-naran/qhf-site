@@ -27,8 +27,8 @@ export default function Nav(){
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="mx-auto max-w-7xl px-4">
         <nav className="mt-3 flex items-center justify-between rounded-2xl glass shadow-glass border border-white/10 px-4 py-3 backdrop-blur supports-[backdrop-filter]:bg-white/5">
-          <Link to="/" className="text-xl font-bold tracking-tight" aria-label="Queens Hedge Fund home">
-            <span className="bg-gold-gradient bg-clip-text text-transparent">QHF</span>
+          <Link to="/" className="flex items-center gap-3" aria-label="Queens Hedge Fund home">
+            <img src="/QHF.jpg" alt="QHF logo" loading="eager" className="h-12 w-auto object-contain p-1 bg-white/6 rounded drop-shadow-lg" />
           </Link>
           <ul className="hidden md:flex gap-6 text-sm items-center">
             <li><a href="/#about" className="hover:text-goldB transition-colors">About</a></li>
@@ -36,7 +36,7 @@ export default function Nav(){
             <li className="relative">
               <button aria-haspopup="menu" aria-expanded={teamsOpen} onClick={()=> setTeamsOpen(v=>!v)} className="inline-flex items-center gap-1 hover:text-goldB">Our Teams <ChevronDown size={16}/></button>
               {teamsOpen && (
-                <div role="menu" className="absolute top-full mt-2 w-72 glass rounded-2xl border border-white/10 p-2">
+                <div role="menu" className="absolute top-full mt-2 w-72 dropdown-panel rounded-2xl border border-white/10 p-2">
                   <NavLink to="/teams" className={({isActive})=>`block px-3 py-2 rounded hover:bg-white/10 ${isActive? 'text-goldB':''}`}>All Teams</NavLink>
                   {TEAM_CATEGORIES.map(t => (
                     <NavLink key={t.slug} to={`/teams/${t.slug}`} className={({isActive})=>`block px-3 py-2 rounded hover:bg-white/10 ${isActive? 'text-goldB':''}`}>{t.name}</NavLink>

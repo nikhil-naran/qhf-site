@@ -8,7 +8,7 @@ import Philosophy from './components/Philosophy.jsx';
 import Founders from './components/Founders.jsx';
 import Industries from './components/Industries.jsx';
 import Events from './components/Events.jsx';
-import Team from './components/Team.jsx';
+// Team section removed from Home
 import Alumni from './components/Alumni.jsx';
 import Join from './components/Join.jsx';
 import Footer from './components/Footer.jsx';
@@ -48,7 +48,6 @@ function Home(){
       {/* Replaced old Portfolio with Performance */}
       <Performance />
       <Events />
-      <Team />
       <Alumni />
       <Join />
     </main>

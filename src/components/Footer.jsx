@@ -11,7 +11,10 @@ export default function Footer(){
           <a href="/#events" className="hover:text-goldB">Events</a>
           <a href="/#join" className="hover:text-goldB">Join</a>
         </nav>
-        <div className="text-sm text-slate-400">© {new Date().getFullYear()} Queens Hedge Fund — Made with care<span className="inline-block ml-1 align-middle w-2 h-2 rounded-full bg-goldA animate-ping"></span></div>
+        <div className="flex items-center gap-3 text-sm text-slate-400">
+          <img src="/QHF.jpg" alt="QHF logo" className="h-8 w-auto rounded p-0.5 bg-white/6 drop-shadow-sm" />
+          <span>© {new Date().getFullYear()} Queens Hedge Fund — Made with care<span className="inline-block ml-1 align-middle w-2 h-2 rounded-full bg-goldA animate-ping"></span></span>
+        </div>
       </div>
     </footer>
   );

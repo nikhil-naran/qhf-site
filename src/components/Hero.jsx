@@ -13,17 +13,21 @@ export default function Hero(){
       <div className="hero-noise"></div>
       <ParticleCanvas />
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 w-full">
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.05]">
-          {['Queens','Hedge','Fund'].map((w,i)=> (
-            <span key={i} className="inline-block mr-3 align-top">
-              <Word word={w} delay={i*120} />
-            </span>
-          ))}
-        </h1>
-        <p className="mt-5 max-w-2xl text-slate-200/90">
-          Empowering students with real-world investment experience and financial expertise.
-        </p>
-        <div className="mt-10 flex items-center gap-4">
+        <div className="flex flex-col items-center">
+          <div className="flex justify-center">
+            <img
+              src="/QHF-home.png"
+              alt="Queens Hedge Fund"
+              loading="eager"
+              style={{ clipPath: 'inset(0 0 25% 0)' }}
+              className="w-[98%] max-w-none h-auto md:w-[90%] lg:w-[80%] object-contain drop-shadow-2xl"
+            />
+          </div>
+          <p className="mt-5 max-w-2xl text-slate-200/90 text-center">
+            Empowering students with real-world investment experience and financial expertise.
+          </p>
+        </div>
+        <div className="mt-10 flex items-center gap-4 justify-center">
           <a href="#about" className="btn">Learn More</a>
           <a href="#philosophy" className="text-slate-200 hover:text-goldB inline-flex items-center gap-2">Our Strategy <ArrowRight size={18}/></a>
         </div>

@@ -28,6 +28,29 @@
   -webkit-backdrop-filter: blur(10px);
 }
 
+/* Slightly more opaque panel for dropdowns where we want less transparency */
+.dropdown-panel {
+  /* More frosted / less transparent: darker tint so text is readable */
+  background: linear-gradient(180deg, rgba(15,23,42,0.80), rgba(15,23,42,0.72));
+  backdrop-filter: blur(20px) saturate(130%) contrast(95%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%) contrast(95%);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.6);
+}
+
+/* Improve readability for links inside the dropdown */
+.dropdown-panel a,
+.dropdown-panel .block {
+  color: rgb(241 245 249 / 0.95); /* near-white */
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+}
+.dropdown-panel a:hover,
+.dropdown-panel .block:hover {
+  background: rgba(255,255,255,0.04);
+  color: var(--tw-text-opacity, 1);
+  color: #C5A16D; /* gold on hover to match theme */
+}
+
 /* Soft noise texture for hero */
 .hero-noise {
   position: absolute; inset: 0; pointer-events: none;
@@ -45,3 +68,63 @@
 .page-fade-enter-active { opacity: 1; transition: opacity 280ms cubic-bezier(0.22,1,0.36,1); }
 .page-fade-exit { opacity: 1; }
 .page-fade-exit-active { opacity: 0; transition: opacity 240ms cubic-bezier(0.22,1,0.36,1); }
+
+/* Marquee: show 3 tiles at a time, fill the panel width, and loop smoothly */
+.marquee-wrapper {
+  --visible-count: 3; /* how many tiles visible at once */
+  width: 100%; /* fill the parent panel */
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  /* duplicated content in markup allows a -50% translate for seamless looping */
+  animation: marquee-scroll 34s linear infinite; /* slightly faster */
+}
+.marquee-item {
+  /* make each item occupy roughly 1/visible-count of the wrapper */
+  flex: 0 0 calc((100% / var(--visible-count)) - 12px);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* make marquee responsive: fewer/larger tiles on narrower screens */
+@media (max-width: 900px) {
+  .marquee-wrapper { --visible-count: 2; }
+  .marquee-track { animation-duration: 28s; }
+}
+@media (max-width: 640px) {
+  .marquee-wrapper { --visible-count: 1; }
+  .marquee-track { animation-duration: 16s; }
+}
+
+/* Larger/taller marquee container and square logo helper */
+.marquee-wrapper { height: 160px; }
+.marquee-item { height: 100%; }
+.marquee-logo {
+  width: 96px;
+  height: 96px;
+  min-width: 96px;
+  min-height: 96px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 900px) {
+  .marquee-wrapper { height: 140px; }
+  .marquee-logo { width: 80px; height: 80px; min-width: 80px; min-height: 80px; }
+}
+@media (max-width: 640px) {
+  .marquee-wrapper { height: 120px; }
+  .marquee-logo { width: 64px; height: 64px; min-width: 64px; min-height: 64px; }
+}
