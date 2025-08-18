@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { revealOnScroll } from '../lib/animation.js';
 
 export default function Join(){
   const [sent, setSent] = useState(false);
+  const ref = useRef(null);
+  useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
   return (
-    <section id="join" className="py-20">
+    <section id="join" ref={ref} className="py-20">
       <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-8 items-start">
         <div className="glass rounded-2xl p-8 border border-white/10">
           <h2 className="text-3xl font-bold">Join Us</h2>

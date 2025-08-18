@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Menu, X, ChevronUp, Accessibility, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronUp, ChevronDown } from 'lucide-react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { TEAM_CATEGORIES } from '../data.js';
-import { setReducedMotion } from '../lib/animation.js';
+// ...existing code...
 
 export default function Nav(){
   const [open, setOpen] = useState(false);
@@ -49,9 +49,6 @@ export default function Nav(){
             <li><a href="/#join" className="hover:text-goldB transition-colors">Join Us</a></li>
           </ul>
           <div className="flex items-center gap-2">
-            <button onClick={() => { const next = !JSON.parse(localStorage.getItem('qhf-reduce-motion')||'false'); setReducedMotion(next); }} className="hidden md:flex items-center gap-1 text-sm px-3 py-1.5 rounded-full border border-white/10 hover:border-goldA">
-              <Accessibility size={16}/> Motion
-            </button>
             <button className="md:hidden p-2 rounded-full hover:bg-white/10" aria-label="Open menu" aria-haspopup="dialog" aria-expanded={open} aria-controls="mobileMenu" onClick={() => setOpen(true)}>
               <Menu />
             </button>
@@ -78,9 +75,7 @@ export default function Nav(){
               <a href="/#events" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Events</a>
               <a href="/#alumni" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Alumni</a>
               <a href="/#join" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Join</a>
-              <button onClick={() => { const next = !JSON.parse(localStorage.getItem('qhf-reduce-motion')||'false'); setReducedMotion(next); }} className="mt-2 inline-flex items-center gap-2 px-3 py-2 rounded border border-white/10 hover:border-goldA">
-                <Accessibility size={16}/> Toggle Motion
-              </button>
+              {/* motion toggle removed */}
             </div>
           </div>
           <button className="flex-1" aria-label="Close menu" onClick={() => setOpen(false)} />

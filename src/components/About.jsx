@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { CheckCircle2, PlayCircle } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { revealOnScroll } from '../lib/animation.js';
 
 export default function About(){
@@ -29,16 +29,7 @@ export default function About(){
               ))}
             </ul>
           </div>
-          <button className="w-full relative overflow-hidden glass rounded-2xl p-6 border border-white/10 text-left group">
-            <div className="flex items-center gap-3">
-              <PlayCircle />
-              <div>
-                <div className="font-semibold">Sizzle Reel</div>
-                <div className="text-sm text-slate-300">Short video overview (coming soon)</div>
-              </div>
-            </div>
-            <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"/>
-          </button>
+          {/* sizzle reel removed */}
         </div>
       </div>
     </section>

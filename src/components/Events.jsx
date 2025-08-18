@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { revealOnScroll } from '../lib/animation.js';
 import { events } from '../data.js';
 import { ChevronDown } from 'lucide-react';
 
 export default function Events(){
+  const ref = useRef(null);
+  useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
   const [open, setOpen] = useState(null);
   return (
-    <section id="events" className="py-20">
+    <section id="events" ref={ref} className="py-20">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Events</h2>
         <div className="mt-6 space-y-4">

@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
+import { revealOnScroll } from '../lib/animation.js';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, CartesianGrid } from 'recharts';
 import { perfSeries } from '../data.js';
 
@@ -9,6 +10,8 @@ function buildSeries(a, b, ka, kb) {
 }
 
 export default function Performance(){
+  const ref = useRef(null);
+  useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
   const ca = useMemo(() => buildSeries(perfSeries.canadian.our, perfSeries.canadian.tsx, 'QHF', 'S&P/TSX'), []);
   const us = useMemo(() => buildSeries(perfSeries.us.our, perfSeries.us.sp500, 'QHF', 'S&P 500'), []);
 
@@ -17,7 +20,7 @@ export default function Performance(){
     : false;
 
   return (
-    <section className="py-20">
+    <section className="py-20" ref={ref}>
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Our Performance</h2>
         <p className="text-slate-200/90 mt-2">Comparing our funds to standard market indexes (sample data).</p>

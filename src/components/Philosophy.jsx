@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { revealOnScroll } from '../lib/animation.js';
 
 function TiltCard({ title, children }){
   const onMove = (e) => {
@@ -18,8 +19,11 @@ function TiltCard({ title, children }){
 }
 
 export default function Philosophy(){
+  const ref = useRef(null);
+  useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
+
   return (
-    <section id="philosophy" className="py-20">
+    <section id="philosophy" ref={ref} className="py-20">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Investment Philosophy</h2>
         <p className="mt-2 text-slate-200/90 max-w-2xl">We run a deep-value, concentrated strategy. Three pillars guide our process from research to conviction and ongoing monitoring.</p>

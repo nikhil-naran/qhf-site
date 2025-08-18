@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { alumniStats, sponsors } from '../data.js';
 import { countTo } from '../lib/animation.js';
+import { revealOnScroll } from '../lib/animation.js';
 
 export default function Alumni(){
   // Reworked as a Placements section (current / past) with partner logos
+  const ref = useRef(null);
+  useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
   const current = [
     { name: 'Questrade', file: '/questrade.png' },
     { name: 'Richardson Wealth', file: '/richardson.png' },
@@ -16,7 +19,7 @@ export default function Alumni(){
   ];
 
   return (
-    <section id="alumni" className="py-20">
+    <section id="alumni" ref={ref} className="py-20">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Placements — Current & Past</h2>
         <div className="mt-6">

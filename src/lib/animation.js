@@ -17,22 +17,39 @@ export const setReducedMotion = (val) => {
 };
 
 /** IntersectionObserver to reveal elements */
-export const revealOnScroll = (el, { translateY = 8, delay = 0 } = {}) => {
+export const revealOnScroll = (el, { translateY = 40, delay = 0 } = {}) => {
   if (!el) return;
+  // initial hidden state
   el.style.opacity = '0';
-  el.style.transform = `translateY(${translateY}px)`;
+  // add a tiny scale to make the entrance more pronounced
+  el.style.transform = `translateY(${translateY}px) scale(0.985)`;
+  const reduce = prefersReducedMotion();
+  if (reduce) {
+    // if reduced motion, show immediately without transitions
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+    return;
+  }
+
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (e.isIntersecting) {
-        const reduce = prefersReducedMotion();
-        el.style.transition = `opacity ${reduce ? 0 : 420}ms ${Motion.ease.out}, transform ${reduce ? 0 : 420}ms ${Motion.ease.out}`;
+        // on enter: animate in (longer/more pronounced)
+        const dur = 1400; // longer, cinematic reveal
+        el.style.transition = `opacity ${dur}ms ${Motion.ease.out}, transform ${dur}ms ${Motion.ease.out}`;
         el.style.transitionDelay = `${delay}ms`;
         el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-        obs.unobserve(el);
+        el.style.transform = 'translateY(0) scale(1)';
+      } else {
+        // on leave: reset to hidden so it can animate again on re-entry
+        // remove transition delay so reset is immediate
+        el.style.transitionDelay = '0ms';
+        el.style.transition = 'opacity 0ms linear, transform 0ms linear';
+        el.style.opacity = '0';
+        el.style.transform = `translateY(${translateY}px) scale(0.985)`;
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.25 }); // reveal when more of the element is visible
   obs.observe(el);
 };
 

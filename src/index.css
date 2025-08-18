@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global page background to ensure the home hero blends seamlessly into other sections */
+:root{
+  --page-bg: radial-gradient(1200px 800px at 20% -10%, rgba(197,161,109,0.12), transparent 60%), radial-gradient(1000px 700px at 80% 10%, rgba(226,199,132,0.08), transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.48), rgba(0,0,0,0.06));
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--page-bg);
+  background-attachment: fixed;
+  background-size: cover;
+  color-scheme: dark;
+  transition: background 600ms cubic-bezier(0.22,1,0.36,1);
+}
+
+/* Make the hero-specific overlay less opinionated so it layers on top of the global background */
+.bg-hero-gradient {
+  background-image: radial-gradient(1200px 800px at 20% -10%, rgba(197,161,109,0.08), transparent 60%), radial-gradient(1000px 700px at 80% 10%, rgba(226,199,132,0.06), transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.16), rgba(0,0,0,0.02));
+  /* subtle blend so underlying body background shows through */
+  mix-blend-mode: normal;
+  opacity: 0.95;
+  transition: opacity 700ms cubic-bezier(0.22,1,0.36,1), background 700ms cubic-bezier(0.22,1,0.36,1);
+}
+
+
 /* Smooth page scrolling (respects reduced motion) */
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
@@ -68,6 +95,66 @@
 .page-fade-enter-active { opacity: 1; transition: opacity 280ms cubic-bezier(0.22,1,0.36,1); }
 .page-fade-exit { opacity: 1; }
 .page-fade-exit-active { opacity: 0; transition: opacity 240ms cubic-bezier(0.22,1,0.36,1); }
+
+/* Reveal animation: soft fade + slide-up for elements on page load */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px) scale(0.99);
+  transition: opacity 1400ms cubic-bezier(0.22,1,0.36,1), transform 1400ms cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Helpful delay utilities (increased for longer, more cinematic reveal) */
+.reveal-delay-0  { transition-delay:   0ms; }
+.reveal-delay-100{ transition-delay: 200ms; }
+.reveal-delay-200{ transition-delay: 400ms; }
+.reveal-delay-300{ transition-delay: 600ms; }
+.reveal-delay-400{ transition-delay: 800ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none !important; transform: none !important; opacity: 1 !important; }
+}
+
+/* Typing cursor used for type-in effect */
+.type-cursor::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 8px;
+  vertical-align: -0.15em;
+  background: rgba(255,255,255,0.95);
+  animation: blink-caret 1s steps(1) infinite;
+}
+
+@keyframes blink-caret {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .type-cursor::after { animation: none; opacity: 0; }
+}
+
+/* Team card hover interaction for Our Teams */
+.team-card {
+  transition: transform 220ms cubic-bezier(0.22,1,0.36,1), box-shadow 220ms cubic-bezier(0.22,1,0.36,1), border-color 220ms;
+  will-change: transform, box-shadow;
+}
+.team-card:hover,
+.team-card:focus-within {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 18px 40px rgba(2,6,23,0.55);
+  border-color: rgba(197,161,109,0.18);
+}
+.team-card:active { transform: translateY(-2px) scale(1.02); }
+
+@media (prefers-reduced-motion: reduce) {
+  .team-card, .team-card:hover, .team-card:focus-within, .team-card:active { transition: none !important; transform: none !important; box-shadow: none !important; }
+}
 
 /* Marquee: show 3 tiles at a time, fill the panel width, and loop smoothly */
 .marquee-wrapper {

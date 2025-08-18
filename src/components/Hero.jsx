@@ -23,13 +23,11 @@ export default function Hero(){
               className="w-[98%] max-w-none h-auto md:w-[90%] lg:w-[80%] object-contain drop-shadow-2xl"
             />
           </div>
-          <p className="mt-5 max-w-2xl text-slate-200/90 text-center">
-            Empowering students with real-world investment experience and financial expertise.
-          </p>
+          <TypingParagraph mounted={mounted} />
         </div>
         <div className="mt-10 flex items-center gap-4 justify-center">
-          <a href="#about" className="btn">Learn More</a>
-          <a href="#philosophy" className="text-slate-200 hover:text-goldB inline-flex items-center gap-2">Our Strategy <ArrowRight size={18}/></a>
+          <a href="#about" className={`btn reveal reveal-delay-200 ${mounted ? 'revealed' : ''} text-base md:text-lg`}>Learn More</a>
+          <a href="#philosophy" className={`text-slate-200 hover:text-goldB inline-flex items-center gap-2 reveal reveal-delay-300 ${mounted ? 'revealed' : ''} text-base md:text-lg`}>Our Strategy <ArrowRight size={20}/></a>
         </div>
       </div>
     </section>
@@ -53,5 +51,30 @@ function Word({ word, delay=0 }){
         {word}
       </span>
     </span>
+  );
+}
+
+function TypingParagraph({ mounted }){
+  const text = 'Empowering students with real-world investment experience and financial expertise.';
+  const [display, setDisplay] = useState('');
+  const reduce = prefersReducedMotion();
+
+  useEffect(()=>{
+    if (!mounted) return;
+    if (reduce) { setDisplay(text); return; }
+    let i = 0;
+    const speed = 28; // ms per char
+    const handle = setInterval(()=>{
+      i += 1;
+      setDisplay(text.slice(0, i));
+      if (i >= text.length) clearInterval(handle);
+    }, speed);
+    return () => clearInterval(handle);
+  }, [mounted, reduce]);
+
+  return (
+    <p className={`mt-5 max-w-2xl text-slate-200/90 text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}>
+      {display}
+    </p>
   );
 }

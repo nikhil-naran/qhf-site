@@ -8,9 +8,11 @@ export default function Portfolio(){
   const [hover, setHover] = useState(null);
   const ytdRef = useRef(null);
   useEffect(()=>{ countTo(ytdRef.current, 8, { formatter: (n)=> `${Math.round(n)}%`}); },[]);
+  const ref = useRef(null);
+  useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
 
   return (
-    <section id="portfolio" className="py-20">
+    <section id="portfolio" ref={ref} className="py-20">
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex items-end justify-between gap-4">
           <div>
