@@ -59,5 +59,6 @@ export default function ParticleCanvas(){
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', onResize); };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" aria-hidden="true" />
+  // Make the particles a fixed, full-viewport layer so they appear behind the header/nav
+  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-none" aria-hidden="true" />
 }

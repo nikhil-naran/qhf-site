@@ -7,6 +7,7 @@ import { TEAM_CATEGORIES } from '../data.js';
 export default function Nav(){
   const [open, setOpen] = useState(false);
   const [teamsOpen, setTeamsOpen] = useState(false);
+  const [opacity, setOpacity] = useState(1);
   const dialogRef = useRef(null);
   const location = useLocation();
 
@@ -18,19 +19,39 @@ export default function Nav(){
 
   useEffect(() => { if (!open) return; const first = dialogRef.current?.querySelector('a, button'); first?.focus(); }, [open]);
 
+  // Fade header opacity as the user scrolls down. Honors prefers-reduced-motion.
+  useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const fadeDistance = 600; // px over which the header fades from 1 -> 0
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY || window.pageYOffset || 0;
+        const o = Math.max(0, Math.min(1, 1 - y / fadeDistance));
+        setOpacity(o);
+        ticking = false;
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   // Close the teams dropdown whenever the route changes (so selecting a team hides the selector)
   useEffect(() => {
     setTeamsOpen(false);
   }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="relative z-50" style={{ opacity, transition: 'opacity 250ms linear' }}>
       <div className="mx-auto max-w-7xl px-4">
-        <nav className="mt-3 flex items-center justify-between rounded-2xl glass shadow-glass border border-white/10 px-4 py-3 backdrop-blur supports-[backdrop-filter]:bg-white/5">
-          <Link to="/" className="flex items-center gap-3" aria-label="Queens Hedge Fund home">
-            <img src="/QHF.jpg" alt="QHF logo" loading="eager" className="h-12 w-auto object-contain p-1 bg-white/6 rounded drop-shadow-lg" />
-          </Link>
-          <ul className="hidden md:flex gap-6 text-sm items-center">
+  <nav className="mt-3 flex items-center bg-transparent px-0 py-4 relative">
+          {/* logo removed */}
+          {/* Centered nav links with more spacing */}
+          <div className="flex-1 flex justify-center">
+            <ul className="hidden md:flex gap-12 text-sm items-center">
             <li><a href="/#about" className="hover:text-goldB transition-colors">About</a></li>
             <li><a href="/#philosophy" className="hover:text-goldB transition-colors">Philosophy</a></li>
             <li className="relative">
@@ -47,7 +68,8 @@ export default function Nav(){
             <li><a href="/#events" className="hover:text-goldB transition-colors">Events</a></li>
             <li><a href="/#alumni" className="hover:text-goldB transition-colors">Current Placements</a></li>
             <li><a href="/#join" className="hover:text-goldB transition-colors">Join Us</a></li>
-          </ul>
+            </ul>
+          </div>
           <div className="flex items-center gap-2">
             <button className="md:hidden p-2 rounded-full hover:bg-white/10" aria-label="Open menu" aria-haspopup="dialog" aria-expanded={open} aria-controls="mobileMenu" onClick={() => setOpen(true)}>
               <Menu />
