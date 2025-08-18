@@ -8,7 +8,7 @@ export default function ParticleCanvas(){
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    let width, height, raf, particles, lastY = window.scrollY;
+    let width, height, raf, particles;
 
     const setup = () => {
       width = canvas.width = canvas.offsetWidth * devicePixelRatio;
@@ -19,19 +19,18 @@ export default function ParticleCanvas(){
         x: Math.random() * (canvas.offsetWidth),
         y: Math.random() * (canvas.offsetHeight),
         z: Math.floor(Math.random()*layers),
-        vx: (Math.random()-0.5)*0.15,
-        vy: (Math.random()-0.5)*0.15,
+        vx: (Math.random()-0.5)*0.12,
+        vy: (Math.random()-0.5)*0.12,
       }));
     };
 
     const draw = () => {
       const reduce = prefersReducedMotion();
       ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight);
-      const bias = Math.max(-1, Math.min(1, (window.scrollY - lastY)/200));
-      lastY = window.scrollY;
+      // non-reactive baseline motion: particles drift based on their own velocities and depth
       particles.forEach(p => {
         const depth = (p.z+1);
-        p.x += p.vx * depth + bias;
+        p.x += p.vx * depth;
         p.y += p.vy * depth;
         if (p.x < 0) p.x = canvas.offsetWidth; if (p.x > canvas.offsetWidth) p.x = 0;
         if (p.y < 0) p.y = canvas.offsetHeight; if (p.y > canvas.offsetHeight) p.y = 0;

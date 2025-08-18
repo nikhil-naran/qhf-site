@@ -17,7 +17,7 @@ export const setReducedMotion = (val) => {
 };
 
 /** IntersectionObserver to reveal elements */
-export const revealOnScroll = (el, { translateY = 40, delay = 0 } = {}) => {
+export const revealOnScroll = (el, { translateY = 40, delay = 0, once } = {}) => {
   if (!el) return;
   // initial hidden state
   el.style.opacity = '0';
@@ -31,6 +31,11 @@ export const revealOnScroll = (el, { translateY = 40, delay = 0 } = {}) => {
     return;
   }
 
+  // determine default 'once' behavior: on small screens or touch devices prefer one-time reveals
+  const isSmallScreen = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
+  const hasTouch = typeof navigator !== 'undefined' && ('maxTouchPoints' in navigator ? navigator.maxTouchPoints > 0 : 'ontouchstart' in window);
+  const effectiveOnce = typeof once === 'boolean' ? once : (isSmallScreen || hasTouch);
+
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (e.isIntersecting) {
@@ -40,7 +45,8 @@ export const revealOnScroll = (el, { translateY = 40, delay = 0 } = {}) => {
         el.style.transitionDelay = `${delay}ms`;
         el.style.opacity = '1';
         el.style.transform = 'translateY(0) scale(1)';
-      } else {
+        if (effectiveOnce) obs.unobserve(el);
+      } else if (!effectiveOnce) {
         // on leave: reset to hidden so it can animate again on re-entry
         // remove transition delay so reset is immediate
         el.style.transitionDelay = '0ms';

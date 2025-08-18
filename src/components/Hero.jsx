@@ -58,22 +58,43 @@ function TypingParagraph({ mounted }){
   const text = 'Empowering students with real-world investment experience and financial expertise.';
   const [display, setDisplay] = useState('');
   const reduce = prefersReducedMotion();
+  const ref = React.useRef(null);
 
   useEffect(()=>{
     if (!mounted) return;
     if (reduce) { setDisplay(text); return; }
-    let i = 0;
-    const speed = 28; // ms per char
-    const handle = setInterval(()=>{
-      i += 1;
-      setDisplay(text.slice(0, i));
-      if (i >= text.length) clearInterval(handle);
-    }, speed);
-    return () => clearInterval(handle);
-  }, [mounted, reduce]);
+
+    let handle = null;
+    let started = false;
+    const startTyping = () => {
+      if (started) return; started = true;
+      let i = 0;
+      const speed = 28; // ms per char
+      handle = setInterval(()=>{
+        i += 1;
+        setDisplay(text.slice(0, i));
+        if (i >= text.length) { clearInterval(handle); handle = null; }
+      }, speed);
+    };
+
+    const el = ref.current;
+    if (el && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e => {
+          if (e.isIntersecting) startTyping();
+        });
+      }, { threshold: 0.25 });
+      io.observe(el);
+      return () => { io.disconnect(); if (handle) clearInterval(handle); };
+    }
+
+    // fallback: start immediately
+    startTyping();
+    return () => { if (handle) clearInterval(handle); };
+  }, [mounted, reduce, text]);
 
   return (
-    <p className={`mt-5 max-w-2xl text-slate-200/90 text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}>
+    <p ref={ref} className={`mt-5 max-w-2xl text-slate-200/90 text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}>
       {display}
     </p>
   );
