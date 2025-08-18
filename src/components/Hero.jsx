@@ -57,6 +57,8 @@ function Word({ word, delay=0 }){
 function TypingParagraph({ mounted }){
   const text = 'Empowering students with real-world investment experience and financial expertise.';
   const [display, setDisplay] = useState('');
+  const [done, setDone] = useState(false);
+  const spanRef = React.useRef(null);
   const reduce = prefersReducedMotion();
   const ref = React.useRef(null);
 
@@ -73,7 +75,20 @@ function TypingParagraph({ mounted }){
       handle = setInterval(()=>{
         i += 1;
         setDisplay(text.slice(0, i));
-        if (i >= text.length) { clearInterval(handle); handle = null; }
+        if (i >= text.length) {
+          clearInterval(handle);
+          handle = null;
+          // ensure the span starts from gold color so the fade animates
+          const el = spanRef.current;
+          if (el) {
+            el.style.color = '#C5A16D';
+            el.style.webkitTextFillColor = '#C5A16D';
+            // force reflow before adding class
+            // eslint-disable-next-line no-unused-expressions
+            el.offsetWidth;
+          }
+          setDone(true);
+        }
       }, speed);
     };
 
@@ -93,9 +108,14 @@ function TypingParagraph({ mounted }){
     return () => { if (handle) clearInterval(handle); };
   }, [mounted, reduce, text]);
 
+  // while typing: show gold (typing-gold). When done, apply keyframe-driven fade class 'typing-fade'.
+  const spanClass = reduce ? 'typing-done' : (done ? 'typing-fade typing-done' : 'typing-gold');
   return (
-    <p ref={ref} className={`mt-5 max-w-2xl text-slate-200/90 text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}>
-      {display}
+    <p
+      ref={ref}
+      className={`mt-5 max-w-2xl text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}
+    >
+      <span ref={spanRef} className={spanClass}>{display}</span>
     </p>
   );
 }

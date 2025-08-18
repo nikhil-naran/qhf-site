@@ -6,12 +6,14 @@ export const TEAM_CATEGORIES = [
   { name: 'Consumer Staples & Retail', slug: 'consumer-staples-retail' },
   { name: 'Real Estate & Health Care', slug: 'real-estate-health-care' },
   { name: 'Crypto', slug: 'crypto' },
-  { name: 'Marketing', slug: 'marketing' }
+  { name: 'Marketing', slug: 'marketing' },
+  { name: 'Macro Economics', slug: 'macro-economics' }
 ];
 
 export const TEAMS = {
   technology: {
     name: 'Technology',
+  iconUrl: '/icons/technology.svg',
     holdings: [
       { ticker: 'NVDA', company: 'NVIDIA', allocation: 28, performance: 32 },
       { ticker: 'AAPL', company: 'Apple', allocation: 18, performance: 9 },
@@ -19,9 +21,13 @@ export const TEAMS = {
       { ticker: 'SHOP', company: 'Shopify', allocation: 22, performance: 18 }
     ],
     portfolioManager: { name: 'Maya Patel', headshot: '', bio: 'Drives concentrated tech exposure with quality bias.' },
+    coPortfolioManagers: [
+      { name: 'Nikhil Naran', headshot: '', bio: 'Co-PM: platform & infra.' },
+      { name: 'Anson El-Ayari', headshot: '', bio: 'Co-PM: applied data & research.' }
+    ],
     analysts: [
-      { name: 'Ethan Lee', headshot: '', bio: 'Semis & AI infra.' },
-      { name: 'Sara Kim', headshot: '', bio: 'Software & platforms.' }
+      { name: 'James Simone', headshot: '', bio: 'Semis & AI infra.' },
+      { name: 'Alicia Wang', headshot: '', bio: 'Software & platforms.' }
     ],
     reports: [
       { title: 'NVIDIA Variant Perception (Q1)', url: '/reports/nvda-q1.pdf' },
@@ -30,68 +36,112 @@ export const TEAMS = {
   },
   financials: {
     name: 'Financials',
+  iconUrl: '/icons/financials.svg',
     holdings: [
       { ticker: 'BNS', company: 'Bank of Nova Scotia', allocation: 12, performance: 3 },
       { ticker: 'RY', company: 'Royal Bank of Canada', allocation: 14, performance: 4 }
     ],
-    portfolioManager: { name: 'Liam O’Reilly', headshot: '', bio: 'Focus on balance sheet resilience and ROE.' },
-    analysts: [{ name: 'Noah Singh', headshot: '', bio: 'Canadian banks & insurers.' }],
+    portfolioManager: { name: 'Bianca Rotariu', headshot: '', bio: 'Focus on balance sheet resilience and ROE.' },
+    analysts: [
+      { name: 'Thomas Skippon', headshot: '', bio: 'Canadian banks & insurers.' }
+    ],
     reports: [{ title: 'Canadian Banks: Net Interest Margin Outlook', url: '/reports/fin-nim.pdf' }]
   },
   'mining-materials': {
     name: 'Mining & Materials',
+  iconUrl: '/icons/mining-materials.svg',
     holdings: [
       { ticker: 'AEM', company: 'Agnico Eagle', allocation: 10, performance: 7 },
       { ticker: 'TECK', company: 'Teck Resources', allocation: 9, performance: 5 }
     ],
-    portfolioManager: { name: 'Omar Singh', headshot: '', bio: 'Quality miners with disciplined capex.' },
-    analysts: [{ name: 'Priya Rao', headshot: '', bio: 'Base metals & gold.' }],
+    portfolioManager: { name: 'Findlay Goodall', headshot: '', bio: 'Quality miners with disciplined capex.' },
+    analysts: [
+      { name: 'Iain Brady', headshot: '', bio: 'Base metals & gold.' },
+      { name: 'Emory Geho', headshot: '', bio: 'Exploration & commodities.' }
+    ],
     reports: [{ title: 'Copper Cycle Primer', url: '/reports/copper-cycle.pdf' }]
   },
   industrials: {
     name: 'Industrials',
+  iconUrl: '/icons/industrials.svg',
     holdings: [
       { ticker: 'CP', company: 'CPKC Railway', allocation: 11, performance: 6 },
       { ticker: 'WSP', company: 'WSP Global', allocation: 10, performance: 8 }
     ],
-    portfolioManager: { name: 'Ava Chen', headshot: '', bio: 'Compounders with durable moats.' },
-    analysts: [{ name: 'Leo Park', headshot: '', bio: 'Transport & engineering services.' }],
+    portfolioManager: { name: 'Beau Leone', headshot: '', bio: 'Compounders with durable moats.' },
+    analysts: [
+      { name: 'Jay Diri', headshot: '', bio: 'Transport & engineering services.' },
+      { name: 'Camran Jiwani', headshot: '', bio: 'Industrial analytics.' }
+    ],
     reports: [{ title: 'Rail Operator Unit Economics', url: '/reports/rail-econ.pdf' }]
   },
   'consumer-staples-retail': {
     name: 'Consumer Staples & Retail',
+  iconUrl: '/icons/consumer-staples-retail.svg',
     holdings: [
       { ticker: 'ATD', company: 'Alimentation Couche-Tard', allocation: 15, performance: 11 }
     ],
-    portfolioManager: { name: 'Maya Patel', headshot: '', bio: 'High ROIC retailers.' },
-    analysts: [{ name: 'Hannah Zhou', headshot: '', bio: 'Global staples coverage.' }],
+    portfolioManager: { name: 'Jillian Dalton', headshot: '', bio: 'High ROIC retailers.' },
+    analysts: [
+      { name: 'Ivan Bardziyan', headshot: '', bio: 'Global staples coverage.' },
+      { name: 'Gavin Cameron', headshot: '', bio: 'Retail comps & margins.' }
+    ],
     reports: [{ title: 'Convenience Retail Landscape', url: '/reports/retail-landscape.pdf' }]
   },
   'real-estate-health-care': {
     name: 'Real Estate & Health Care',
+  iconUrl: '/icons/real-estate-health-care.svg',
     holdings: [
       { ticker: 'SIA', company: 'Sienna Senior Living', allocation: 7, performance: 4 }
     ],
-    portfolioManager: { name: 'Omar Singh', headshot: '', bio: 'Defensive yield + growth.' },
-    analysts: [{ name: 'Julia Costa', headshot: '', bio: 'HC services & REITs.' }],
+  portfolioManager: { name: 'Alex Papadopoulos', headshot: '', bio: 'Defensive yield + growth.' },
+  analysts: [{ name: 'Daniel Thompson', headshot: '', bio: 'HC services & REITs.' }],
     reports: [{ title: 'Senior Living REITs: Rate vs Occupancy', url: '/reports/reits-senior.pdf' }]
   },
   crypto: {
     name: 'Crypto',
+  iconUrl: '/icons/crypto.svg',
     holdings: [
       { ticker: 'BTC', company: 'Bitcoin', allocation: 5, performance: 20 },
       { ticker: 'ETH', company: 'Ethereum', allocation: 4, performance: 15 }
     ],
-    portfolioManager: { name: 'Ava Chen', headshot: '', bio: 'Risk-managed exposure to digital assets.' },
-    analysts: [{ name: 'Max Ivanov', headshot: '', bio: 'On-chain & L2s.' }],
+  portfolioManager: { name: 'Nikhil Naran', headshot: '', bio: 'Risk-managed exposure to digital assets.' },
+  analysts: [{ name: 'Aaron Feng', headshot: '', bio: 'On-chain & L2s.' }],
     reports: [{ title: 'ETH Staking Dynamics', url: '/reports/eth-staking.pdf' }]
   },
   marketing: {
     name: 'Marketing',
-    holdings: [],
+    iconUrl: '/icons/marketing.svg',
+    holdings: [
+      { ticker: 'GOOGL', company: 'Alphabet (Google)', allocation: 10, performance: 8 },
+      { ticker: 'META', company: 'Meta Platforms', allocation: 8, performance: 12 },
+      { ticker: 'NFLX', company: 'Netflix', allocation: 6, performance: 5 }
+    ],
     portfolioManager: { name: 'Nora Malik', headshot: '', bio: 'Brand, outreach, and events.' },
-    analysts: [{ name: 'Arjun Mehta', headshot: '', bio: 'Comms & content.' }],
+    members: [
+      { name: 'Bum 1' },
+      { name: 'Bum 2' },
+      { name: 'Bum 3' }
+    ],
     reports: [{ title: 'Event Playbook 2025', url: '/reports/event-playbook.pdf' }]
+  }
+  ,
+  'macro-economics': {
+    name: 'Macro Economics',
+  iconUrl: '/icons/macro-economics.svg',
+    holdings: [
+      { ticker: 'TLT', company: 'iShares 20+ Year Treasury ETF', allocation: 30, performance: 2 },
+      { ticker: 'GLD', company: 'SPDR Gold Shares', allocation: 20, performance: 5 },
+      { ticker: 'UUP', company: 'Invesco DB US Dollar Index Bullish Fund', allocation: 10, performance: -1 }
+    ],
+    portfolioManager: { name: 'Dr. Samuel Grant', headshot: '', bio: 'Leads macroeconomic research and scenario analysis.' },
+    members: [
+      { name: 'Ravjot Sarao' },
+      { name: 'Roscoe Sze' }
+    ],
+    reports: [
+      { title: 'Macro Regime Playbook', url: '/reports/macro-regime-playbook.pdf' }
+    ]
   }
 };
 

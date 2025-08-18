@@ -1,5 +1,5 @@
 import React from 'react';
-import { TEAM_CATEGORIES } from '../data.js';
+import { TEAM_CATEGORIES, TEAMS } from '../data.js';
 import { Link } from 'react-router-dom';
 
 export default function TeamsHub(){
@@ -9,12 +9,28 @@ export default function TeamsHub(){
         <h1 className="text-4xl font-extrabold">Our Teams</h1>
         <p className="text-slate-300 mt-2 max-w-2xl">Explore QHF’s specialized investment divisions and their research.</p>
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TEAM_CATEGORIES.map((t)=> (
-            <Link key={t.slug} to={`/teams/${t.slug}`} className="glass rounded-2xl border border-white/10 p-6 hover:-translate-y-1 transition-transform">
-              <div className="text-xl font-semibold">{t.name}</div>
-              <div className="text-sm text-slate-300 mt-1">View portfolio, team, and reports</div>
-            </Link>
-          ))}
+          {TEAM_CATEGORIES.map((t)=> {
+            const meta = TEAMS[t.slug] || {};
+            const blurb = meta.portfolioManager?.bio || 'View portfolio, team, and reports';
+            return (
+              <Link key={t.slug} to={`/teams/${t.slug}`} className="team-grid-card group">
+                <div className="flex items-center gap-4">
+                  <div className="team-logo bg-white/5 rounded-md flex items-center justify-center overflow-hidden">
+                    {meta.iconUrl ? (
+                      <img src={meta.iconUrl} alt={`${t.name} icon`} className="w-12 h-12 object-contain" />
+                    ) : (
+                      <span className="text-xl font-bold text-goldB">{t.name.split(' ').map(s=>s[0]).slice(0,2).join('')}</span>
+                    )}
+                  </div>
+                  <div>
+                    <div className="text-xl font-semibold group-hover:text-goldB transition-colors">{t.name}</div>
+                    <div className="text-sm text-slate-300 mt-1">{blurb}</div>
+                  </div>
+                </div>
+                <div className="mt-4 text-sm text-slate-200/90">Explore →</div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </main>

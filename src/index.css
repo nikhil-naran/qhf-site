@@ -139,6 +139,39 @@ body {
   .type-cursor::after { animation: none; opacity: 0; }
 }
 
+/* Typing color states: gold while typing, fade to white when done */
+.typing-gold { color: #C5A16D; transition: color 13200ms cubic-bezier(0.22,1,0.36,1); }
+.typing-done { color: rgba(255,255,255,0.95); transition: color 13200ms cubic-bezier(0.22,1,0.36,1); }
+
+/* Stronger specificity for hero to override other utilities */
+#hero .typing-gold, .typing-gold { 
+  color: #C5A16D;
+  -webkit-text-fill-color: #C5A16D;
+  transition: color 13200ms cubic-bezier(0.22,1,0.36,1), -webkit-text-fill-color 13200ms cubic-bezier(0.22,1,0.36,1);
+}
+#hero .typing-done, .typing-done {
+  color: rgba(255,255,255,0.95);
+  -webkit-text-fill-color: rgba(255,255,255,0.95);
+  transition: color 13200ms cubic-bezier(0.22,1,0.36,1), -webkit-text-fill-color 13200ms cubic-bezier(0.22,1,0.36,1);
+}
+
+/* Keyframe-driven fade to ensure the color animates reliably across renderers */
+@keyframes typingColorFade {
+  0% {
+    color: #C5A16D;
+    -webkit-text-fill-color: #C5A16D;
+  }
+  100% {
+    color: rgba(255,255,255,0.95);
+    -webkit-text-fill-color: rgba(255,255,255,0.95);
+  }
+}
+
+/* animation class applied on typing completion */
+.typing-fade {
+  animation: typingColorFade 13.2s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
 /* Team card hover interaction for Our Teams */
 .team-card {
   transition: transform 220ms cubic-bezier(0.22,1,0.36,1), box-shadow 220ms cubic-bezier(0.22,1,0.36,1), border-color 220ms;
@@ -155,6 +188,23 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .team-card, .team-card:hover, .team-card:focus-within, .team-card:active { transition: none !important; transform: none !important; box-shadow: none !important; }
 }
+
+/* Grid card style used by TeamsHub and Our Teams */
+.team-grid-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 260ms cubic-bezier(0.22,1,0.36,1), box-shadow 260ms;
+}
+.team-grid-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 48px rgba(2,6,23,0.6); }
+.team-logo { width: 64px; height: 64px; min-width: 64px; min-height: 64px; border-radius: 10px; display:inline-flex; align-items:center; justify-content:center; overflow:hidden; }
+
 
 /* Marquee: show 3 tiles at a time, fill the panel width, and loop smoothly */
 .marquee-wrapper {
