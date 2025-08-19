@@ -16,11 +16,11 @@ export default function Hero(){
         <div className="flex flex-col items-center">
           <div className="flex justify-center">
             <img
-              src="/QHF-home.png"
+              src="/QHF-2.svg"
               alt="Queens Hedge Fund"
               loading="eager"
               style={{ clipPath: 'inset(0 0 25% 0)' }}
-              className="w-[98%] max-w-none h-auto md:w-[90%] lg:w-[80%] object-contain drop-shadow-2xl"
+              className="h-56 md:h-72 lg:h-96 xl:h-[36rem] w-auto max-w-none object-contain drop-shadow-2xl"
             />
           </div>
           <TypingParagraph mounted={mounted} />
@@ -152,7 +152,7 @@ function TypingParagraph({ mounted }){
       ref={ref}
       className={`mt-5 max-w-2xl text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}
     >
-  <span ref={spanRef} className={spanClass} style={{ color: '#C5A16D' }}>{display}</span>
+  <span ref={spanRef} className={spanClass} style={{ color: '#FEF7E6' }}>{display}</span>
     </p>
   );
 }

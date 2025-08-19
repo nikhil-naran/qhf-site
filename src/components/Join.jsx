@@ -6,7 +6,7 @@ export default function Join(){
   const ref = useRef(null);
   useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
   return (
-    <section id="join" ref={ref} className="py-20">
+  <section id="join" ref={ref} className="py-20 relative">
       <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-8 items-start">
         <div className="glass rounded-2xl p-8 border border-white/10">
           <h2 className="text-3xl font-bold">Join Us</h2>
@@ -32,6 +32,7 @@ export default function Join(){
           )}
         </form>
       </div>
+  {/* logo removed as requested */}
     </section>
   );
 }

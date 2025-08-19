@@ -40,8 +40,9 @@ export const revealOnScroll = (el, { translateY = 40, delay = 0, once } = {}) =>
     entries.forEach((e) => {
       if (e.isIntersecting) {
         // on enter: animate in (longer/more pronounced)
-        const dur = 1400; // longer, cinematic reveal
-        el.style.transition = `opacity ${dur}ms ${Motion.ease.out}, transform ${dur}ms ${Motion.ease.out}`;
+  // make the reveal animation faster (previously cinematic 1400ms)
+  const dur = 467; // ~1400ms / 3 => ~467ms for a 3x speed-up
+  el.style.transition = `opacity ${dur}ms ${Motion.ease.out}, transform ${dur}ms ${Motion.ease.out}`;
         el.style.transitionDelay = `${delay}ms`;
         el.style.opacity = '1';
         el.style.transform = 'translateY(0) scale(1)';

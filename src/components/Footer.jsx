@@ -11,8 +11,7 @@ export default function Footer(){
           <a href="/#events" className="hover:text-goldB">Events</a>
           <a href="/#join" className="hover:text-goldB">Join</a>
         </nav>
-        <div className="flex items-center gap-3 text-sm text-slate-400">
-          <img src="/QHF.jpg" alt="QHF logo" className="h-8 w-auto rounded p-0.5 bg-white/6 drop-shadow-sm" />
+        <div className="text-sm text-slate-400">
           <span>© {new Date().getFullYear()} Queens Hedge Fund — Made by The Lab <span aria-hidden="true">🍳</span></span>
         </div>
       </div>
