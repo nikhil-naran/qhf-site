@@ -150,7 +150,7 @@ function TypingParagraph({ mounted }){
   return (
     <p
       ref={ref}
-      className={`mt-5 max-w-2xl text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}
+      className={`mt-5 max-w-4xl text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}
     >
   <span ref={spanRef} className={spanClass} style={{ color: '#FEF7E6' }}>{display}</span>
     </p>

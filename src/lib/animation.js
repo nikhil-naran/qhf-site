@@ -31,10 +31,9 @@ export const revealOnScroll = (el, { translateY = 40, delay = 0, once } = {}) =>
     return;
   }
 
-  // determine default 'once' behavior: on small screens or touch devices prefer one-time reveals
-  const isSmallScreen = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
-  const hasTouch = typeof navigator !== 'undefined' && ('maxTouchPoints' in navigator ? navigator.maxTouchPoints > 0 : 'ontouchstart' in window);
-  const effectiveOnce = typeof once === 'boolean' ? once : (isSmallScreen || hasTouch);
+  // determine default 'once' behavior: default to one-time reveals so animations don't retrigger when
+  // scrolling back up. Consumer can still pass `once: false` to allow retriggering explicitly.
+  const effectiveOnce = typeof once === 'boolean' ? once : true;
 
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e) => {

@@ -32,7 +32,7 @@ export default function Philosophy(){
   <section id="philosophy" ref={ref} className="py-20 scroll-mt-24">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Investment Philosophy</h2>
-        <p className="mt-2 text-slate-200/90 max-w-2xl">We run a top-down, macro-driven strategy with a concentrated portfolio. Our process balances disciplined asset allocation with selective security selection, guided by four core pillars:</p>
+        <p className="mt-2 text-slate-200/90 max-w-2xl">We run a top-down, macro-driven multi strategy fund with a concentrated portfolio. Our process balances disciplined asset allocation with selective security selection, guided by four core pillars:</p>
 
         <div className="mt-8 space-y-6">
           <div className="glass rounded-2xl p-6 border border-white/10">

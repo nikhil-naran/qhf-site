@@ -42,12 +42,11 @@ function Home(){
     <main id="main">
       <Hero />
       <About />
+  <Philosophy />
   <Founders />
-      <Philosophy />
-  <Industries />
-      {/* Replaced old Portfolio with Performance */}
-      <Performance />
-      <Events />
+      <Industries />
+      {/* <Performance /> removed */}
+      {/* <Events /> removed */}
       <Alumni />
       <Join />
     </main>
