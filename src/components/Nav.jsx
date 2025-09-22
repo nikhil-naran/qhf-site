@@ -7,17 +7,41 @@ import { TEAM_CATEGORIES } from '../data.js';
 export default function Nav(){
   const [open, setOpen] = useState(false);
   const [teamsOpen, setTeamsOpen] = useState(false);
+  const [mobileTeamsOpen, setMobileTeamsOpen] = useState(false);
   const [opacity, setOpacity] = useState(1);
   const dialogRef = useRef(null);
+  const teamsRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
-    const handler = (e) => { if (e.key === 'Escape') setOpen(false); };
+    const handler = (e) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        setTeamsOpen(false);
+      }
+    };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
   useEffect(() => { if (!open) return; const first = dialogRef.current?.querySelector('a, button'); first?.focus(); }, [open]);
+
+  useEffect(() => {
+    if (!open) {
+      setMobileTeamsOpen(false);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!teamsOpen) return;
+    const onPointerDown = (e) => {
+      if (!teamsRef.current?.contains(e.target)) {
+        setTeamsOpen(false);
+      }
+    };
+    window.addEventListener('pointerdown', onPointerDown);
+    return () => window.removeEventListener('pointerdown', onPointerDown);
+  }, [teamsOpen]);
 
   // Fade header opacity as the user scrolls down. Honors prefers-reduced-motion.
   useEffect(() => {
@@ -42,6 +66,7 @@ export default function Nav(){
   // Close the teams dropdown whenever the route changes (so selecting a team hides the selector)
   useEffect(() => {
     setTeamsOpen(false);
+    setMobileTeamsOpen(false);
   }, [location.pathname]);
 
   return (
@@ -54,18 +79,26 @@ export default function Nav(){
             <ul className="hidden md:flex gap-12 text-sm items-center">
             <li><a href="/#about" className="hover:text-goldB transition-colors">About</a></li>
             <li><a href="/#philosophy" className="hover:text-goldB transition-colors">Philosophy</a></li>
-            <li className="relative">
-              <button aria-haspopup="menu" aria-expanded={teamsOpen} onClick={()=> setTeamsOpen(v=>!v)} className="inline-flex items-center gap-1 hover:text-goldB">Our Teams <ChevronDown size={16}/></button>
+            <li className="relative" ref={teamsRef}>
+              <button
+                type="button"
+                aria-haspopup="menu"
+                aria-expanded={teamsOpen}
+                onClick={()=> setTeamsOpen(v=>!v)}
+                className={`our-teams-trigger inline-flex items-center gap-2 transition-colors ${teamsOpen ? 'is-open' : ''}`}
+              >
+                <span className="text-sm font-semibold tracking-[0.08em]">Our Teams</span>
+                <ChevronDown size={16} className={`transition-transform duration-200 ${teamsOpen ? 'rotate-180' : ''}`}/>
+              </button>
               {teamsOpen && (
-                <div role="menu" className="absolute top-full mt-2 w-72 dropdown-panel rounded-2xl border border-white/10 p-2">
-                  <NavLink to="/teams" className={({isActive})=>`block px-3 py-2 rounded hover:bg-white/10 ${isActive? 'text-goldB':''}`}>All Teams</NavLink>
+                <div role="menu" className="absolute top-full mt-3 w-72 dropdown-panel our-teams-dropdown">
+                  <NavLink to="/teams" className={({isActive})=>`nav-dropdown-link ${isActive? 'is-active':''}`}>All Teams</NavLink>
                   {TEAM_CATEGORIES.map(t => (
-                    <NavLink key={t.slug} to={`/teams/${t.slug}`} className={({isActive})=>`block px-3 py-2 rounded hover:bg-white/10 ${isActive? 'text-goldB':''}`}>{t.name}</NavLink>
+                    <NavLink key={t.slug} to={`/teams/${t.slug}`} className={({isActive})=>`nav-dropdown-link ${isActive? 'is-active':''}`}>{t.name}</NavLink>
                   ))}
                 </div>
               )}
             </li>
-            <li><a href="/#events" className="hover:text-goldB transition-colors">Events</a></li>
             <li><a href="/#alumni" className="hover:text-goldB transition-colors">Current Placements</a></li>
             <li><a href="/#join" className="hover:text-goldB transition-colors">Join Us</a></li>
             </ul>
@@ -90,11 +123,31 @@ export default function Nav(){
               <Link to="/" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Home</Link>
               <a href="/#about" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">About</a>
               <a href="/#philosophy" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Philosophy</a>
-              <Link to="/teams" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Our Teams</Link>
-              {TEAM_CATEGORIES.map(t=> (
-                <NavLink key={t.slug} to={`/teams/${t.slug}`} onClick={()=> setOpen(false)} className="px-4 py-2 rounded hover:bg-white/10">{t.name}</NavLink>
-              ))}
-              <a href="/#events" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Events</a>
+              <button
+                type="button"
+                onClick={() => setMobileTeamsOpen(v => !v)}
+                className={`flex items-center justify-between px-2 py-2 rounded hover:bg-white/10 transition-colors ${mobileTeamsOpen ? 'text-goldB' : ''}`}
+                aria-expanded={mobileTeamsOpen}
+                aria-controls="mobileTeamsMenu"
+              >
+                <span>Our Teams</span>
+                <ChevronDown size={18} className={`transition-transform duration-200 ${mobileTeamsOpen ? 'rotate-180' : ''}`}/>
+              </button>
+              {mobileTeamsOpen && (
+                <div id="mobileTeamsMenu" className="ml-2 flex flex-col gap-1 border-l border-white/10 pl-3">
+                  <Link to="/teams" onClick={()=> { setOpen(false); setMobileTeamsOpen(false); }} className="px-2 py-2 rounded hover:bg-white/10 text-sm">All Teams</Link>
+                  {TEAM_CATEGORIES.map(t=> (
+                    <NavLink
+                      key={t.slug}
+                      to={`/teams/${t.slug}`}
+                      onClick={()=> { setOpen(false); setMobileTeamsOpen(false); }}
+                      className="px-2 py-2 rounded hover:bg-white/10 text-sm"
+                    >
+                      {t.name}
+                    </NavLink>
+                  ))}
+                </div>
+              )}
               <a href="/#alumni" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Current Placements</a>
               <a href="/#join" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Join</a>
               {/* motion toggle removed */}

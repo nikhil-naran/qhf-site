@@ -6,9 +6,9 @@ export default function Founders(){
   const ref = useRef(null);
   useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
   const founders = [
-  { name: 'Anson El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Anson.', linkedin: '#' },
-  { name: 'Nikhil Naran', title: 'Co-Founder', bio: 'Placeholder bio for Nikhil.', linkedin: '#' },
-  { name: 'Ava El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Ava.', linkedin: '#' },
+  { name: 'Anson El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Anson.', linkedin: 'https://www.linkedin.com/in/anson-el-ayari/' },
+  { name: 'Nikhil Naran', title: 'Co-Founder', bio: 'Placeholder bio for Nikhil.', linkedin: 'https://www.linkedin.com/in/nikhilnaran/' },
+  { name: 'Ava El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Ava.', linkedin: 'https://www.linkedin.com/in/ava-el-ayari/' },
   ];
   const [selected, setSelected] = useState(null); // will store selected index or null
   const closeBtnRef = useRef(null);
@@ -74,36 +74,57 @@ export default function Founders(){
                 role="dialog"
                 aria-modal="true"
                 aria-label={`${f.name} details`}
-                className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-6"
+                className="fixed inset-0 z-50"
                 onClick={(e)=> { if (e.target === e.currentTarget) setSelected(null); }}
               >
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-                <div className="glass relative z-10 w-full max-w-3xl rounded-2xl border border-white/10 p-6 shadow-glass sm:p-8">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10 text-2xl font-black text-goldB sm:h-24 sm:w-24 sm:text-3xl">
-                        {f.name.split(' ').map(n=>n[0]).join('')}
-                      </div>
-                      <div>
-                        <div className="text-xl font-bold sm:text-2xl">{f.name}</div>
-                        <div className="text-sm text-slate-300">{f.title}</div>
+                <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={()=> setSelected(null)} />
+                <div className="relative z-10 flex h-full w-full overflow-y-auto">
+                  <div className="mx-auto flex w-full max-w-6xl flex-col px-4 py-12 md:py-16">
+                    <div className="founder-modal glass relative w-full overflow-hidden rounded-3xl border border-white/12 shadow-glass">
+                      <div className="founder-modal__glow" aria-hidden="true" />
+                      <button
+                        ref={closeBtnRef}
+                        aria-label="Close"
+                        onClick={()=> setSelected(null)}
+                        className="absolute right-5 top-5 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/20 text-slate-100 transition hover:bg-black/30 hover:text-white"
+                      >
+                        <X />
+                      </button>
+                      <div className="relative grid gap-10 px-6 pb-10 pt-16 md:grid-cols-[320px_minmax(0,1fr)] md:gap-16 md:px-12 md:pt-20">
+                        <div className="flex flex-col gap-6 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8">
+                          <div className="flex h-28 w-28 items-center justify-center self-start rounded-2xl bg-gradient-to-br from-goldA/25 to-goldB/15 text-3xl font-black tracking-widest text-goldB md:h-32 md:w-32 md:text-4xl">
+                            {f.name.split(' ').map(n=>n[0]).join('')}
+                          </div>
+                          <div>
+                            <div className="text-2xl font-semibold text-slate-50 md:text-3xl">{f.name}</div>
+                            <div className="mt-1 text-sm uppercase tracking-[0.3em] text-goldB/80">{f.title}</div>
+                          </div>
+                        </div>
+                        <div className="flex flex-col justify-center gap-6 text-base leading-relaxed text-slate-100/90 md:pr-6">
+                          <p className="text-lg text-slate-100/95">{f.bio}</p>
+                          <div className="grid gap-4 text-sm text-slate-300">
+                            <p>Orchestrates strategic initiatives and mentors student investors, ensuring QHF stays aligned with its founding vision.</p>
+                            <p>Use this space to highlight achievements, professional background, and the unique perspective each founder brings to the fund.</p>
+                            <p className="rounded-2xl border border-white/10 bg-white/5 p-4 text-slate-200/95">
+                              Looking for more? Add education history, favorite sectors, or a quote that reflects their investing philosophy.
+                            </p>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-3">
+                            {f.linkedin && (
+                              <a
+                                href={f.linkedin}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/20"
+                              >
+                                <Linkedin size={16}/> Connect on LinkedIn
+                              </a>
+                            )}
+                            <button onClick={()=> setSelected(null)} className="btn">Close</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <button ref={closeBtnRef} aria-label="Close" onClick={()=> setSelected(null)} className="p-2 rounded-full hover:bg-white/5">
-                      <X />
-                    </button>
-                  </div>
-                  <div className="mt-6 text-slate-200/90">
-                    <p>{f.bio}</p>
-                    <p className="mt-4 text-sm text-slate-300">More detailed bio and roles can be shown here. Add education, notable projects, and contact info as needed.</p>
-                  </div>
-                  <div className="mt-6 flex items-center gap-3">
-                    {f.linkedin && (
-                      <a href={f.linkedin} target="_blank" rel="noreferrer noopener" className="inline-flex items-center gap-2 px-3 py-2 rounded bg-white/5 hover:bg-white/10 border border-white/6">
-                        <Linkedin size={16}/> View on LinkedIn
-                      </a>
-                    )}
-                    <button onClick={()=> setSelected(null)} className="ml-auto btn">Close</button>
                   </div>
                 </div>
               </div>
