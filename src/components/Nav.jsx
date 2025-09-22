@@ -99,7 +99,7 @@ export default function Nav(){
                 </div>
               )}
             </li>
-            <li><a href="/#alumni" className="hover:text-goldB transition-colors">Current Placements</a></li>
+            <li><a href="/#alumni" className="hover:text-goldB transition-colors">Member Placements</a></li>
             <li><a href="/#join" className="hover:text-goldB transition-colors">Join Us</a></li>
             </ul>
           </div>
@@ -148,7 +148,7 @@ export default function Nav(){
                   ))}
                 </div>
               )}
-              <a href="/#alumni" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Current Placements</a>
+              <a href="/#alumni" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Member Placements</a>
               <a href="/#join" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Join</a>
               {/* motion toggle removed */}
             </div>

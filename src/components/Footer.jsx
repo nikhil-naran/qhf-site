@@ -12,7 +12,7 @@ export default function Footer(){
           <a href="/#join" className="hover:text-goldB">Join</a>
         </nav>
         <div className="text-sm text-slate-400">
-          <span>© {new Date().getFullYear()} Queens Hedge Fund — Made by The Lab <span aria-hidden="true">🍳</span></span>
+          <span>© {new Date().getFullYear()} Queens Hedge Fund</span>
         </div>
       </div>
     </footer>

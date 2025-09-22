@@ -73,7 +73,7 @@ export default function About(){
           <div className="glass rounded-2xl border border-white/10 p-8 shadow-sm">
             <h3 className="text-3xl font-bold">Why QHF</h3>
             <p className="mt-4 text-slate-200/80 leading-relaxed">
-              QHF is designed for students who want more than just theory — we offer the structure, discipline, and accountability of a real hedge fund environment.
+              QHF is designed for students who want more than just theory; we offer the structure, discipline, and accountability of a real hedge fund environment.
             </p>
 
             <div className="mt-8 lg:mt-12 grid items-stretch gap-4 sm:grid-cols-2">

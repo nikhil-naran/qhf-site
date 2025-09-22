@@ -10,7 +10,7 @@ const accentGradients = [
   'from-indigo-500/25 via-slate-900/35 to-slate-900/5',
 ];
 
-const formatMetric = (value) => (value && value > 0 ? value.toLocaleString('en-CA') : '—');
+const formatMetric = (value) => (value && value > 0 ? value.toLocaleString('en-CA') : 'N/A');
 
 export default function TeamsHub(){
   const allTeams = TEAM_CATEGORIES.map((entry, index) => ({
@@ -33,7 +33,7 @@ export default function TeamsHub(){
     { label: 'Holdings tracked', value: formatMetric(totalHoldings) },
     { label: 'Team leads', value: formatMetric(totalLeads) },
     { label: 'Published reports', value: formatMetric(totalReports) },
-  ].filter((metric) => metric.value !== '—');
+  ].filter((metric) => metric.value !== 'N/A');
 
   return (
     <main className="relative isolate overflow-hidden py-16 sm:py-20 lg:py-24">
@@ -66,7 +66,7 @@ export default function TeamsHub(){
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {allTeams.map((team) => {
             const { meta } = team;
-            const blurb = meta.portfolioManager?.bio || meta.coPortfolioManagers?.[0]?.bio || 'View portfolio, team, and reports';
+            const blurb = 'Explore holdings, team leads, and research highlights.';
             const leadNames = meta.portfolioManager?.name || (Array.isArray(meta.coPortfolioManagers) && meta.coPortfolioManagers.length > 0 ? meta.coPortfolioManagers.map((person) => person.name).join(' · ') : null);
 
             const holdings = Array.isArray(meta.holdings) ? meta.holdings.slice(0, 3) : [];

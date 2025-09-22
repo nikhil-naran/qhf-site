@@ -66,7 +66,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Helmet>
-        <title>Queens Hedge Fund (QHF) — Empowering students with real-world investment experience</title>
+        <title>Queens Hedge Fund (QHF) - Empowering students with real-world investment experience</title>
         <meta name="description" content="Queens Hedge Fund (QHF) is a student-led investment group based in Kingston, Ontario."/>
         <meta property="og:title" content="Queens Hedge Fund (QHF)" />
         <meta property="og:description" content="Empowering students with real-world investment experience and financial expertise" />

@@ -46,7 +46,7 @@ export default function Philosophy(){
       step: '01',
       title: 'Research',
       points: [
-        'We begin with a macroeconomic lens — analyzing global growth, monetary policy, and sector trends.',
+        'We begin with a macroeconomic lens - analyzing global growth, monetary policy, and sector trends.',
         'From there, we narrow into bottom-up fundamentals, favoring companies whose strengths align with our macro regime.',
         'We also incorporate technical indicators to optimize trade timing and risk entry points.',
       ],
@@ -71,7 +71,7 @@ export default function Philosophy(){
       step: '04',
       title: 'Monitoring',
       points: [
-        'Markets evolve — so does our portfolio.',
+        'Markets evolve - so does our portfolio.',
         'We continuously review macro indicators, company performance, and exposures to ensure our allocations remain aligned with shifting regimes.',
       ],
     },

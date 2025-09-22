@@ -3,31 +3,11 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Motion, revealOnScroll, prefersReducedMotion } from '../lib/animation.js';
 
 const placements = [
-  { name: 'Questrade', logo: '/logos/questrade.png' },
   { name: 'RBC', logo: '/logos/rbc.png' },
-  { name: 'Richardson Wealth', logo: '/logos/richardson-wealth.png' },
+  { name: 'Questrade', logo: '/logos/questrade.png' },
   { name: 'TD', logo: '/logos/td.png' },
-  { name: 'BMO', logo: '/logos/bmo.png' },
-  { name: 'CIBC', logo: '/logos/cibc.png' },
-  { name: 'Scotiabank', logo: '/logos/scotiabank.png' },
-  { name: 'Fidelity', logo: '/logos/fidelity.png' },
   { name: 'Manulife', logo: '/logos/manulife.png' },
-  { name: 'Sun Life', logo: '/logos/sun-life.png' },
-  { name: 'Brookfield', logo: '/logos/brookfield.png' },
-  { name: 'BlackRock', logo: '/logos/blackrock.png' },
-  { name: 'Morgan Stanley', logo: '/logos/morgan-stanley.png' },
-  { name: 'Goldman Sachs', logo: '/logos/goldman-sachs.png' },
-  { name: 'National Bank', logo: '/logos/national-bank.png' },
-  { name: 'PI Financial', logo: '/logos/pi-financial.png' },
-  { name: 'RBC Capital Markets', logo: '/logos/rbc-capital-markets.png' },
-  { name: 'Desjardins', logo: '/logos/desjardins.png' },
-  { name: 'Crestone', logo: '/logos/crestone.png' },
-  { name: 'ATB Financial', logo: '/logos/atb-financial.png' },
-  { name: 'HSBC', logo: '/logos/hsbc.png' },
-  { name: 'Simplii', logo: '/logos/simplii.png' },
-  { name: 'Wealthsimple', logo: '/logos/wealthsimple.png' },
-  { name: 'Interactive Brokers', logo: '/logos/interactive-brokers.png' },
-  { name: 'Vanguard', logo: '/logos/vanguard.png' }
+  { name: 'Richardson Wealth', logo: '/logos/richardson-wealth.png' }
 ];
 
 const SCROLL_CYCLE_MS = 22000; // time to shift one slide completely
@@ -250,10 +230,10 @@ export default function Alumni(){
   return (
     <section id="alumni" ref={ref} className="py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
-        <h2 className="text-3xl font-bold">Current Placements</h2>
+        <h2 className="text-3xl font-bold">Member Placements</h2>
         <div className="mt-6">
           <div className="glass overflow-hidden rounded-2xl border border-white/10 p-5 sm:p-6">
-            <h3 className="text-xl font-semibold mb-4">Current Placements</h3>
+            <h3 className="text-xl font-semibold mb-4">Current / Past Placements</h3>
             <div
               className="placements-slider relative"
               ref={sliderRef}

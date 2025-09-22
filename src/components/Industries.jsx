@@ -11,11 +11,11 @@ export default function Industries(){
     <section id="teams" ref={ref} className="py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Our Teams</h2>
-        <p className="text-slate-300 mt-2 max-w-2xl">Explore QHF’s specialized teams — click any team to view holdings, members, and research.</p>
+        <p className="text-slate-300 mt-2 max-w-2xl">Explore QHF’s specialized teams - click any team to view holdings, members, and research.</p>
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {TEAM_CATEGORIES.map((c) => {
             const meta = TEAMS[c.slug] || {};
-            const blurb = meta.portfolioManager?.bio || 'View team, holdings, and research';
+            const blurb = 'Explore holdings, team leads, and research highlights.';
             return (
               <Link key={c.slug} to={`/teams/${c.slug}`} className="team-grid-card group">
                 <div className="flex items-center gap-3 sm:gap-4">

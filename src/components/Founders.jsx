@@ -6,9 +6,9 @@ import { getHeadshot } from '../lib/headshots.js';
 const getInitials = (name = '') => name.split(' ').map((n) => n[0]).filter(Boolean).join('').slice(0, 2).toUpperCase();
 
 const founders = [
-  { name: 'Anson El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Anson.', linkedin: 'https://www.linkedin.com/in/anson-el-ayari/' },
-  { name: 'Nikhil Naran', title: 'Co-Founder', bio: 'Placeholder bio for Nikhil.', linkedin: 'https://www.linkedin.com/in/nikhilnaran/' },
-  { name: 'Ava El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Ava.', linkedin: 'https://www.linkedin.com/in/ava-el-ayari/' },
+  { name: 'Anson El Ayari', title: 'Co-Founder', bio: '', linkedin: 'https://www.linkedin.com/in/anson-el-ayari/' },
+  { name: 'Nikhil Naran', title: 'Co-Founder', bio: '', linkedin: 'https://www.linkedin.com/in/nikhilnaran/' },
+  { name: 'Ava El Ayari', title: 'Co-Founder', bio: '', linkedin: 'https://www.linkedin.com/in/ava-el-ayari/' },
 ].map((founder) => ({ ...founder, headshot: getHeadshot(founder.name) }));
 
 function Headshot({ person, className = '', initialsClass = '' }){
@@ -62,7 +62,6 @@ export default function Founders(){
                 <Headshot person={f} className="mb-4 flex h-24 w-24 items-center justify-center sm:h-28 sm:w-28" initialsClass="text-2xl" />
                 <div className="font-semibold">{f.name}</div>
                 <div className="text-sm text-slate-300">{f.title}</div>
-                <p className="mt-3 text-sm text-slate-300">{f.bio}</p>
               </button>
               {f.linkedin && (
                 <a
@@ -113,15 +112,7 @@ export default function Founders(){
                             <div className="mt-1 text-sm uppercase tracking-[0.3em] text-goldB/80">{f.title}</div>
                           </div>
                         </div>
-                        <div className="flex flex-col justify-center gap-6 text-base leading-relaxed text-slate-100/90 md:pr-6">
-                          <p className="text-lg text-slate-100/95">{f.bio}</p>
-                          <div className="grid gap-4 text-sm text-slate-300">
-                            <p>Orchestrates strategic initiatives and mentors student investors, ensuring QHF stays aligned with its founding vision.</p>
-                            <p>Use this space to highlight achievements, professional background, and the unique perspective each founder brings to the fund.</p>
-                            <p className="rounded-2xl border border-white/10 bg-white/5 p-4 text-slate-200/95">
-                              Looking for more? Add education history, favorite sectors, or a quote that reflects their investing philosophy.
-                            </p>
-                          </div>
+                        <div className="flex flex-col justify-center gap-6 md:pr-6">
                           <div className="flex flex-wrap items-center gap-3">
                             {f.linkedin && (
                               <a

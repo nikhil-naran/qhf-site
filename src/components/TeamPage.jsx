@@ -124,7 +124,6 @@ export default function TeamPage(){
                           <PersonAvatar person={cpm} size="md" />
                           <div>
                             <div className="font-semibold text-slate-50">{cpm.name}</div>
-                            <p className="text-sm text-slate-300">{cpm.bio || 'Co-Portfolio Manager'}</p>
                           </div>
                         </div>
                       ))}
@@ -140,7 +139,6 @@ export default function TeamPage(){
                     <PersonAvatar person={pm} size="lg" />
                     <div>
                       <div className="font-semibold text-slate-50">{pm?.name}</div>
-                      <p className="text-sm text-slate-300">{pm?.bio || 'Portfolio lead'}</p>
                     </div>
                   </div>
                 </>
@@ -160,7 +158,6 @@ export default function TeamPage(){
                       <div key={i} className="glass rounded-xl border border-white/10 p-4">
                         <PersonAvatar person={a} size="md" className="mb-3" />
                         <div className="font-semibold text-slate-50">{a.name}</div>
-                        <p className="text-sm text-slate-300">{a.bio || (usingMembers ? 'Team member' : 'Analyst')}</p>
                       </div>
                     ))}
                   </div>
