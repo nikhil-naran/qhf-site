@@ -6,9 +6,9 @@ export default function Join(){
   const ref = useRef(null);
   useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
   return (
-  <section id="join" ref={ref} className="py-20 relative">
-      <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-2 gap-8 items-start">
-        <div className="glass rounded-2xl p-8 border border-white/10">
+    <section id="join" ref={ref} className="relative py-16 sm:py-20">
+      <div className="mx-auto grid max-w-7xl items-start gap-6 px-4 md:grid-cols-2 md:gap-8">
+        <div className="glass rounded-2xl border border-white/10 p-6 sm:p-8">
           <h2 className="text-3xl font-bold">Join Us</h2>
           <ul className="mt-4 list-disc list-inside text-slate-200/90 space-y-1">
             <li>Undergraduate students at Queen's University</li>
@@ -17,7 +17,13 @@ export default function Join(){
           </ul>
           <p className="mt-4 text-sm text-slate-300">We welcome all programs. Commitment and curiosity matter most.</p>
         </div>
-        <form name="contact" method="POST" data-netlify="true" className="glass rounded-2xl p-8 border border-white/10" onSubmit={(e)=>{e.preventDefault(); setSent(true);}}>
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          className="glass rounded-2xl border border-white/10 p-6 sm:p-8"
+          onSubmit={(e)=>{e.preventDefault(); setSent(true);}}
+        >
           <input type="hidden" name="form-name" value="contact" />
           <h3 className="text-2xl font-semibold">Contact Us</h3>
           {!sent ? (

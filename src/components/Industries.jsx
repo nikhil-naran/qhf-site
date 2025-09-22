@@ -8,17 +8,17 @@ export default function Industries(){
   useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
 
   return (
-    <section id="teams" ref={ref} className="py-20">
+    <section id="teams" ref={ref} className="py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Our Teams</h2>
         <p className="text-slate-300 mt-2 max-w-2xl">Explore QHF’s specialized teams — click any team to view holdings, members, and research.</p>
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {TEAM_CATEGORIES.map((c) => {
             const meta = TEAMS[c.slug] || {};
             const blurb = meta.portfolioManager?.bio || 'View team, holdings, and research';
             return (
               <Link key={c.slug} to={`/teams/${c.slug}`} className="team-grid-card group">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 sm:gap-4">
                   <div className="team-logo bg-white/5 rounded-md flex items-center justify-center overflow-hidden">
                     {meta.iconUrl ? (
                       <img src={meta.iconUrl} alt={`${c.name} icon`} className="w-12 h-12 object-contain" />
@@ -27,8 +27,8 @@ export default function Industries(){
                     )}
                   </div>
                   <div>
-                    <div className="text-xl font-semibold group-hover:text-goldB transition-colors">{c.name}</div>
-                    <div className="text-sm text-slate-300 mt-1">{blurb}</div>
+                    <div className="text-lg font-semibold transition-colors group-hover:text-goldB sm:text-xl">{c.name}</div>
+                    <div className="mt-1 text-sm text-slate-300 leading-relaxed">{blurb}</div>
                   </div>
                 </div>
                 <div className="mt-4 text-sm text-slate-200/90">Explore →</div>

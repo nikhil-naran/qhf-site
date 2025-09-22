@@ -34,15 +34,15 @@ export default function Founders(){
   }, [selected]);
 
   return (
-    <section id="founders" ref={ref} className="py-20">
+    <section id="founders" ref={ref} className="py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Founders</h2>
         <p className="text-slate-300 mt-2 max-w-2xl">Meet the students who started QHF.</p>
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
           {founders.map((f, i) => (
-            <div key={i} className="glass rounded-2xl p-6 border border-white/10 team-card">
+            <div key={i} className="glass rounded-2xl border border-white/10 p-5 sm:p-6 team-card">
               <button onClick={()=> setSelected(i)} className="text-left w-full">
-                <div className="w-28 h-28 rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10 flex items-center justify-center text-2xl font-black text-goldB mb-4">
+                <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10 text-2xl font-black text-goldB sm:h-28 sm:w-28">
                   {f.name.split(' ').map(n=>n[0]).join('')}
                 </div>
                 <div className="font-semibold">{f.name}</div>
@@ -78,14 +78,14 @@ export default function Founders(){
                 onClick={(e)=> { if (e.target === e.currentTarget) setSelected(null); }}
               >
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-                <div className="relative z-10 max-w-3xl w-full glass rounded-2xl p-8 border border-white/10 shadow-glass">
+                <div className="glass relative z-10 w-full max-w-3xl rounded-2xl border border-white/10 p-6 shadow-glass sm:p-8">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-4">
-                      <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10 flex items-center justify-center text-3xl font-black text-goldB">
+                      <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10 text-2xl font-black text-goldB sm:h-24 sm:w-24 sm:text-3xl">
                         {f.name.split(' ').map(n=>n[0]).join('')}
                       </div>
                       <div>
-                        <div className="text-2xl font-bold">{f.name}</div>
+                        <div className="text-xl font-bold sm:text-2xl">{f.name}</div>
                         <div className="text-sm text-slate-300">{f.title}</div>
                       </div>
                     </div>

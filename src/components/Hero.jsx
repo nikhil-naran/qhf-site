@@ -8,26 +8,33 @@ export default function Hero(){
   useEffect(() => setMounted(true), []);
 
   return (
-    <section id="hero" className="relative min-h-[92vh] flex items-center overflow-hidden">
+    <section
+      id="hero"
+      className="relative flex min-h-[82vh] items-start overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 md:min-h-[92vh] md:items-center"
+    >
       <div className="absolute inset-0 bg-hero-gradient" aria-hidden="true"></div>
       <div className="hero-noise"></div>
       <ParticleCanvas />
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 w-full">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-12 sm:py-16 lg:py-24">
         <div className="flex flex-col items-center">
           <div className="flex justify-center">
             <img
               src="/QHF-2.svg"
               alt="Queens Hedge Fund"
               loading="eager"
-              style={{ clipPath: 'inset(0 0 25% 0)' }}
-              className="h-56 md:h-72 lg:h-96 xl:h-[36rem] w-auto max-w-none object-contain drop-shadow-2xl"
+              className="w-48 sm:w-64 md:w-80 lg:w-96 xl:w-[30rem] max-w-full object-contain drop-shadow-2xl md:[clip-path:inset(0_0_25%_0)]"
             />
           </div>
           <TypingParagraph mounted={mounted} />
         </div>
-        <div className="mt-10 flex items-center gap-4 justify-center">
-          <a href="#about" className={`btn reveal reveal-delay-200 ${mounted ? 'revealed' : ''} text-base md:text-lg`}>Learn More</a>
-          <a href="#philosophy" className={`text-slate-200 hover:text-goldB inline-flex items-center gap-2 reveal reveal-delay-300 ${mounted ? 'revealed' : ''} text-base md:text-lg`}>Our Strategy <ArrowRight size={20}/></a>
+        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+          <a href="#about" className={`btn reveal reveal-delay-200 ${mounted ? 'revealed' : ''} text-base sm:text-lg`}>Learn More</a>
+          <a
+            href="#philosophy"
+            className={`inline-flex items-center gap-2 text-slate-200 hover:text-goldB reveal reveal-delay-300 ${mounted ? 'revealed' : ''} text-base sm:text-lg`}
+          >
+            Our Strategy <ArrowRight size={20}/>
+          </a>
         </div>
       </div>
     </section>
@@ -150,9 +157,9 @@ function TypingParagraph({ mounted }){
   return (
     <p
       ref={ref}
-      className={`mt-5 max-w-4xl text-center reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''} text-lg md:text-xl lg:text-2xl leading-relaxed`}
+      className={`mt-5 max-w-2xl text-center text-base sm:text-lg md:text-xl leading-relaxed reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''}`}
     >
-  <span ref={spanRef} className={spanClass} style={{ color: '#FEF7E6' }}>{display}</span>
+      <span ref={spanRef} className={spanClass} style={{ color: '#FEF7E6' }}>{display}</span>
     </p>
   );
 }

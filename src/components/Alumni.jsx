@@ -1,48 +1,226 @@
-import React, { useEffect, useRef } from 'react';
-import { alumniStats, sponsors } from '../data.js';
-import { countTo } from '../lib/animation.js';
-import { revealOnScroll } from '../lib/animation.js';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { revealOnScroll, prefersReducedMotion } from '../lib/animation.js';
+
+const placements = [
+  { name: 'Questrade', logo: '/logos/questrade.png' },
+  { name: 'RBC', logo: '/logos/rbc.png' },
+  { name: 'Richardson Wealth', logo: '/logos/richardson-wealth.png' },
+  { name: 'TD', logo: '/logos/td.png' },
+  { name: 'BMO', logo: '/logos/bmo.png' },
+  { name: 'CIBC', logo: '/logos/cibc.png' },
+  { name: 'Scotiabank', logo: '/logos/scotiabank.png' },
+  { name: 'Fidelity', logo: '/logos/fidelity.png' },
+  { name: 'Manulife', logo: '/logos/manulife.png' },
+  { name: 'Sun Life', logo: '/logos/sun-life.png' },
+  { name: 'Brookfield', logo: '/logos/brookfield.png' },
+  { name: 'BlackRock', logo: '/logos/blackrock.png' },
+  { name: 'Morgan Stanley', logo: '/logos/morgan-stanley.png' },
+  { name: 'Goldman Sachs', logo: '/logos/goldman-sachs.png' },
+  { name: 'National Bank', logo: '/logos/national-bank.png' },
+  { name: 'PI Financial', logo: '/logos/pi-financial.png' },
+  { name: 'RBC Capital Markets', logo: '/logos/rbc-capital-markets.png' },
+  { name: 'Desjardins', logo: '/logos/desjardins.png' },
+  { name: 'Crestone', logo: '/logos/crestone.png' },
+  { name: 'ATB Financial', logo: '/logos/atb-financial.png' },
+  { name: 'HSBC', logo: '/logos/hsbc.png' },
+  { name: 'Simplii', logo: '/logos/simplii.png' },
+  { name: 'Wealthsimple', logo: '/logos/wealthsimple.png' },
+  { name: 'Interactive Brokers', logo: '/logos/interactive-brokers.png' },
+  { name: 'Vanguard', logo: '/logos/vanguard.png' }
+];
+
+const AUTO_SCROLL_DELAY = 6000;
+
+const getVisibleCount = (width) => {
+  if (width >= 1024) return 4;
+  if (width >= 768) return 3;
+  return 2;
+};
 
 export default function Alumni(){
   // Reworked as a Placements section (current / past) with partner logos
   const ref = useRef(null);
+  const sliderRef = useRef(null);
+  const [visibleCount, setVisibleCount] = useState(() => {
+    if (typeof window === 'undefined') return 3;
+    return getVisibleCount(window.innerWidth);
+  });
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return prefersReducedMotion();
+  });
+  const autoPlayRef = useRef(null);
   useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
-  const current = [
-    { name: 'Questrade', file: '/questrade.png' },
-    { name: 'Richardson Wealth', file: '/richardson.png' },
-    { name: 'RBC', file: '/rbc.png' }
-  ];
-  const past = [
-    'Summer Interns at Questrade',
-    'Analyst placements at RBC',
-    'Advisory roles at Richardson Wealth'
-  ];
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleResize = () => setVisibleCount(getVisibleCount(window.innerWidth));
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    const updateMotion = () => setReduceMotion(prefersReducedMotion());
+    updateMotion();
+
+    const handleCustom = (event) => setReduceMotion(!!event.detail);
+    window.addEventListener('qhf-reduce-motion-change', handleCustom);
+
+    let mediaQuery;
+    let handleMediaChange;
+    if ('matchMedia' in window) {
+      mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      handleMediaChange = (event) => setReduceMotion(event.matches);
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', handleMediaChange);
+      } else if (mediaQuery.addListener) {
+        mediaQuery.addListener(handleMediaChange);
+      }
+    }
+
+    return () => {
+      window.removeEventListener('qhf-reduce-motion-change', handleCustom);
+      if (mediaQuery && handleMediaChange) {
+        if (mediaQuery.removeEventListener) {
+          mediaQuery.removeEventListener('change', handleMediaChange);
+        } else if (mediaQuery.removeListener) {
+          mediaQuery.removeListener(handleMediaChange);
+        }
+      }
+    };
+  }, []);
+
+  const slides = useMemo(() => {
+    const chunkSize = Math.max(visibleCount, 1);
+    const result = [];
+    for (let i = 0; i < placements.length; i += chunkSize) {
+      result.push(placements.slice(i, i + chunkSize));
+    }
+    return result;
+  }, [visibleCount]);
+  const totalSlides = slides.length;
+
+  useEffect(() => {
+    if (totalSlides === 0) return;
+    setCurrentSlide((prev) => Math.min(prev, totalSlides - 1));
+  }, [totalSlides]);
+
+  const showControls = totalSlides > 1;
+  const clearAutoPlay = useCallback(() => {
+    if (autoPlayRef.current) {
+      window.clearInterval(autoPlayRef.current);
+      autoPlayRef.current = null;
+    }
+  }, []);
+
+  const startAutoPlay = useCallback(() => {
+    if (!showControls || reduceMotion) return;
+    clearAutoPlay();
+    autoPlayRef.current = window.setInterval(() => {
+      setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
+    }, AUTO_SCROLL_DELAY);
+  }, [showControls, reduceMotion, totalSlides, clearAutoPlay]);
+
+  const handleFocus = useCallback(() => {
+    clearAutoPlay();
+  }, [clearAutoPlay]);
+
+  const handleBlur = useCallback((event) => {
+    if (!sliderRef.current) {
+      startAutoPlay();
+      return;
+    }
+    if (event && sliderRef.current.contains(event.relatedTarget)) return;
+    startAutoPlay();
+  }, [startAutoPlay]);
+
+  useEffect(() => {
+    startAutoPlay();
+    return clearAutoPlay;
+  }, [startAutoPlay, clearAutoPlay]);
+
+  const goPrev = () => {
+    if (!showControls) return;
+    setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
+    startAutoPlay();
+  };
+  const goNext = () => {
+    if (!showControls) return;
+    setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
+    startAutoPlay();
+  };
+
+  const gridColumns = (groupLength) => Math.min(visibleCount, groupLength);
 
   return (
-    <section id="alumni" ref={ref} className="py-20">
+    <section id="alumni" ref={ref} className="py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
-  <h2 className="text-3xl font-bold">Current Placements</h2>
+        <h2 className="text-3xl font-bold">Current Placements</h2>
         <div className="mt-6">
-          <div className="glass rounded-2xl p-6 border border-white/10 overflow-hidden">
+          <div className="glass overflow-hidden rounded-2xl border border-white/10 p-5 sm:p-6">
             <h3 className="text-xl font-semibold mb-4">Current Placements</h3>
-            <div className="overflow-hidden">
-              {/* marquee wrapper limits visible area to 3 tiles; track is duplicated for seamless looping */}
-              <div className="marquee-wrapper">
-                <div className="marquee-track" style={{ whiteSpace: 'nowrap' }}>
-                  {(
-                    [
-                      'Questrade','RBC','Richardson Wealth','TD','BMO','CIBC','Scotiabank','Fidelity','Manulife','Sun Life','Brookfield','BlackRock','Morgan Stanley','Goldman Sachs','National Bank','PI Financial','RBC Capital Markets','Desjardins','Crestone','ATB Financial','HSBC','Simplii','Wealthsimple','Interactive Brokers','Vanguard'
-                    ]
-                  ).concat([
-                    'Questrade','RBC','Richardson Wealth','TD','BMO','CIBC','Scotiabank','Fidelity','Manulife','Sun Life','Brookfield','BlackRock','Morgan Stanley','Goldman Sachs','National Bank','PI Financial','RBC Capital Markets','Desjardins','Crestone','ATB Financial','HSBC','Simplii','Wealthsimple','Interactive Brokers','Vanguard'
-                  ]).map((name, i) => (
-                    <div key={i} className="marquee-item inline-flex items-center gap-3 opacity-95 hover:opacity-100 rounded-lg bg-white/3 border border-white/6">
-                      <div className="shrink-0 marquee-logo rounded bg-white/6 border border-white/10 flex items-center justify-center text-sm text-slate-800">{name.split(' ')[0]}</div>
-                      <span className="text-sm text-slate-200 px-3 py-2">{name}</span>
+            <div
+              className="placements-slider relative"
+              ref={sliderRef}
+              onMouseEnter={clearAutoPlay}
+              onMouseLeave={startAutoPlay}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            >
+              {showControls && (
+                <button
+                  type="button"
+                  onClick={goPrev}
+                  className="slider-control left-2"
+                  aria-label="Show previous placements"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+              )}
+              <div className="placements-viewport">
+                <div
+                  className="placements-track"
+                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                >
+                  {slides.map((group, slideIndex) => (
+                    <div key={`placements-slide-${slideIndex}`} className="placements-slide">
+                      <div
+                        className="placements-grid gap-4"
+                        style={{ gridTemplateColumns: `repeat(${gridColumns(group.length)}, minmax(0, 1fr))` }}
+                      >
+                        {group.map((company) => (
+                          <div
+                            key={company.name}
+                            className="placement-card inline-flex items-center gap-3 opacity-95 hover:opacity-100 rounded-lg bg-white/3 border border-white/6"
+                          >
+                            <div className="placement-logo rounded bg-white/6 border border-white/10 flex items-center justify-center">
+                              <img
+                                src={company.logo}
+                                alt={`${company.name} logo`}
+                                loading="lazy"
+                                className="h-full w-full object-contain p-4"
+                              />
+                            </div>
+                            <span className="text-sm text-slate-200 px-3 py-2">{company.name}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
+              {showControls && (
+                <button
+                  type="button"
+                  onClick={goNext}
+                  className="slider-control right-2"
+                  aria-label="Show next placements"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              )}
             </div>
           </div>
         </div>

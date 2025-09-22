@@ -8,7 +8,7 @@ export default function Events(){
   useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
   const [open, setOpen] = useState(null);
   return (
-    <section id="events" ref={ref} className="py-20">
+    <section id="events" ref={ref} className="py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Events</h2>
         <div className="mt-6 space-y-4">

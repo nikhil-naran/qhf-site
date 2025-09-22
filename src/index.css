@@ -206,48 +206,43 @@ body {
 .team-grid-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 48px rgba(2,6,23,0.6); }
 .team-logo { width: 64px; height: 64px; min-width: 64px; min-height: 64px; border-radius: 10px; display:inline-flex; align-items:center; justify-content:center; overflow:hidden; }
 
+@media (max-width: 640px) {
+  .team-grid-card { padding: 1rem; }
+  .team-logo {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+  }
+}
 
-/* Marquee: show 3 tiles at a time, fill the panel width, and loop smoothly */
-.marquee-wrapper {
-  --visible-count: 3; /* how many tiles visible at once */
-  width: 100%; /* fill the parent panel */
+
+/* Placements slider replaces marquee auto-scroll */
+.placements-slider {
+  position: relative;
+}
+.placements-viewport {
   overflow: hidden;
 }
-.marquee-track {
+.placements-track {
   display: flex;
-  gap: 12px;
-  align-items: center;
-  /* duplicated content in markup allows a -50% translate for seamless looping */
-  animation: marquee-scroll 34s linear infinite; /* slightly faster */
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.marquee-item {
-  /* make each item occupy roughly 1/visible-count of the wrapper */
-  flex: 0 0 calc((100% / var(--visible-count)) - 12px);
+.placements-slide {
+  flex: 0 0 100%;
+  padding: 8px 0;
+}
+.placements-grid {
+  display: grid;
+}
+.placement-card {
+  height: 100%;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   padding: 14px 16px;
 }
-
-@keyframes marquee-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* make marquee responsive: fewer/larger tiles on narrower screens */
-@media (max-width: 900px) {
-  .marquee-wrapper { --visible-count: 2; }
-  .marquee-track { animation-duration: 28s; }
-}
-@media (max-width: 640px) {
-  .marquee-wrapper { --visible-count: 1; }
-  .marquee-track { animation-duration: 16s; }
-}
-
-/* Larger/taller marquee container and square logo helper */
-.marquee-wrapper { height: 160px; }
-.marquee-item { height: 100%; }
-.marquee-logo {
+.placement-logo {
   width: 96px;
   height: 96px;
   min-width: 96px;
@@ -258,11 +253,52 @@ body {
   align-items: center;
   justify-content: center;
 }
+.slider-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(15, 23, 42, 0.78);
+  color: #f8fafc;
+  transition: background 180ms ease, border-color 180ms ease, transform 200ms ease;
+}
+.slider-control:hover {
+  background: rgba(37, 99, 235, 0.85);
+  border-color: rgba(255,255,255,0.4);
+}
+.slider-control:focus-visible {
+  outline: 2px solid rgba(96, 165, 250, 0.9);
+  outline-offset: 2px;
+}
+.slider-control:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
 @media (max-width: 900px) {
-  .marquee-wrapper { height: 140px; }
-  .marquee-logo { width: 80px; height: 80px; min-width: 80px; min-height: 80px; }
+  .placement-logo {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+    min-height: 80px;
+  }
 }
 @media (max-width: 640px) {
-  .marquee-wrapper { height: 120px; }
-  .marquee-logo { width: 64px; height: 64px; min-width: 64px; min-height: 64px; }
+  .placement-logo {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
+  }
+  .placement-card {
+    padding: 12px 14px;
+  }
+  .slider-control {
+    width: 36px;
+    height: 36px;
+  }
 }
