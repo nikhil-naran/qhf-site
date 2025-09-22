@@ -2,6 +2,28 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { TEAMS } from '../data.js';
 
+const INITIALS_FALLBACK = (name = '') => name.split(' ').map((part) => part[0]).filter(Boolean).join('').slice(0, 2).toUpperCase();
+
+const AVATAR_SIZES = {
+  sm: 'h-12 w-12 sm:h-14 sm:w-14',
+  md: 'h-16 w-16 sm:h-20 sm:w-20',
+  lg: 'h-20 w-20 sm:h-24 sm:w-24',
+};
+
+function PersonAvatar({ person = {}, size = 'md', className = '' }) {
+  const classes = AVATAR_SIZES[size] || AVATAR_SIZES.md;
+  const src = person.headshot;
+  return (
+    <div className={`relative flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-goldA/20 to-goldB/10 text-goldB ${classes} ${className}`}>
+      {src ? (
+        <img src={src} alt={`${person.name} headshot`} className="headshot-img absolute inset-0 h-full w-full" />
+      ) : (
+        <span className="relative z-10 font-semibold uppercase tracking-wide text-slate-100">{INITIALS_FALLBACK(person.name)}</span>
+      )}
+    </div>
+  );
+}
+
 export default function TeamPage(){
   const { slug } = useParams();
   const team = TEAMS[slug];
@@ -99,10 +121,10 @@ export default function TeamPage(){
                     <div className="mt-3 grid gap-4 sm:grid-cols-2">
                       {team.coPortfolioManagers.map((cpm, idx) => (
                         <div key={idx} className="flex items-center gap-4">
-                          <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10 sm:h-20 sm:w-20" aria-label="Headshot placeholder" />
+                          <PersonAvatar person={cpm} size="md" />
                           <div>
-                            <div className="font-semibold">{cpm.name}</div>
-                            <p className="text-sm text-slate-300">To Be Filled out</p>
+                            <div className="font-semibold text-slate-50">{cpm.name}</div>
+                            <p className="text-sm text-slate-300">{cpm.bio || 'Co-Portfolio Manager'}</p>
                           </div>
                         </div>
                       ))}
@@ -115,10 +137,10 @@ export default function TeamPage(){
                 <>
                   <h3 className="text-lg font-medium">Portfolio Manager</h3>
                   <div className="mt-3 grid items-center gap-4 sm:grid-cols-[96px_1fr]">
-                    <div className="h-20 w-20 rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10 sm:h-24 sm:w-24" aria-label="Headshot placeholder" />
+                    <PersonAvatar person={pm} size="lg" />
                     <div>
-                      <div className="font-semibold">{pm.name}</div>
-                      <p className="text-sm text-slate-300">To Be Filled out</p>
+                      <div className="font-semibold text-slate-50">{pm?.name}</div>
+                      <p className="text-sm text-slate-300">{pm?.bio || 'Portfolio lead'}</p>
                     </div>
                   </div>
                 </>
@@ -136,9 +158,9 @@ export default function TeamPage(){
                   <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
                     {list.map((a, i)=> (
                       <div key={i} className="glass rounded-xl border border-white/10 p-4">
-                        <div className="mb-3 h-16 w-16 rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10 sm:h-20 sm:w-20" aria-label="Headshot placeholder" />
-                        <div className="font-semibold">{a.name}</div>
-                        <p className="text-sm text-slate-300">To Be Filled out</p>
+                        <PersonAvatar person={a} size="md" className="mb-3" />
+                        <div className="font-semibold text-slate-50">{a.name}</div>
+                        <p className="text-sm text-slate-300">{a.bio || (usingMembers ? 'Team member' : 'Analyst')}</p>
                       </div>
                     ))}
                   </div>

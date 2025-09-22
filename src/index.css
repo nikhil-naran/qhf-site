@@ -110,6 +110,11 @@ body {
   color: #E2C784;
 }
 
+.headshot-img {
+  object-fit: cover;
+  object-position: 50% 35%;
+}
+
 .founder-modal {
   background: linear-gradient(160deg, rgba(12,14,18,0.82), rgba(74,28,39,0.65));
   backdrop-filter: blur(30px) saturate(150%);

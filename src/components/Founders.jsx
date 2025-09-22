@@ -1,15 +1,32 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { revealOnScroll } from '../lib/animation.js';
 import { Linkedin, X } from 'lucide-react';
+import { getHeadshot } from '../lib/headshots.js';
+
+const getInitials = (name = '') => name.split(' ').map((n) => n[0]).filter(Boolean).join('').slice(0, 2).toUpperCase();
+
+const founders = [
+  { name: 'Anson El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Anson.', linkedin: 'https://www.linkedin.com/in/anson-el-ayari/' },
+  { name: 'Nikhil Naran', title: 'Co-Founder', bio: 'Placeholder bio for Nikhil.', linkedin: 'https://www.linkedin.com/in/nikhilnaran/' },
+  { name: 'Ava El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Ava.', linkedin: 'https://www.linkedin.com/in/ava-el-ayari/' },
+].map((founder) => ({ ...founder, headshot: getHeadshot(founder.name) }));
+
+function Headshot({ person, className = '', initialsClass = '' }){
+  const src = person?.headshot;
+  return (
+    <div className={`relative flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-goldA/20 to-goldB/10 text-goldB ${className}`}>
+      {src ? (
+        <img src={src} alt={`${person.name} headshot`} className="headshot-img absolute inset-0 h-full w-full" />
+      ) : (
+        <span className={`relative z-10 font-black tracking-widest ${initialsClass}`}>{getInitials(person?.name)}</span>
+      )}
+    </div>
+  );
+}
 
 export default function Founders(){
   const ref = useRef(null);
   useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
-  const founders = [
-  { name: 'Anson El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Anson.', linkedin: 'https://www.linkedin.com/in/anson-el-ayari/' },
-  { name: 'Nikhil Naran', title: 'Co-Founder', bio: 'Placeholder bio for Nikhil.', linkedin: 'https://www.linkedin.com/in/nikhilnaran/' },
-  { name: 'Ava El Ayari', title: 'Co-Founder', bio: 'Placeholder bio for Ava.', linkedin: 'https://www.linkedin.com/in/ava-el-ayari/' },
-  ];
   const [selected, setSelected] = useState(null); // will store selected index or null
   const closeBtnRef = useRef(null);
 
@@ -42,9 +59,7 @@ export default function Founders(){
           {founders.map((f, i) => (
             <div key={i} className="glass rounded-2xl border border-white/10 p-5 sm:p-6 team-card">
               <button onClick={()=> setSelected(i)} className="text-left w-full">
-                <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-xl bg-gradient-to-br from-goldA/20 to-goldB/10 text-2xl font-black text-goldB sm:h-28 sm:w-28">
-                  {f.name.split(' ').map(n=>n[0]).join('')}
-                </div>
+                <Headshot person={f} className="mb-4 flex h-24 w-24 items-center justify-center sm:h-28 sm:w-28" initialsClass="text-2xl" />
                 <div className="font-semibold">{f.name}</div>
                 <div className="text-sm text-slate-300">{f.title}</div>
                 <p className="mt-3 text-sm text-slate-300">{f.bio}</p>
@@ -92,9 +107,7 @@ export default function Founders(){
                       </button>
                       <div className="relative grid gap-10 px-6 pb-10 pt-16 md:grid-cols-[320px_minmax(0,1fr)] md:gap-16 md:px-12 md:pt-20">
                         <div className="flex flex-col gap-6 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8">
-                          <div className="flex h-28 w-28 items-center justify-center self-start rounded-2xl bg-gradient-to-br from-goldA/25 to-goldB/15 text-3xl font-black tracking-widest text-goldB md:h-32 md:w-32 md:text-4xl">
-                            {f.name.split(' ').map(n=>n[0]).join('')}
-                          </div>
+                          <Headshot person={f} className="flex h-28 w-28 items-center justify-center rounded-2xl md:h-32 md:w-32" initialsClass="text-3xl md:text-4xl" />
                           <div>
                             <div className="text-2xl font-semibold text-slate-50 md:text-3xl">{f.name}</div>
                             <div className="mt-1 text-sm uppercase tracking-[0.3em] text-goldB/80">{f.title}</div>

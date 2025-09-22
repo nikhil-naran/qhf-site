@@ -1,3 +1,10 @@
+import { getHeadshot } from './lib/headshots.js';
+
+const withHeadshot = (person = {}) => ({
+  ...person,
+  headshot: person.headshot || getHeadshot(person.name),
+});
+
 export const TEAM_CATEGORIES = [
   { name: 'Industrials', slug: 'industrials' },
   { name: 'Mining & Materials', slug: 'mining-materials' },
@@ -21,12 +28,12 @@ export const TEAMS = {
       { ticker: 'SHOP', company: 'Shopify', allocation: 22, performance: 18 }
     ],
     coPortfolioManagers: [
-      { name: 'Anson El-Ayari', headshot: '', bio: 'Co-PM: applied data & research.' },
-      { name: 'Nikhil Naran', headshot: '', bio: 'Co-PM: platform & infra.' }
+      withHeadshot({ name: 'Anson El-Ayari', bio: 'Co-PM: applied data & research.' }),
+      withHeadshot({ name: 'Nikhil Naran', bio: 'Co-PM: platform & infra.' })
     ],
     analysts: [
-      { name: 'James Simone', headshot: '', bio: 'Semis & AI infra.' },
-      { name: 'Alicia Wang', headshot: '', bio: 'Software & platforms.' }
+      withHeadshot({ name: 'James Simone', bio: 'Semis & AI infra.' }),
+      withHeadshot({ name: 'Alicia Wang', bio: 'Software & platforms.' })
     ],
     reports: [
       { title: 'NVIDIA Variant Perception (Q1)', url: '/reports/nvda-q1.pdf' },
@@ -40,9 +47,9 @@ export const TEAMS = {
       { ticker: 'BNS', company: 'Bank of Nova Scotia', allocation: 12, performance: 3 },
       { ticker: 'RY', company: 'Royal Bank of Canada', allocation: 14, performance: 4 }
     ],
-    portfolioManager: { name: 'Bianca Rotariu', headshot: '', bio: 'Focus on balance sheet resilience and ROE.' },
+    portfolioManager: withHeadshot({ name: 'Bianca Rotariu', bio: 'Focus on balance sheet resilience and ROE.' }),
     analysts: [
-      { name: 'Thomas Skippon', headshot: '', bio: 'Canadian banks & insurers.' }
+      withHeadshot({ name: 'Thomas Skippon', bio: 'Canadian banks & insurers.' })
     ],
     reports: [{ title: 'Canadian Banks: Net Interest Margin Outlook', url: '/reports/fin-nim.pdf' }]
   },
@@ -53,10 +60,10 @@ export const TEAMS = {
       { ticker: 'AEM', company: 'Agnico Eagle', allocation: 10, performance: 7 },
       { ticker: 'TECK', company: 'Teck Resources', allocation: 9, performance: 5 }
     ],
-    portfolioManager: { name: 'Findlay Goodall', headshot: '', bio: 'Quality miners with disciplined capex.' },
+    portfolioManager: withHeadshot({ name: 'Findlay Goodall', bio: 'Quality miners with disciplined capex.' }),
     analysts: [
-      { name: 'Iain Brady', headshot: '', bio: 'Base metals & gold.' },
-      { name: 'Emory Geho', headshot: '', bio: 'Exploration & commodities.' }
+      withHeadshot({ name: 'Iain Brady', bio: 'Base metals & gold.' }),
+      withHeadshot({ name: 'Emory Geho', bio: 'Exploration & commodities.' })
     ],
     reports: [{ title: 'Copper Cycle Primer', url: '/reports/copper-cycle.pdf' }]
   },
@@ -67,10 +74,10 @@ export const TEAMS = {
       { ticker: 'CP', company: 'CPKC Railway', allocation: 11, performance: 6 },
       { ticker: 'WSP', company: 'WSP Global', allocation: 10, performance: 8 }
     ],
-    portfolioManager: { name: 'Beau Leone', headshot: '', bio: 'Compounders with durable moats.' },
+    portfolioManager: withHeadshot({ name: 'Beau Leone', bio: 'Compounders with durable moats.' }),
     analysts: [
-      { name: 'Jay Diri', headshot: '', bio: 'Transport & engineering services.' },
-      { name: 'Camran Jiwani', headshot: '', bio: 'Industrial analytics.' }
+      withHeadshot({ name: 'Jay Diri', bio: 'Transport & engineering services.' }),
+      withHeadshot({ name: 'Camran Jiwani', bio: 'Industrial analytics.' })
     ],
     reports: [{ title: 'Rail Operator Unit Economics', url: '/reports/rail-econ.pdf' }]
   },
@@ -80,10 +87,10 @@ export const TEAMS = {
     holdings: [
       { ticker: 'ATD', company: 'Alimentation Couche-Tard', allocation: 15, performance: 11 }
     ],
-    portfolioManager: { name: 'Jillian Dalton', headshot: '', bio: 'High ROIC retailers.' },
+    portfolioManager: withHeadshot({ name: 'Jillian Dalton', bio: 'High ROIC retailers.' }),
     analysts: [
-      { name: 'Ivan Bardziyan', headshot: '', bio: 'Global staples coverage.' },
-      { name: 'Gavin Cameron', headshot: '', bio: 'Retail comps & margins.' }
+      withHeadshot({ name: 'Ivan Bardziyan', bio: 'Global staples coverage.' }),
+      withHeadshot({ name: 'Gavin Cameron', bio: 'Retail comps & margins.' })
     ],
     reports: [{ title: 'Convenience Retail Landscape', url: '/reports/retail-landscape.pdf' }]
   },
@@ -93,8 +100,8 @@ export const TEAMS = {
     holdings: [
       { ticker: 'SIA', company: 'Sienna Senior Living', allocation: 7, performance: 4 }
     ],
-  portfolioManager: { name: 'Alex Papadopoulos', headshot: '', bio: 'Defensive yield + growth.' },
-  analysts: [{ name: 'Daniel Thompson', headshot: '', bio: 'HC services & REITs.' }],
+  portfolioManager: withHeadshot({ name: 'Alex Papadopoulos', bio: 'Defensive yield + growth.' }),
+  analysts: [withHeadshot({ name: 'Daniel Thompson', bio: 'HC services & REITs.' })],
     reports: [{ title: 'Senior Living REITs: Rate vs Occupancy', url: '/reports/reits-senior.pdf' }]
   },
   crypto: {
@@ -104,8 +111,8 @@ export const TEAMS = {
       { ticker: 'BTC', company: 'Bitcoin', allocation: 5, performance: 20 },
       { ticker: 'ETH', company: 'Ethereum', allocation: 4, performance: 15 }
     ],
-  portfolioManager: { name: 'Nikhil Naran', headshot: '', bio: 'Risk-managed exposure to digital assets.' },
-  analysts: [{ name: 'Aaron Feng', headshot: '', bio: 'On-chain & L2s.' }],
+  portfolioManager: withHeadshot({ name: 'Nikhil Naran', bio: 'Risk-managed exposure to digital assets.' }),
+  analysts: [withHeadshot({ name: 'Aaron Feng', bio: 'On-chain & L2s.' })],
     reports: [{ title: 'ETH Staking Dynamics', url: '/reports/eth-staking.pdf' }]
   },
   marketing: {
@@ -116,11 +123,11 @@ export const TEAMS = {
       { ticker: 'META', company: 'Meta Platforms', allocation: 8, performance: 12 },
       { ticker: 'NFLX', company: 'Netflix', allocation: 6, performance: 5 }
     ],
-    portfolioManager: { name: 'Nora Malik', headshot: '', bio: 'Brand, outreach, and events.' },
+    portfolioManager: withHeadshot({ name: 'Nora Malik', bio: 'Brand, outreach, and events.' }),
     members: [
-      { name: 'Bum 1' },
-      { name: 'Bum 2' },
-      { name: 'Bum 3' }
+      withHeadshot({ name: 'Jessica Cook', bio: 'Events & partnerships.' }),
+      withHeadshot({ name: 'Adam Bizios', bio: 'Content & campaigns.' }),
+      withHeadshot({ name: 'Sydney Garrah', bio: 'Creative & design.' })
     ],
     reports: [{ title: 'Event Playbook 2025', url: '/reports/event-playbook.pdf' }]
   }
@@ -133,11 +140,11 @@ export const TEAMS = {
       { ticker: 'GLD', company: 'SPDR Gold Shares', allocation: 20, performance: 5 },
       { ticker: 'UUP', company: 'Invesco DB US Dollar Index Bullish Fund', allocation: 10, performance: -1 }
     ],
-    portfolioManager: { name: 'Dr. Samuel Grant', headshot: '', bio: 'Leads macroeconomic research and scenario analysis.' },
+    portfolioManager: withHeadshot({ name: 'Dr. Samuel Grant', bio: 'Leads macroeconomic research and scenario analysis.' }),
     members: [
       { name: 'Ravjot Sarao' },
       { name: 'Roscoe Sze' }
-    ],
+    ].map(withHeadshot),
     reports: [
       { title: 'Macro Regime Playbook', url: '/reports/macro-regime-playbook.pdf' }
     ]
