@@ -150,6 +150,7 @@ export default function TeamPage(){
               const usingMembers = !(team.analysts && team.analysts.length) && (team.members && team.members.length);
               const label = usingMembers ? 'Members' : 'Analysts';
               const list = (team.analysts && team.analysts.length) ? team.analysts : (team.members || []);
+              if (!list.length) return null;
               return (
                 <>
                   <h3 className="text-lg font-medium">{label}</h3>

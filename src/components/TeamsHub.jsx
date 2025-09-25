@@ -22,7 +22,8 @@ export default function TeamsHub(){
   const teamsMeta = Object.values(TEAMS || {});
   const totalHoldings = teamsMeta.reduce((acc, team) => acc + (team?.holdings?.length || 0), 0);
   const totalReports = teamsMeta.reduce((acc, team) => acc + (team?.reports?.length || 0), 0);
-  const totalLeads = teamsMeta.reduce((acc, team) => {
+  const totalLeads = Object.entries(TEAMS || {}).reduce((acc, [slug, team]) => {
+    if (['marketing', 'macro-economics'].includes(slug)) return acc;
     const pm = team?.portfolioManager ? 1 : 0;
     const coPM = Array.isArray(team?.coPortfolioManagers) ? team.coPortfolioManagers.length : 0;
     return acc + pm + coPM;
@@ -66,6 +67,8 @@ export default function TeamsHub(){
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {allTeams.map((team) => {
             const { meta } = team;
+            const showLeadership = !['marketing', 'macro-economics'].includes(team.slug);
+            const showMemberChips = !['marketing', 'macro-economics'].includes(team.slug);
             const blurb = 'Explore holdings, team leads, and research highlights.';
             const leadNames = meta.portfolioManager?.name || (Array.isArray(meta.coPortfolioManagers) && meta.coPortfolioManagers.length > 0 ? meta.coPortfolioManagers.map((person) => person.name).join(' · ') : null);
 
@@ -73,7 +76,7 @@ export default function TeamsHub(){
             const reportChips = holdings.length === 0 && Array.isArray(meta.reports)
               ? meta.reports.slice(0, 2).map((report) => ({ id: report.title, title: report.title, subtitle: 'Report' }))
               : [];
-            const memberChips = holdings.length === 0 && reportChips.length === 0 && Array.isArray(meta.members)
+            const memberChips = showMemberChips && holdings.length === 0 && reportChips.length === 0 && Array.isArray(meta.members)
               ? meta.members.slice(0, 2).map((member) => ({ id: member.name, title: member.name, subtitle: 'Team member' }))
               : [];
 
@@ -116,11 +119,13 @@ export default function TeamsHub(){
                     </div>
                   )}
 
-                  <div className="mt-auto flex items-center justify-between text-sm text-slate-200/80">
-                    <div>
-                      <div className="text-[11px] uppercase tracking-[0.3em] text-slate-400">Leadership</div>
-                      <div className="mt-1 font-medium text-slate-100">{leadNames || 'QHF leadership team'}</div>
-                    </div>
+                  <div className={`mt-auto flex items-center ${showLeadership ? 'justify-between' : 'justify-end'} text-sm text-slate-200/80`}>
+                    {showLeadership && (
+                      <div>
+                        <div className="text-[11px] uppercase tracking-[0.3em] text-slate-400">Leadership</div>
+                        <div className="mt-1 font-medium text-slate-100">{leadNames || 'QHF leadership team'}</div>
+                      </div>
+                    )}
                     <span className="inline-flex items-center gap-2 font-semibold text-goldB transition-transform duration-200 group-hover:translate-x-1">
                       Explore
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-4 w-4">

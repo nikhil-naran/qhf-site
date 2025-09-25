@@ -7,7 +7,11 @@ const placements = [
   { name: 'Questrade', logo: '/logos/questrade.png' },
   { name: 'TD', logo: '/logos/td.png' },
   { name: 'Manulife', logo: '/logos/manulife.png' },
-  { name: 'Richardson Wealth', logo: '/logos/richardson-wealth.png' }
+  { name: 'Richardson Wealth', logo: '/logos/richardson-wealth.png' },
+  { name: 'ENGIE Global Markets', logo: '/logos/engie-global-markets.png' },
+  { name: 'Two Sigma', logo: '/logos/two-sigma.png' },
+  { name: 'DWP Capital', logo: '/logos/dwp-capital.png' },
+  { name: 'Blue Owl Capital', logo: '/logos/blue-owl-capital.png' }
 ];
 
 const SCROLL_CYCLE_MS = 22000; // time to shift one slide completely
