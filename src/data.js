@@ -13,6 +13,7 @@ export const TEAM_CATEGORIES = [
   { name: 'Consumer Staples & Retail', slug: 'consumer-staples-retail' },
   { name: 'Real Estate & Health Care', slug: 'real-estate-health-care' },
   { name: 'Crypto', slug: 'crypto' },
+  { name: 'Communications', slug: 'communications' },
   { name: 'Marketing', slug: 'marketing' },
   { name: 'Macro Economics', slug: 'macro-economics' }
 ];
@@ -85,6 +86,16 @@ export const TEAMS = {
     holdings: [],
   portfolioManager: withHeadshot({ name: 'Nikhil Naran', bio: 'Risk-managed exposure to digital assets.' }),
   analysts: [withHeadshot({ name: 'Aaron Feng', bio: 'On-chain & L2s.' })],
+    reports: []
+  },
+  communications: {
+    name: 'Communications',
+    iconUrl: '/icons/communications.svg',
+    holdings: [],
+    portfolioManager: withHeadshot({ name: 'Edan Kroi', bio: 'Leads member communications and external media.' }),
+    analysts: [
+      withHeadshot({ name: 'Andy Quinn', bio: 'Focuses on digital storytelling and outreach.' })
+    ],
     reports: []
   },
   marketing: {

@@ -10,19 +10,19 @@ export default function Hero(){
   return (
     <section
       id="hero"
-      className="relative flex min-h-[82vh] items-start overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 md:min-h-[92vh] md:items-center"
+      className="relative flex min-h-[82vh] items-start overflow-hidden pt-16 pb-28 sm:pt-20 sm:pb-32 md:min-h-[92vh]"
     >
       <div className="absolute inset-0 bg-hero-gradient" aria-hidden="true"></div>
       <div className="hero-noise"></div>
       <ParticleCanvas />
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-12 sm:py-16 lg:py-24">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-6 pb-20 sm:pt-8 sm:pb-24 lg:pt-10 lg:pb-28">
         <div className="flex flex-col items-center">
           <div className="flex justify-center">
             <img
               src="/QHF-2.svg"
               alt="Queens Hedge Fund"
               loading="eager"
-              className="w-48 sm:w-64 md:w-80 lg:w-96 xl:w-[30rem] max-w-full object-contain drop-shadow-2xl md:[clip-path:inset(0_0_25%_0)]"
+              className="w-[19rem] max-w-[92vw] object-contain drop-shadow-[0_25px_80px_rgba(8,15,30,0.45)] sm:w-[23rem] md:w-[27rem] lg:w-[31rem] xl:w-[36rem]"
             />
           </div>
           <TypingParagraph mounted={mounted} />

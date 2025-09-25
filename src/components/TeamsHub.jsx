@@ -2,20 +2,11 @@ import React from 'react';
 import { TEAM_CATEGORIES, TEAMS } from '../data.js';
 import { Link } from 'react-router-dom';
 
-const accentGradients = [
-  'from-amber-500/25 via-slate-900/35 to-slate-900/5',
-  'from-sky-500/25 via-slate-900/35 to-slate-900/5',
-  'from-emerald-500/25 via-slate-900/35 to-slate-900/5',
-  'from-fuchsia-500/25 via-slate-900/35 to-slate-900/5',
-  'from-indigo-500/25 via-slate-900/35 to-slate-900/5',
-];
-
 const formatMetric = (value) => (value && value > 0 ? value.toLocaleString('en-CA') : 'N/A');
 
 export default function TeamsHub(){
-  const allTeams = TEAM_CATEGORIES.map((entry, index) => ({
+  const allTeams = TEAM_CATEGORIES.map((entry) => ({
     ...entry,
-    gradient: accentGradients[index % accentGradients.length],
     meta: TEAMS[entry.slug] || {},
   }));
 
@@ -88,12 +79,9 @@ export default function TeamsHub(){
               <Link
                 key={team.slug}
                 to={`/teams/${team.slug}`}
-                className="team-grid-card group relative overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-goldB"
+                className="team-grid-card glass group relative overflow-hidden border border-white/12 shadow-glass focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-goldB"
               >
-                <span className={`absolute inset-0 rounded-2xl border border-white/10 bg-gradient-to-br ${team.gradient} opacity-80 transition-opacity duration-300 group-hover:opacity-100`} aria-hidden="true"></span>
-                <span className="absolute inset-px rounded-[1.05rem] bg-slate-900/60" aria-hidden="true"></span>
-
-                <div className="relative z-10 flex h-full flex-col gap-6">
+                <div className="flex h-full flex-col gap-6">
                   <div className="flex items-start gap-4">
                     <div className="team-logo rounded-xl border border-white/10 bg-white/10">
                       {meta.iconUrl ? (
