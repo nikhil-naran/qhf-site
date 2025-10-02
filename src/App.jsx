@@ -71,6 +71,13 @@ function DefaultSeo(){
     }
   ];
 
+  const logoObject = {
+    '@type': 'ImageObject',
+    url: `${origin}/QHF-2.svg`,
+    width: 500,
+    height: 500
+  };
+
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
@@ -78,7 +85,8 @@ function DefaultSeo(){
     alternateName: 'QHF',
     description,
     url: canonicalUrl,
-    logo: `${origin}/QHF-2.svg`,
+    logo: logoObject,
+    image: logoObject,
     areaServed: 'CA',
     address: {
       '@type': 'PostalAddress',
@@ -93,7 +101,11 @@ function DefaultSeo(){
       name: "Queen's University",
       url: 'https://www.queensu.ca/'
     },
-    founder: founders
+    founder: founders,
+    sameAs: [
+      'https://www.linkedin.com/company/queens-hedge-fund/',
+      'https://www.instagram.com/queenshedgefund/'
+    ]
   };
 
   return (
