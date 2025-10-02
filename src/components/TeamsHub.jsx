@@ -1,6 +1,7 @@
 import React from 'react';
 import { TEAM_CATEGORIES, TEAMS } from '../data.js';
 import { Link } from 'react-router-dom';
+import OptimizedImage from './OptimizedImage.jsx';
 
 const formatMetric = (value) => (value && value > 0 ? value.toLocaleString('en-CA') : 'N/A');
 
@@ -85,7 +86,13 @@ export default function TeamsHub(){
                   <div className="flex items-start gap-4">
                     <div className="team-logo rounded-xl border border-white/10 bg-white/10">
                       {meta.iconUrl ? (
-                        <img src={meta.iconUrl} alt={`${team.name} icon`} className="h-12 w-12 object-contain" />
+                        <OptimizedImage
+                          src={meta.iconUrl}
+                          alt={`${team.name} icon`}
+                          widths={[48, 64, 96, 128]}
+                          sizes="64px"
+                          className="h-12 w-12 object-contain"
+                        />
                       ) : (
                         <span className="text-xl font-bold text-goldB">{team.name.split(' ').map((segment) => segment[0]).slice(0, 2).join('')}</span>
                       )}

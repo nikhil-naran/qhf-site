@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://qhf-site.vercel.app/sitemap.xml
+Sitemap: https://www.queenshedgefund.com/sitemap.xml

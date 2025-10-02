@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { revealOnScroll, prefersReducedMotion } from '../lib/animation.js';
+import OptimizedImage from './OptimizedImage.jsx';
 
 const placements = [
   { name: 'RBC', logo: '/logos/rbc.png' },
@@ -207,10 +208,11 @@ export default function Alumni(){
                             className="placement-card inline-flex items-center gap-3 opacity-95 hover:opacity-100"
                           >
                             <div className="placement-logo rounded flex items-center justify-center">
-                              <img
+                              <OptimizedImage
                                 src={company.logo}
                                 alt={`${company.name} logo`}
-                                loading="lazy"
+                                widths={[120, 160, 220, 280]}
+                                sizes="(min-width: 1024px) 180px, (min-width: 768px) 140px, 45vw"
                                 className="h-full w-full object-contain p-4"
                               />
                             </div>

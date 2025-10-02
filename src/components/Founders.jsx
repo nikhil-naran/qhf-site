@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { revealOnScroll } from '../lib/animation.js';
 import { Linkedin, X } from 'lucide-react';
 import { getHeadshot } from '../lib/headshots.js';
+import OptimizedImage from './OptimizedImage.jsx';
 
 const getInitials = (name = '') => name.split(' ').map((n) => n[0]).filter(Boolean).join('').slice(0, 2).toUpperCase();
 
@@ -16,7 +17,13 @@ function Headshot({ person, className = '', initialsClass = '' }){
   return (
     <div className={`relative flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-goldA/20 to-goldB/10 text-goldB ${className}`}>
       {src ? (
-        <img src={src} alt={`${person.name} headshot`} className="headshot-img absolute inset-0 h-full w-full" />
+        <OptimizedImage
+          src={src}
+          alt={`${person.name} headshot`}
+          widths={[128, 160, 192, 256]}
+          sizes="(min-width: 768px) 7rem, 32vw"
+          className="headshot-img absolute inset-0 h-full w-full object-cover"
+        />
       ) : (
         <span className={`relative z-10 font-black tracking-widest ${initialsClass}`}>{getInitials(person?.name)}</span>
       )}
