@@ -50,9 +50,9 @@ export default function About(){
           <div className="glass rounded-2xl border border-white/10 p-8 shadow-sm">
             <h2 className="text-3xl font-bold">What We Do</h2>
             <p className="mt-3 max-w-3xl text-slate-200/90 leading-relaxed">
-              Queen’s Hedge Fund (QHF) is a student-managed North American investment fund based in Kingston, Ontario.
-              We run a concentrated, multi-strategy macro-driven portfolio while developing the next generation of
-              investors through hands-on training, workshops, research reviews, and live stock pitches.
+              Queen's Hedge Fund (QHF) is Queen's University's student-managed hedge fund in Kingston, Ontario.
+              Our analysts research North American markets, operate a concentrated multi-strategy portfolio, and
+              practice institutional-grade risk management while progressing through our training pipeline.
             </p>
             <p className="mt-6 text-slate-200/80 leading-relaxed">Our members gain experience through:</p>
 
@@ -73,7 +73,7 @@ export default function About(){
           <div className="glass rounded-2xl border border-white/10 p-8 shadow-sm">
             <h3 className="text-3xl font-bold">Why QHF</h3>
             <p className="mt-4 text-slate-200/80 leading-relaxed">
-              QHF is designed for students who want more than just theory; we offer the structure, discipline, and accountability of a real hedge fund environment.
+              QHF is designed for students who want more than just theory; by mirroring a professional hedge fund inside Queen's University, we provide the structure, discipline, and accountability required to pitch and manage real investment ideas.
             </p>
 
             <div className="mt-8 lg:mt-12 grid items-stretch gap-4 sm:grid-cols-2">
@@ -88,6 +88,9 @@ export default function About(){
                 </div>
               ))}
             </div>
+            <p className="mt-8 text-sm text-slate-300">
+              Interested in joining Queen's Hedge Fund? <a href="/#join" className="text-goldB hover:text-goldA">Start your application conversation with QHF</a>.
+            </p>
           </div>
         </div>
       </div>

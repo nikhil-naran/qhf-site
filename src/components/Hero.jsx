@@ -20,11 +20,16 @@ export default function Hero(){
           <div className="flex justify-center">
             <img
               src="/QHF-2.svg"
-              alt="Queens Hedge Fund"
+              alt="Queen's Hedge Fund crest"
               loading="eager"
               className="w-[19rem] max-w-[92vw] object-contain drop-shadow-[0_25px_80px_rgba(8,15,30,0.45)] sm:w-[23rem] md:w-[27rem] lg:w-[31rem] xl:w-[36rem]"
             />
           </div>
+          <h1
+            className={`mt-6 max-w-3xl text-center text-3xl font-semibold leading-tight text-slate-50 sm:text-4xl md:text-[2.9rem] reveal reveal-delay-150 ${mounted ? 'revealed' : ''}`}
+          >
+            Queen's Hedge Fund (QHF) is the official student-run hedge fund at Queen's University, preparing Kingston-based analysts to invest with institutional discipline.
+          </h1>
           <TypingParagraph mounted={mounted} />
         </div>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
@@ -62,7 +67,7 @@ function Word({ word, delay=0 }){
 }
 
 function TypingParagraph({ mounted }){
-  const base = 'Empowering students with ';
+  const base = "Queens Hedge Fund equips Queen's University students with ";
   const variants = [
     'real-world investment experience.',
     'financial expertise.',

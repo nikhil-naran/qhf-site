@@ -37,13 +37,100 @@ function PageFade({ children }) {
   return <div className={`page-fade-${state} page-fade-enter-active`}>{children}</div>;
 }
 
+function DefaultSeo(){
+  const loc = useLocation();
+  const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : 'https://www.queenshedgefund.com';
+  const canonicalUrl = new URL(`${loc.pathname}${loc.search}`, origin).toString();
+  const ogImage = `${origin}/QHF-home.png`;
+  const description = "Queen's Hedge Fund (QHF) is the student-run hedge fund at Queen's University in Kingston, Ontario, delivering real investment training, research, and portfolio experience.";
+  const title = "Queen's Hedge Fund (QHF) | Queen's University Student Hedge Fund";
+  const keywords = [
+    "Queens Hedge Fund",
+    "Queen's Hedge Fund",
+    "Queen's University hedge fund",
+    "QHF",
+    "student investment fund",
+    "Queens student asset management"
+  ].join(', ');
+
+  const founders = [
+    {
+      '@type': 'Person',
+      name: 'Anson El Ayari',
+      sameAs: 'https://www.linkedin.com/in/anson-el-ayari/'
+    },
+    {
+      '@type': 'Person',
+      name: 'Nikhil Naran',
+      sameAs: 'https://www.linkedin.com/in/nikhilnaran/'
+    },
+    {
+      '@type': 'Person',
+      name: 'Ava El Ayari',
+      sameAs: 'https://www.linkedin.com/in/ava-el-ayari/'
+    }
+  ];
+
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    name: "Queen's Hedge Fund",
+    alternateName: 'QHF',
+    description,
+    url: canonicalUrl,
+    logo: `${origin}/QHF-2.svg`,
+    areaServed: 'CA',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '143 Union Street',
+      addressLocality: 'Kingston',
+      addressRegion: 'ON',
+      postalCode: 'K7L 3N6',
+      addressCountry: 'CA'
+    },
+    parentOrganization: {
+      '@type': 'CollegeOrUniversity',
+      name: "Queen's University",
+      url: 'https://www.queensu.ca/'
+    },
+    founder: founders
+  };
+
+  return (
+    <Helmet prioritizeSeoTags>
+      <html lang="en" />
+      <title>{title}</title>
+      <link rel="canonical" href={canonicalUrl} />
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Queen's Hedge Fund" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:alt" content="Queen's Hedge Fund crest" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:locale" content="en_CA" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image:alt" content="Queen's Hedge Fund crest" />
+      <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
+    </Helmet>
+  );
+}
+
 function Home(){
   return (
     <main id="main">
       <Hero />
       <About />
-  <Philosophy />
-  <Founders />
+      <Philosophy />
+      <Founders />
       <Industries />
       {/* <Performance /> removed */}
       {/* <Events /> removed */}
@@ -65,13 +152,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Helmet>
-        <title>Queens Hedge Fund (QHF) - Empowering students with real-world investment experience</title>
-        <meta name="description" content="Queens Hedge Fund (QHF) is a student-led investment group based in Kingston, Ontario."/>
-        <meta property="og:title" content="Queens Hedge Fund (QHF)" />
-        <meta property="og:description" content="Empowering students with real-world investment experience and financial expertise" />
-        <meta property="og:type" content="website" />
-      </Helmet>
+      <DefaultSeo />
       <div id="progressBar" aria-hidden="true"></div>
       <Nav />
       <ScrollToHash />

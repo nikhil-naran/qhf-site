@@ -54,7 +54,7 @@ export default function Founders(){
     <section id="founders" ref={ref} className="py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="text-3xl font-bold">Founders</h2>
-        <p className="text-slate-300 mt-2 max-w-2xl">Meet the students who started QHF.</p>
+        <p className="text-slate-300 mt-2 max-w-2xl">Meet the Queen's Hedge Fund student founders who shaped QHF's mandate and training culture.</p>
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
           {founders.map((f, i) => (
             <div key={i} className="glass rounded-2xl border border-white/10 p-5 sm:p-6 team-card">

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Motion, revealOnScroll, prefersReducedMotion } from '../lib/animation.js';
+import { revealOnScroll, prefersReducedMotion } from '../lib/animation.js';
 
 const placements = [
   { name: 'RBC', logo: '/logos/rbc.png' },
@@ -14,8 +14,7 @@ const placements = [
   { name: 'Blue Owl Capital', logo: '/logos/blue-owl-capital.png' }
 ];
 
-const SCROLL_CYCLE_MS = 22000; // time to shift one slide completely
-const MANUAL_RESUME_DELAY = 1600;
+const AUTO_ADVANCE_MS = 6000;
 
 const getVisibleCount = (width) => {
   if (width >= 1024) return 4;
@@ -24,10 +23,9 @@ const getVisibleCount = (width) => {
 };
 
 export default function Alumni(){
-  // Reworked as a Placements section (current / past) with partner logos
   const ref = useRef(null);
   const sliderRef = useRef(null);
-  const trackRef = useRef(null);
+  const autoTimerRef = useRef(null);
   const [visibleCount, setVisibleCount] = useState(() => {
     if (typeof window === 'undefined') return 3;
     return getVisibleCount(window.innerWidth);
@@ -36,13 +34,12 @@ export default function Alumni(){
     if (typeof window === 'undefined') return false;
     return prefersReducedMotion();
   });
-  const rafRef = useRef(null);
-  const lastTimestampRef = useRef(null);
-  const offsetRef = useRef(0);
-  const resumeTimeoutRef = useRef(null);
-  useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => revealOnScroll(ref.current, { translateY: 28 }), []);
+
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return undefined;
     const handleResize = () => setVisibleCount(getVisibleCount(window.innerWidth));
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -84,152 +81,89 @@ export default function Alumni(){
     const chunkSize = Math.max(visibleCount, 1);
     if (placements.length === 0) return [];
     const result = [];
-    for (let i = 0; i < placements.length; i += chunkSize) {
-      let group = placements.slice(i, i + chunkSize);
-      if (group.length < chunkSize) {
-        const needed = chunkSize - group.length;
-        const wrapItems = [];
-        for (let j = 0; j < needed; j++) {
-          wrapItems.push(placements[j % placements.length]);
-        }
-        group = group.concat(wrapItems);
+    for (let start = 0; start < placements.length; start += chunkSize) {
+      const slice = placements.slice(start, start + chunkSize);
+      if (slice.length < chunkSize) {
+        const wrap = placements.slice(0, chunkSize - slice.length);
+        result.push([...slice, ...wrap]);
+      } else {
+        result.push(slice);
       }
-      result.push(group);
-    }
-    if (result.length === 0) {
-      const wrapGroup = [];
-      for (let k = 0; k < chunkSize; k++) {
-        wrapGroup.push(placements[k % placements.length]);
-      }
-      result.push(wrapGroup);
     }
     return result;
   }, [visibleCount]);
+
   const totalSlides = slides.length;
   const showControls = totalSlides > 1;
 
-  const slidesLoop = useMemo(() => (
-    showControls ? [...slides, ...slides] : slides
-  ), [slides, showControls]);
-
-  const stopAutoScroll = useCallback(() => {
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
+  useEffect(() => {
+    if (totalSlides === 0) {
+      setCurrentSlide(0);
+    } else {
+      setCurrentSlide((prev) => prev % totalSlides);
     }
-    lastTimestampRef.current = null;
-  }, []);
+  }, [totalSlides]);
 
-  const applyOffset = useCallback((offset) => {
-    if (!trackRef.current) return;
-    trackRef.current.style.transform = `translateX(-${offset}%)`;
-  }, []);
-
-  const clearResumeTimeout = useCallback(() => {
-    if (resumeTimeoutRef.current) {
-      window.clearTimeout(resumeTimeoutRef.current);
-      resumeTimeoutRef.current = null;
+  const stopAuto = useCallback(() => {
+    if (autoTimerRef.current) {
+      window.clearInterval(autoTimerRef.current);
+      autoTimerRef.current = null;
     }
   }, []);
 
-  const startAutoScroll = useCallback(() => {
-    if (!showControls || reduceMotion || !trackRef.current) return;
-    if (rafRef.current) return;
-    trackRef.current.style.transition = 'none';
-    const maxOffset = totalSlides * 100;
-    const tick = (timestamp) => {
-      if (!lastTimestampRef.current) lastTimestampRef.current = timestamp;
-      const delta = timestamp - lastTimestampRef.current;
-      lastTimestampRef.current = timestamp;
-
-      const increment = (delta / SCROLL_CYCLE_MS) * 100;
-      offsetRef.current += increment;
-      if (offsetRef.current >= maxOffset) {
-        offsetRef.current -= maxOffset;
-      }
-      applyOffset(offsetRef.current);
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-  }, [applyOffset, reduceMotion, showControls, totalSlides]);
-
-  const scheduleAutoResume = useCallback(() => {
-    if (reduceMotion || !showControls) return;
-    clearResumeTimeout();
-    resumeTimeoutRef.current = window.setTimeout(() => {
-      if (trackRef.current) {
-        trackRef.current.style.transition = 'none';
-      }
-      resumeTimeoutRef.current = null;
-      startAutoScroll();
-    }, MANUAL_RESUME_DELAY);
-  }, [clearResumeTimeout, reduceMotion, showControls, startAutoScroll]);
-
-  useEffect(() => () => {
-    stopAutoScroll();
-    clearResumeTimeout();
-  }, [clearResumeTimeout, stopAutoScroll]);
+  const startAuto = useCallback(() => {
+    if (!showControls || reduceMotion || totalSlides <= 1) {
+      stopAuto();
+      return;
+    }
+    stopAuto();
+    autoTimerRef.current = window.setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, AUTO_ADVANCE_MS);
+  }, [reduceMotion, showControls, stopAuto, totalSlides]);
 
   useEffect(() => {
-    const maxOffset = totalSlides * 100;
-    if (maxOffset === 0) {
-      offsetRef.current = 0;
-      applyOffset(0);
-      stopAutoScroll();
-      return;
-    }
-    offsetRef.current = ((offsetRef.current % maxOffset) + maxOffset) % maxOffset;
-    applyOffset(offsetRef.current);
-    if (reduceMotion || !showControls) {
-      stopAutoScroll();
-      return;
-    }
-    stopAutoScroll();
-    startAutoScroll();
-  }, [applyOffset, reduceMotion, showControls, startAutoScroll, stopAutoScroll, totalSlides]);
+    startAuto();
+    return () => stopAuto();
+  }, [startAuto, stopAuto]);
 
   const handleFocus = useCallback(() => {
-    stopAutoScroll();
-    clearResumeTimeout();
-  }, [clearResumeTimeout, stopAutoScroll]);
+    stopAuto();
+  }, [stopAuto]);
 
   const handleBlur = useCallback((event) => {
     if (!sliderRef.current) return;
     if (event && sliderRef.current.contains(event.relatedTarget)) return;
-    scheduleAutoResume();
-  }, [scheduleAutoResume]);
+    startAuto();
+  }, [startAuto]);
 
   const handleMouseEnter = useCallback(() => {
-    stopAutoScroll();
-    clearResumeTimeout();
-  }, [clearResumeTimeout, stopAutoScroll]);
+    stopAuto();
+  }, [stopAuto]);
 
   const handleMouseLeave = useCallback(() => {
-    scheduleAutoResume();
-  }, [scheduleAutoResume]);
+    startAuto();
+  }, [startAuto]);
 
-  const goToSlide = useCallback((direction) => {
-    if (!showControls || !trackRef.current || totalSlides === 0) return;
-    clearResumeTimeout();
-    stopAutoScroll();
-    const maxOffset = totalSlides * 100;
-    const normalizedOffset = ((offsetRef.current % maxOffset) + maxOffset) % maxOffset;
-    const currentIndex = normalizedOffset / 100;
-    const targetIndex = direction === 'next'
-      ? Math.floor(currentIndex + 1)
-      : Math.ceil(currentIndex - 1);
-    const wrappedIndex = ((targetIndex % totalSlides) + totalSlides) % totalSlides;
-    const targetOffset = wrappedIndex * 100;
-    offsetRef.current = targetOffset;
-    trackRef.current.style.transition = `transform 420ms ${Motion.ease.out}`;
-    applyOffset(targetOffset);
-    scheduleAutoResume();
-  }, [applyOffset, clearResumeTimeout, scheduleAutoResume, showControls, stopAutoScroll, totalSlides]);
+  const goPrev = useCallback(() => {
+    if (!showControls || totalSlides === 0) return;
+    stopAuto();
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    startAuto();
+  }, [showControls, startAuto, stopAuto, totalSlides]);
 
-  const goPrev = useCallback(() => goToSlide('prev'), [goToSlide]);
-  const goNext = useCallback(() => goToSlide('next'), [goToSlide]);
+  const goNext = useCallback(() => {
+    if (!showControls || totalSlides === 0) return;
+    stopAuto();
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    startAuto();
+  }, [showControls, startAuto, stopAuto, totalSlides]);
 
   const gridColumns = (groupLength) => Math.min(visibleCount, groupLength);
+
+  const trackStyle = useMemo(() => ({
+    transform: `translateX(-${currentSlide * 100}%)`
+  }), [currentSlide]);
 
   return (
     <section id="alumni" ref={ref} className="py-16 sm:py-20">
@@ -259,17 +193,17 @@ export default function Alumni(){
               <div className="placements-viewport">
                 <div
                   className="placements-track"
-                  ref={trackRef}
+                  style={trackStyle}
                 >
-                  {slidesLoop.map((group, slideIndex) => (
+                  {slides.map((group, slideIndex) => (
                     <div key={`placements-slide-${slideIndex}`} className="placements-slide">
                       <div
                         className="placements-grid gap-4"
                         style={{ gridTemplateColumns: `repeat(${gridColumns(group.length)}, minmax(0, 1fr))` }}
                       >
-                        {group.map((company) => (
+                        {group.map((company, itemIndex) => (
                           <div
-                            key={company.name}
+                            key={`${company.name}-${slideIndex}-${itemIndex}`}
                             className="placement-card inline-flex items-center gap-3 opacity-95 hover:opacity-100"
                           >
                             <div className="placement-logo rounded flex items-center justify-center">

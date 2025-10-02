@@ -12,7 +12,9 @@ export default function Footer(){
           <a href="/#join" className="hover:text-goldB">Join</a>
         </nav>
         <div className="text-sm text-slate-400">
-          <span>© {new Date().getFullYear()} Queens Hedge Fund</span>
+          <span>© {new Date().getFullYear()} Queen's Hedge Fund</span>
+          <span className="block">Smith School of Business, Queen's University, Kingston, Ontario</span>
+          <a href="/#join" className="mt-1 inline-block text-slate-300 hover:text-goldB">Connect with the QHF leadership team</a>
         </div>
       </div>
     </footer>

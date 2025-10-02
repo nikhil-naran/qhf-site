@@ -15,7 +15,9 @@ export default function Join(){
             <li>Applications open each Fall term</li>
             <li>Equity research case + interview</li>
           </ul>
-          <p className="mt-4 text-sm text-slate-300">We welcome all programs. Commitment and curiosity matter most.</p>
+          <p className="mt-4 text-sm text-slate-300">
+            We welcome all programs. Commitment and curiosity matter most for Queen's Hedge Fund candidates, so connect with us early if you have questions about the hedge fund recruiting path.
+          </p>
         </div>
         <form
           name="contact"
