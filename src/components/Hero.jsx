@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import ParticleCanvas from './ParticleCanvas.jsx';
-import OptimizedImage from './OptimizedImage.jsx';
 import { prefersReducedMotion } from '../lib/animation.js';
 
 export default function Hero(){
@@ -19,13 +18,10 @@ export default function Hero(){
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-6 pb-20 sm:pt-8 sm:pb-24 lg:pt-10 lg:pb-28">
         <div className="flex flex-col items-center">
           <div className="flex justify-center">
-            <OptimizedImage
+            <img
               src="/QHF-2.svg"
               alt="Queen's Hedge Fund crest"
               loading="eager"
-              fetchpriority="high"
-              widths={[320, 480, 640, 768, 920]}
-              sizes="(min-width: 1280px) 576px, (min-width: 1024px) 496px, (min-width: 768px) 432px, 80vw"
               className="w-[19rem] max-w-[92vw] object-contain drop-shadow-[0_25px_80px_rgba(8,15,30,0.45)] sm:w-[23rem] md:w-[27rem] lg:w-[31rem] xl:w-[36rem]"
             />
           </div>

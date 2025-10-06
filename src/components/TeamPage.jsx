@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { TEAMS } from '../data.js';
-import OptimizedImage from './OptimizedImage.jsx';
 
 const INITIALS_FALLBACK = (name = '') => name.split(' ').map((part) => part[0]).filter(Boolean).join('').slice(0, 2).toUpperCase();
 
@@ -17,13 +16,7 @@ function PersonAvatar({ person = {}, size = 'md', className = '' }) {
   return (
     <div className={`relative flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-goldA/20 to-goldB/10 text-goldB ${classes} ${className}`}>
       {src ? (
-        <OptimizedImage
-          src={src}
-          alt={`${person.name} headshot`}
-          widths={[128, 160, 192, 256]}
-          sizes="(min-width: 1024px) 8rem, (min-width: 640px) 6rem, 42vw"
-          className="headshot-img absolute inset-0 h-full w-full object-cover"
-        />
+        <img src={src} alt={`${person.name} headshot`} className="headshot-img absolute inset-0 h-full w-full" />
       ) : (
         <span className="relative z-10 font-semibold uppercase tracking-wide text-slate-100">{INITIALS_FALLBACK(person.name)}</span>
       )}
@@ -49,12 +42,10 @@ export default function TeamPage(){
       <div className="mx-auto max-w-7xl space-y-8 px-4 sm:space-y-10">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center">
           {team.iconUrl && (
-            <OptimizedImage
+            <img
               src={team.iconUrl}
               alt={`${team.name} icon`}
-              widths={[48, 64, 96, 128]}
-              sizes="64px"
-              className="h-12 w-12 rounded-md bg-white/5 p-2 object-contain sm:h-14 sm:w-14"
+              className="h-12 w-12 rounded-md bg-white/5 p-2 sm:h-14 sm:w-14"
             />
           )}
           <div>

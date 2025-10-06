@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import { revealOnScroll } from '../lib/animation.js';
 import { TEAM_CATEGORIES, TEAMS } from '../data.js';
 import { Link } from 'react-router-dom';
-import OptimizedImage from './OptimizedImage.jsx';
 
 export default function Industries(){
   const ref = useRef(null);
@@ -22,13 +21,7 @@ export default function Industries(){
                 <div className="flex items-center gap-3 sm:gap-4">
                   <div className="team-logo bg-white/5 rounded-md flex items-center justify-center overflow-hidden">
                     {meta.iconUrl ? (
-                      <OptimizedImage
-                        src={meta.iconUrl}
-                        alt={`${c.name} icon`}
-                        widths={[48, 64, 96, 128]}
-                        sizes="64px"
-                        className="h-12 w-12 object-contain"
-                      />
+                      <img src={meta.iconUrl} alt={`${c.name} icon`} className="w-12 h-12 object-contain" />
                     ) : (
                       <span className="text-xl font-bold text-goldB">{c.name.split(' ').map(s=>s[0]).slice(0,2).join('')}</span>
                     )}
