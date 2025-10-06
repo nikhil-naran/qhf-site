@@ -1,17 +1,18 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { revealOnScroll, prefersReducedMotion } from '../lib/animation.js';
+import { asset } from '../lib/assets.js';
 
 const placements = [
-  { name: 'RBC', logo: '/logos/rbc.png' },
-  { name: 'Questrade', logo: '/logos/questrade.png' },
-  { name: 'TD', logo: '/logos/td.png' },
-  { name: 'Manulife', logo: '/logos/manulife.png' },
-  { name: 'Richardson Wealth', logo: '/logos/richardson-wealth.png' },
-  { name: 'ENGIE Global Markets', logo: '/logos/engie-global-markets.png' },
-  { name: 'Two Sigma', logo: '/logos/two-sigma.png' },
-  { name: 'DWP Capital', logo: '/logos/dwp-capital.png' },
-  { name: 'Blue Owl Capital', logo: '/logos/blue-owl-capital.png' }
+  { name: 'RBC', logo: asset('logos/rbc.png') },
+  { name: 'Questrade', logo: asset('logos/questrade.png') },
+  { name: 'TD', logo: asset('logos/td.png') },
+  { name: 'Manulife', logo: asset('logos/manulife.png') },
+  { name: 'Richardson Wealth', logo: asset('logos/richardson-wealth.png') },
+  { name: 'ENGIE Global Markets', logo: asset('logos/engie-global-markets.png') },
+  { name: 'Two Sigma', logo: asset('logos/two-sigma.png') },
+  { name: 'DWP Capital', logo: asset('logos/dwp-capital.png') },
+  { name: 'Blue Owl Capital', logo: asset('logos/blue-owl-capital.png') }
 ];
 
 const AUTO_ADVANCE_MS = 6000;

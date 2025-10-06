@@ -1,3 +1,4 @@
+import { asset } from './lib/assets.js';
 import { getHeadshot } from './lib/headshots.js';
 
 const withHeadshot = (person = {}) => ({
@@ -21,7 +22,7 @@ export const TEAM_CATEGORIES = [
 export const TEAMS = {
   technology: {
     name: 'Technology',
-  iconUrl: '/icons/technology.svg',
+    iconUrl: asset('icons/technology.svg'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'James Simone', bio: 'Sector lead.' }),
     analysts: [
@@ -31,7 +32,7 @@ export const TEAMS = {
   },
   financials: {
     name: 'Financials',
-  iconUrl: '/icons/financials.svg',
+    iconUrl: asset('icons/financials.svg'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Bianca Rotariu', bio: 'Focus on balance sheet resilience and ROE.' }),
     analysts: [
@@ -41,7 +42,7 @@ export const TEAMS = {
   },
   'mining-materials': {
     name: 'Mining & Materials',
-  iconUrl: '/icons/mining-materials.svg',
+    iconUrl: asset('icons/mining-materials.svg'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Findlay Goodall', bio: 'Quality miners with disciplined capex.' }),
     analysts: [
@@ -52,7 +53,7 @@ export const TEAMS = {
   },
   industrials: {
     name: 'Industrials',
-  iconUrl: '/icons/industrials.svg',
+    iconUrl: asset('icons/industrials.svg'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Beau Leone', bio: 'Compounders with durable moats.' }),
     analysts: [
@@ -63,7 +64,7 @@ export const TEAMS = {
   },
   'consumer-staples-retail': {
     name: 'Consumer Staples & Retail',
-  iconUrl: '/icons/consumer-staples-retail.svg',
+    iconUrl: asset('icons/consumer-staples-retail.svg'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Jillian Dalton', bio: 'High ROIC retailers.' }),
     analysts: [
@@ -74,23 +75,23 @@ export const TEAMS = {
   },
   'real-estate-health-care': {
     name: 'Real Estate & Health Care',
-  iconUrl: '/icons/real-estate-health-care.svg',
+    iconUrl: asset('icons/real-estate-health-care.svg'),
     holdings: [],
-  portfolioManager: withHeadshot({ name: 'Alex Papadopoulos', bio: 'Defensive yield + growth.' }),
-  analysts: [withHeadshot({ name: 'Daniel Thompson', bio: 'HC services & REITs.' })],
+    portfolioManager: withHeadshot({ name: 'Alex Papadopoulos', bio: 'Defensive yield + growth.' }),
+    analysts: [withHeadshot({ name: 'Daniel Thompson', bio: 'HC services & REITs.' })],
     reports: []
   },
   crypto: {
     name: 'Crypto',
-  iconUrl: '/icons/crypto.svg',
+    iconUrl: asset('icons/crypto.svg'),
     holdings: [],
-  portfolioManager: withHeadshot({ name: 'Nikhil Naran', bio: 'Risk-managed exposure to digital assets.' }),
-  analysts: [withHeadshot({ name: 'Aaron Feng', bio: 'On-chain & L2s.' })],
+    portfolioManager: withHeadshot({ name: 'Nikhil Naran', bio: 'Risk-managed exposure to digital assets.' }),
+    analysts: [withHeadshot({ name: 'Aaron Feng', bio: 'On-chain & L2s.' })],
     reports: []
   },
   communications: {
     name: 'Communications',
-    iconUrl: '/icons/communications.svg',
+    iconUrl: asset('icons/communications.svg'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Edan Kroi', bio: 'Leads member communications and external media.' }),
     analysts: [
@@ -100,7 +101,7 @@ export const TEAMS = {
   },
   marketing: {
     name: 'Marketing',
-    iconUrl: '/icons/marketing.svg',
+    iconUrl: asset('icons/marketing.svg'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Nora Malik', bio: 'Brand, outreach, and events.' }),
     members: [
@@ -109,11 +110,10 @@ export const TEAMS = {
       withHeadshot({ name: 'Sydney Garrah', bio: 'Creative & design.' })
     ],
     reports: []
-  }
-  ,
+  },
   'macro-economics': {
     name: 'Macro Economics',
-  iconUrl: '/icons/macro-economics.svg',
+    iconUrl: asset('icons/macro-economics.svg'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Dr. Samuel Grant', bio: 'Leads macroeconomic research and scenario analysis.' }),
     members: [
@@ -137,14 +137,14 @@ export const perfSeries = {
 };
 
 export const sponsors = [
-  { name: 'RBC (placeholder)', logoUrl: '/sponsor-placeholder.svg' },
-  { name: 'TD (placeholder)', logoUrl: '/sponsor-placeholder.svg' },
-  { name: 'BMO (placeholder)', logoUrl: '/sponsor-placeholder.svg' },
-  { name: 'Scotiabank (placeholder)', logoUrl: '/sponsor-placeholder.svg' }
+  { name: 'RBC (placeholder)', logoUrl: asset('sponsor-placeholder.svg') },
+  { name: 'TD (placeholder)', logoUrl: asset('sponsor-placeholder.svg') },
+  { name: 'BMO (placeholder)', logoUrl: asset('sponsor-placeholder.svg') },
+  { name: 'Scotiabank (placeholder)', logoUrl: asset('sponsor-placeholder.svg') }
 ];
 
 export const events = [
-  { dateISO: '2025-09-15', title: 'Fall Info Session', description: 'Overview of QHF, selection process, and Q&A.', location: 'Smith School of Business' },
+  { dateISO: '2025-09-15', title: 'Fall Info Session', description: 'Overview of QHF, selection process, and Q&A.', location: 'Queen\'s University Campus' },
   { dateISO: '2025-10-02', title: 'Equity Research Workshop', description: 'Hands-on session building an investment thesis.', location: 'Goodes Hall 104' },
   { dateISO: '2025-11-12', title: 'Alumni Panel Night', description: 'Hear from alumni at leading firms.', location: 'Virtual' },
 ];
