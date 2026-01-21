@@ -22,7 +22,7 @@ export const TEAM_CATEGORIES = [
 export const TEAMS = {
   technology: {
     name: 'Technology',
-    iconUrl: asset('icons/technology.svg'),
+    iconUrl: asset('icons/technology.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'James Simone', bio: 'Sector lead.' }),
     analysts: [
@@ -32,7 +32,7 @@ export const TEAMS = {
   },
   financials: {
     name: 'Financials',
-    iconUrl: asset('icons/financials.svg'),
+    iconUrl: asset('icons/financials.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Bianca Rotariu', bio: 'Focus on balance sheet resilience and ROE.' }),
     analysts: [
@@ -42,7 +42,7 @@ export const TEAMS = {
   },
   'mining-materials': {
     name: 'Mining & Materials',
-    iconUrl: asset('icons/mining-materials.svg'),
+    iconUrl: asset('icons/mining-materials.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Findlay Goodall', bio: 'Quality miners with disciplined capex.' }),
     analysts: [
@@ -53,7 +53,7 @@ export const TEAMS = {
   },
   industrials: {
     name: 'Industrials',
-    iconUrl: asset('icons/industrials.svg'),
+    iconUrl: asset('icons/industrials.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Beau Leone', bio: 'Compounders with durable moats.' }),
     analysts: [
@@ -64,7 +64,7 @@ export const TEAMS = {
   },
   'consumer-staples-retail': {
     name: 'Consumer Staples & Retail',
-    iconUrl: asset('icons/consumer-staples-retail.svg'),
+    iconUrl: asset('icons/consumer-staples-retail.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Jillian Dalton', bio: 'High ROIC retailers.' }),
     analysts: [
@@ -75,7 +75,7 @@ export const TEAMS = {
   },
   'real-estate-health-care': {
     name: 'Real Estate & Health Care',
-    iconUrl: asset('icons/real-estate-health-care.svg'),
+    iconUrl: asset('icons/real-estate-health-care.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Alex Papadopoulos', bio: 'Defensive yield + growth.' }),
     analysts: [withHeadshot({ name: 'Daniel Thompson', bio: 'HC services & REITs.' })],
@@ -83,7 +83,7 @@ export const TEAMS = {
   },
   crypto: {
     name: 'Crypto',
-    iconUrl: asset('icons/crypto.svg'),
+    iconUrl: asset('icons/crypto.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Nikhil Naran', bio: 'Risk-managed exposure to digital assets.' }),
     analysts: [withHeadshot({ name: 'Aaron Feng', bio: 'On-chain & L2s.' })],
@@ -91,7 +91,7 @@ export const TEAMS = {
   },
   communications: {
     name: 'Communications',
-    iconUrl: asset('icons/communications.svg'),
+    iconUrl: asset('icons/communications.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Edan Kroi', bio: 'Leads member communications and external media.' }),
     analysts: [
@@ -101,7 +101,7 @@ export const TEAMS = {
   },
   marketing: {
     name: 'Marketing',
-    iconUrl: asset('icons/marketing.svg'),
+    iconUrl: asset('icons/marketing.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Nora Malik', bio: 'Brand, outreach, and events.' }),
     members: [
@@ -113,7 +113,7 @@ export const TEAMS = {
   },
   'macro-economics': {
     name: 'Macro Economics',
-    iconUrl: asset('icons/macro-economics.svg'),
+    iconUrl: asset('icons/macro-economics.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Dr. Samuel Grant', bio: 'Leads macroeconomic research and scenario analysis.' }),
     members: [
@@ -127,12 +127,12 @@ export const TEAMS = {
 // Home performance (index = month number)
 export const perfSeries = {
   canadian: {
-    our:  [100,103,105,108,112,115,117,118,120,124,127,129],
-    tsx:  [100,101,102,104,106,107,109,110,111,113,115,116]
+    our: [100, 103, 105, 108, 112, 115, 117, 118, 120, 124, 127, 129],
+    tsx: [100, 101, 102, 104, 106, 107, 109, 110, 111, 113, 115, 116]
   },
   us: {
-    our:   [100,104,108,111,115,120,123,125,127,130,134,137],
-    sp500: [100,102,104,106,108,110,112,114,116,118,120,121]
+    our: [100, 104, 108, 111, 115, 120, 123, 125, 127, 130, 134, 137],
+    sp500: [100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 121]
   }
 };
 
@@ -150,3 +150,40 @@ export const events = [
 ];
 
 export const alumniStats = { alumniCount: 200, cities: 18, industries: 12 };
+
+export const FEATURED_EVENTS = [
+  {
+    id: 'jane-shantz-speaker',
+    title: 'Jane Shantz Management Consulting Speaker Event',
+    type: 'speaker',
+    dateISO: '2025-12-01T18:30:00',
+    displayDate: 'December 1, 2025 @ 6:30 PM',
+    host: 'CIO Anson El-Ayari',
+    meetingLink: '#', // Placeholder - meeting hasn't started
+    meetingLinkLabel: 'Join Google Meet',
+    headshot: null, // Placeholder for Jane Shantz's photo
+    bio: `Jane Shantz is a seasoned Organizational Change Management Consultant, Strategist, and Executive Coach with nearly 30 years of experience helping Fortune 500 companies navigate complex transformation. She began her career at Andersen Consulting (now Accenture) and later founded her own consulting practice, where she partners with executive teams to lead enterprise-wide change across industries such as banking, retail, and healthcare.
+
+Jane's work spans major regulatory programs, digital modernization, and operating model redesign. She is often brought in as a trusted advisor or program leader to align stakeholders, drive momentum, and deliver measurable impact in high-stakes environments.
+
+Outside of consulting, Jane is an executive coach who works primarily with women leaders seeking to lead with clarity, influence, and integrity. She is also a passionate speaker and mentor, known for blending strategic insight with grounded storytelling.
+
+Jane holds two degrees from Queen's University—one in Kinesiology and one in History. During her time at Queen's, she served as Vice-President of University Affairs, and was a proud member of the Queen's Bands, experiences that shaped her leadership philosophy and drive for impact.`,
+  },
+  {
+    id: 'csc-investment-tutorial',
+    title: 'CSC Investment Analysis Tutorial',
+    type: 'tutorial',
+    dateISO: '2025-11-22T18:30:00',
+    displayDate: 'November 22, 2025 @ 6:30 PM',
+    host: 'CIO Anson El-Ayari',
+    meetingLink: '#', // Placeholder
+    meetingLinkLabel: 'Join Meeting',
+    eventGraphic: null, // Placeholder image
+    description: `Join us for a hands-on tutorial covering the core components of investment analysis, including fundamental, technical, and company-level analysis. This session will walk through how these frameworks are applied in real-world decision-making and is designed to support students preparing for the CSC or looking to strengthen their analytical toolkit. Open to all experience levels.`,
+    diagnosticSection: {
+      title: 'Diagnostic Quiz',
+      description: `We developed a short diagnostic quiz to assess members' baseline knowledge prior to the analysis tutorial, allowing us to tailor the session's depth, pacing, and examples to participants' existing understanding.`,
+    },
+  },
+];

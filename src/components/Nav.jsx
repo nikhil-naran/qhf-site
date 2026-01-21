@@ -4,7 +4,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { TEAM_CATEGORIES } from '../data.js';
 // ...existing code...
 
-export default function Nav(){
+export default function Nav() {
   const [open, setOpen] = useState(false);
   const [teamsOpen, setTeamsOpen] = useState(false);
   const [mobileTeamsOpen, setMobileTeamsOpen] = useState(false);
@@ -72,35 +72,36 @@ export default function Nav(){
   return (
     <header className="relative z-50" style={{ opacity, transition: 'opacity 250ms linear' }}>
       <div className="mx-auto max-w-7xl px-4">
-  <nav className="mt-3 flex items-center bg-transparent px-0 py-4 relative">
+        <nav className="mt-3 flex items-center bg-transparent px-0 py-4 relative">
           {/* logo removed */}
           {/* Centered nav links with more spacing */}
           <div className="flex-1 flex justify-center">
             <ul className="hidden md:flex gap-12 text-sm items-center">
-            <li><a href="/#about" className="hover:text-goldB transition-colors">About</a></li>
-            <li><a href="/#philosophy" className="hover:text-goldB transition-colors">Philosophy</a></li>
-            <li className="relative" ref={teamsRef}>
-              <button
-                type="button"
-                aria-haspopup="menu"
-                aria-expanded={teamsOpen}
-                onClick={()=> setTeamsOpen(v=>!v)}
-                className={`our-teams-trigger inline-flex items-center gap-2 transition-colors ${teamsOpen ? 'is-open' : ''}`}
-              >
-                <span className="text-sm font-semibold tracking-[0.08em]">Our Teams</span>
-                <ChevronDown size={16} className={`transition-transform duration-200 ${teamsOpen ? 'rotate-180' : ''}`}/>
-              </button>
-              {teamsOpen && (
-                <div role="menu" className="absolute top-full mt-3 w-72 dropdown-panel our-teams-dropdown">
-                  <NavLink to="/teams" className={({isActive})=>`nav-dropdown-link ${isActive? 'is-active':''}`}>All Teams</NavLink>
-                  {TEAM_CATEGORIES.map(t => (
-                    <NavLink key={t.slug} to={`/teams/${t.slug}`} className={({isActive})=>`nav-dropdown-link ${isActive? 'is-active':''}`}>{t.name}</NavLink>
-                  ))}
-                </div>
-              )}
-            </li>
-            <li><a href="/#alumni" className="hover:text-goldB transition-colors">Member Placements</a></li>
-            <li><a href="/#join" className="hover:text-goldB transition-colors">Join Us</a></li>
+              <li><a href="/#about" className="hover:text-goldB transition-colors">About</a></li>
+              <li><a href="/#philosophy" className="hover:text-goldB transition-colors">Philosophy</a></li>
+              <li className="relative" ref={teamsRef}>
+                <button
+                  type="button"
+                  aria-haspopup="menu"
+                  aria-expanded={teamsOpen}
+                  onClick={() => setTeamsOpen(v => !v)}
+                  className={`our-teams-trigger inline-flex items-center gap-2 transition-colors ${teamsOpen ? 'is-open' : ''}`}
+                >
+                  <span className="text-sm font-semibold tracking-[0.08em]">Our Teams</span>
+                  <ChevronDown size={16} className={`transition-transform duration-200 ${teamsOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {teamsOpen && (
+                  <div role="menu" className="absolute top-full mt-3 w-72 dropdown-panel our-teams-dropdown">
+                    <NavLink to="/teams" className={({ isActive }) => `nav-dropdown-link ${isActive ? 'is-active' : ''}`}>All Teams</NavLink>
+                    {TEAM_CATEGORIES.map(t => (
+                      <NavLink key={t.slug} to={`/teams/${t.slug}`} className={({ isActive }) => `nav-dropdown-link ${isActive ? 'is-active' : ''}`}>{t.name}</NavLink>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li><a href="/#alumni" className="hover:text-goldB transition-colors">Member Placements</a></li>
+              <li><NavLink to="/events" className={({ isActive }) => `hover:text-goldB transition-colors ${isActive ? 'text-goldB' : ''}`}>Events</NavLink></li>
+              <li><a href="/#join" className="hover:text-goldB transition-colors">Join Us</a></li>
             </ul>
           </div>
           <div className="flex items-center gap-2">
@@ -117,12 +118,12 @@ export default function Nav(){
           <div className="ml-auto w-[80%] max-w-sm h-full bg-burgundy glass p-6 shadow-glass border-l border-white/10">
             <div className="flex items-center justify-between mb-4">
               <span className="text-lg font-semibold">Menu</span>
-              <button aria-label="Close menu" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-white/10"><X/></button>
+              <button aria-label="Close menu" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-white/10"><X /></button>
             </div>
             <div className="flex flex-col gap-2">
-              <Link to="/" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Home</Link>
-              <a href="/#about" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">About</a>
-              <a href="/#philosophy" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Philosophy</a>
+              <Link to="/" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Home</Link>
+              <a href="/#about" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">About</a>
+              <a href="/#philosophy" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Philosophy</a>
               <button
                 type="button"
                 onClick={() => setMobileTeamsOpen(v => !v)}
@@ -131,16 +132,16 @@ export default function Nav(){
                 aria-controls="mobileTeamsMenu"
               >
                 <span>Our Teams</span>
-                <ChevronDown size={18} className={`transition-transform duration-200 ${mobileTeamsOpen ? 'rotate-180' : ''}`}/>
+                <ChevronDown size={18} className={`transition-transform duration-200 ${mobileTeamsOpen ? 'rotate-180' : ''}`} />
               </button>
               {mobileTeamsOpen && (
                 <div id="mobileTeamsMenu" className="ml-2 flex flex-col gap-1 border-l border-white/10 pl-3">
-                  <Link to="/teams" onClick={()=> { setOpen(false); setMobileTeamsOpen(false); }} className="px-2 py-2 rounded hover:bg-white/10 text-sm">All Teams</Link>
-                  {TEAM_CATEGORIES.map(t=> (
+                  <Link to="/teams" onClick={() => { setOpen(false); setMobileTeamsOpen(false); }} className="px-2 py-2 rounded hover:bg-white/10 text-sm">All Teams</Link>
+                  {TEAM_CATEGORIES.map(t => (
                     <NavLink
                       key={t.slug}
                       to={`/teams/${t.slug}`}
-                      onClick={()=> { setOpen(false); setMobileTeamsOpen(false); }}
+                      onClick={() => { setOpen(false); setMobileTeamsOpen(false); }}
                       className="px-2 py-2 rounded hover:bg-white/10 text-sm"
                     >
                       {t.name}
@@ -148,8 +149,9 @@ export default function Nav(){
                   ))}
                 </div>
               )}
-              <a href="/#alumni" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Member Placements</a>
-              <a href="/#join" onClick={()=> setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Join</a>
+              <a href="/#alumni" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Member Placements</a>
+              <NavLink to="/events" onClick={() => setOpen(false)} className={({ isActive }) => `px-2 py-2 rounded hover:bg-white/10 ${isActive ? 'text-goldB' : ''}`}>Events</NavLink>
+              <a href="/#join" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Join</a>
               {/* motion toggle removed */}
             </div>
           </div>
@@ -162,7 +164,7 @@ export default function Nav(){
   );
 }
 
-function BackToTop(){
+function BackToTop() {
   const [show, setShow] = useState(false);
   useEffect(() => {
     const onScroll = () => {

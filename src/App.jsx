@@ -15,11 +15,12 @@ import Footer from './components/Footer.jsx';
 import ProgressBar from './components/ProgressBar.jsx';
 import TeamsHub from './components/TeamsHub.jsx';
 import TeamPage from './components/TeamPage.jsx';
+import EventsPage from './components/EventsPage.jsx';
 import Performance from './components/Performance.jsx';
 
-function ScrollToHash(){
+function ScrollToHash() {
   const loc = useLocation();
-  useEffect(()=>{
+  useEffect(() => {
     if (loc.hash) {
       const el = document.querySelector(loc.hash);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -37,7 +38,7 @@ function PageFade({ children }) {
   return <div className={`page-fade-${state} page-fade-enter-active`}>{children}</div>;
 }
 
-function DefaultSeo(){
+function DefaultSeo() {
   const loc = useLocation();
   const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : 'https://www.queenshedgefund.com';
   const canonicalUrl = new URL(`${loc.pathname}${loc.search}`, origin).toString();
@@ -136,7 +137,7 @@ function DefaultSeo(){
   );
 }
 
-function Home(){
+function Home() {
   return (
     <main id="main">
       <Hero />
@@ -173,6 +174,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/teams" element={<TeamsHub />} />
           <Route path="/teams/:slug" element={<TeamPage />} />
+          <Route path="/events" element={<EventsPage />} />
         </Routes>
       </PageFade>
       <Footer reduced={reduced} />
