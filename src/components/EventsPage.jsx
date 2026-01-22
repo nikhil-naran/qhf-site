@@ -173,10 +173,13 @@ function SpeakerEventCard({ event }) {
                             <Calendar size={16} className="text-goldB" />
                             <span>{event.displayDate}</span>
                         </div>
-                        <div className="inline-flex items-center gap-2 text-slate-300">
-                            <Users size={16} className="text-goldB" />
-                            <span>Hosted by {event.host}</span>
-                        </div>
+                        {/* Conditionally render Host info */}
+                        {event.host && (
+                            <div className="inline-flex items-center gap-2 text-slate-300">
+                                <Users size={16} className="text-goldB" />
+                                <span>Hosted by {event.host}</span>
+                            </div>
+                        )}
                     </div>
 
                     {/* Bio */}
@@ -189,13 +192,14 @@ function SpeakerEventCard({ event }) {
 
                     {/* Meeting Link */}
                     <div className="mt-6 pt-6 border-t border-white/10">
-                        <a
-                            href={event.meetingLink}
-                            className="btn inline-flex items-center gap-2 bg-goldA/20 border-goldB/30 hover:bg-goldA/30"
+                        <button
+                            type="button"
+                            onClick={() => window.alert('The event has already passed and is over.')}
+                            className="btn inline-flex items-center gap-2 bg-goldA/20 border-goldB/30 hover:bg-goldA/30 cursor-pointer"
                         >
                             <Video size={18} />
                             {event.meetingLinkLabel}
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -206,22 +210,17 @@ function SpeakerEventCard({ event }) {
 function TutorialEventCard({ event }) {
     return (
         <div className="glass rounded-3xl border border-white/10 overflow-hidden shadow-glass">
-            <div className="grid lg:grid-cols-2 gap-0">
+            <div className={`grid ${event.eventGraphic ? 'lg:grid-cols-2' : 'grid-cols-1'} gap-0`}>
                 {/* Event Graphic Column */}
-                <div className="relative bg-gradient-to-br from-sky-500/10 to-burgundy/30 p-6 lg:p-8 flex items-center justify-center order-2 lg:order-1">
-                    {event.eventGraphic ? (
+                {event.eventGraphic && (
+                    <div className="relative bg-gradient-to-br from-sky-500/10 to-burgundy/30 p-6 lg:p-8 flex items-center justify-center order-2 lg:order-1">
                         <img
                             src={event.eventGraphic}
                             alt={`${event.title} graphic`}
                             className="w-full max-w-md rounded-2xl border border-white/10 shadow-lg"
                         />
-                    ) : (
-                        <div className="w-full max-w-md aspect-video rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center">
-                            <FileText size={64} className="text-slate-400" />
-                            <span className="sr-only">Event graphic placeholder</span>
-                        </div>
-                    )}
-                </div>
+                    </div>
+                )}
 
                 {/* Content Column */}
                 <div className="p-6 lg:p-8 flex flex-col order-1 lg:order-2">
@@ -233,10 +232,13 @@ function TutorialEventCard({ event }) {
                             <Calendar size={16} className="text-goldB" />
                             <span>{event.displayDate}</span>
                         </div>
-                        <div className="inline-flex items-center gap-2 text-slate-300">
-                            <Users size={16} className="text-goldB" />
-                            <span>Hosted by {event.host}</span>
-                        </div>
+                        {/* Conditionally render Host info */}
+                        {event.host && (
+                            <div className="inline-flex items-center gap-2 text-slate-300">
+                                <Users size={16} className="text-goldB" />
+                                <span>Hosted by {event.host}</span>
+                            </div>
+                        )}
                     </div>
 
                     {/* Description */}
@@ -261,13 +263,14 @@ function TutorialEventCard({ event }) {
 
                     {/* Meeting Link */}
                     <div className="mt-6 pt-6 border-t border-white/10">
-                        <a
-                            href={event.meetingLink}
-                            className="btn inline-flex items-center gap-2 bg-goldA/20 border-goldB/30 hover:bg-goldA/30"
+                        <button
+                            type="button"
+                            onClick={() => window.alert('The event has already passed and is over.')}
+                            className="btn inline-flex items-center gap-2 bg-goldA/20 border-goldB/30 hover:bg-goldA/30 cursor-pointer"
                         >
                             <Video size={18} />
                             {event.meetingLinkLabel}
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

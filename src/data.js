@@ -158,10 +158,10 @@ export const FEATURED_EVENTS = [
     type: 'speaker',
     dateISO: '2025-12-01T18:30:00',
     displayDate: 'December 1, 2025 @ 6:30 PM',
-    host: 'CIO Anson El-Ayari',
+    host: null,
     meetingLink: '#', // Placeholder - meeting hasn't started
     meetingLinkLabel: 'Join Google Meet',
-    headshot: null, // Placeholder for Jane Shantz's photo
+    headshot: asset('IMG_3698.jpeg'),
     bio: `Jane Shantz is a seasoned Organizational Change Management Consultant, Strategist, and Executive Coach with nearly 30 years of experience helping Fortune 500 companies navigate complex transformation. She began her career at Andersen Consulting (now Accenture) and later founded her own consulting practice, where she partners with executive teams to lead enterprise-wide change across industries such as banking, retail, and healthcare.
 
 Jane's work spans major regulatory programs, digital modernization, and operating model redesign. She is often brought in as a trusted advisor or program leader to align stakeholders, drive momentum, and deliver measurable impact in high-stakes environments.
@@ -181,9 +181,6 @@ Jane holds two degrees from Queen's University—one in Kinesiology and one in H
     meetingLinkLabel: 'Join Meeting',
     eventGraphic: null, // Placeholder image
     description: `Join us for a hands-on tutorial covering the core components of investment analysis, including fundamental, technical, and company-level analysis. This session will walk through how these frameworks are applied in real-world decision-making and is designed to support students preparing for the CSC or looking to strengthen their analytical toolkit. Open to all experience levels.`,
-    diagnosticSection: {
-      title: 'Diagnostic Quiz',
-      description: `We developed a short diagnostic quiz to assess members' baseline knowledge prior to the analysis tutorial, allowing us to tailor the session's depth, pacing, and examples to participants' existing understanding.`,
-    },
+    diagnosticSection: null,
   },
 ];
