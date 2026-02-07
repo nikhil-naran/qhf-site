@@ -77,6 +77,7 @@ export default function Nav() {
             <ul className="hidden md:flex gap-12 text-sm items-center">
               <li><a href="/#about" className="hover:text-goldB transition-colors">About</a></li>
               <li><a href="/#philosophy" className="hover:text-goldB transition-colors">Philosophy</a></li>
+              <li><a href="/#alumni" className="hover:text-goldB transition-colors">Member Placements</a></li>
               <li className="relative" ref={teamsRef}>
                 <button
                   type="button"
@@ -98,7 +99,6 @@ export default function Nav() {
                   </div>
                 )}
               </li>
-              <li><a href="/#alumni" className="hover:text-goldB transition-colors">Member Placements</a></li>
               <li><NavLink to="/events" className={({ isActive }) => `hover:text-goldB transition-colors ${isActive ? 'text-goldB' : ''}`}>Events</NavLink></li>
               <li><NavLink to="/research" className={({ isActive }) => `hover:text-goldB transition-colors ${isActive ? 'text-goldB' : ''}`}>Research</NavLink></li>
               <li><a href="/#join" className="hover:text-goldB transition-colors">Join Us</a></li>
@@ -123,6 +123,7 @@ export default function Nav() {
               <Link to="/" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Home</Link>
               <a href="/#about" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">About</a>
               <a href="/#philosophy" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Philosophy</a>
+              <a href="/#alumni" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Member Placements</a>
               <button
                 type="button"
                 onClick={() => setMobileTeamsOpen(v => !v)}
@@ -148,7 +149,6 @@ export default function Nav() {
                   ))}
                 </div>
               )}
-              <a href="/#alumni" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Member Placements</a>
               <NavLink to="/events" onClick={() => setOpen(false)} className={({ isActive }) => `px-2 py-2 rounded hover:bg-white/10 ${isActive ? 'text-goldB' : ''}`}>Events</NavLink>
               <NavLink to="/research" onClick={() => setOpen(false)} className={({ isActive }) => `px-2 py-2 rounded hover:bg-white/10 ${isActive ? 'text-goldB' : ''}`}>Research</NavLink>
               <a href="/#join" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Join</a>
