@@ -72,7 +72,7 @@ export default function Philosophy(){
                 <h2 className="font-serif text-4xl font-semibold text-white sm:text-5xl">Investment Philosophy</h2>
               </div>
               <p className="max-w-xl text-base text-slate-200/90 sm:text-lg">
-                At Queen's Hedge Fund we run a top-down, macro-driven multi strategy fund with a concentrated portfolio. Our process balances disciplined asset allocation with selective security selection, guided by four core pillars:
+                At Queen's Hedge Fund, we run a top-down, macro-driven multi-strategy fund with a concentrated portfolio. Our process balances disciplined asset allocation with selective security selection, guided by four core pillars:
               </p>
               <ol className="flex flex-wrap items-center gap-3 text-[0.78rem] font-medium tracking-wide text-slate-100">
                 {pillars.map((pillar) => (

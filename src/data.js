@@ -169,7 +169,7 @@ As promised, you're eligible for free access to two of WSO's top bootcamps spons
 • Financial Modeling Bootcamp ($497) — February 8, 2026 (3 hours)
 • Investment Banking Interview Bootcamp ($297) — February 7, 2026 (4.5 hours)
 
-Attendance will be taken! If you attend the Q&A session you'll also receive access to the LARGEST high finance application tracker. Fill out your email to secure your spot in both bootcamps, and we'll be in touch with more details.`,
+Attendance will be taken! If you attend the Q&A session, you'll also receive access to the LARGEST high finance application tracker. Fill out your email to secure your spot in both bootcamps, and we'll be in touch with more details.`,
     diagnosticSection: null,
     signupLink: 'https://docs.google.com/forms/d/e/1FAIpQLSfT9Bqi_bzficpWx31VMl5Eegru6R8B8jryjQgH-Hc-FwAQMA/viewform',
   },
