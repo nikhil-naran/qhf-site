@@ -205,44 +205,6 @@ Jane holds two degrees from Queen's University—one in Kinesiology and one in H
     diagnosticSection: null,
   },
 ];
-export const ANNUAL_REPORTS = [
-  {
-    year: '2024',
-    title: '2024 Year-End Performance Report',
-    date: 'December 2024',
-    description: 'A comprehensive review of QHF\'s investment strategy, portfolio performance, and organizational milestones throughout the 2024 fiscal year.',
-    link: '#', // Placeholder
-    thumbnail: null
-  },
-  {
-    year: '2023',
-    title: '2023 Annual Report',
-    date: 'December 2023',
-    description: 'Detailed analysis of our sector allocations, key holdings performance, and the expansion of our analyst program.',
-    link: '#',
-    thumbnail: null
-  }
-];
+export const ANNUAL_REPORTS = [];
 
-export const STOCK_PITCHES = [
-  {
-    ticker: 'SHOP',
-    company: 'Shopify Inc.',
-    title: 'Shopify: The Backbone of Modern Commerce',
-    date: 'October 2024',
-    author: 'Technology Team',
-    thesis: 'Long-term growth driven by expansion into enterprise retail and merchant solutions monetization.',
-    link: '#',
-    type: 'Buy'
-  },
-  {
-    ticker: 'CP',
-    company: 'Canadian Pacific Kansas City',
-    title: 'CPKC: A Continental Powerhouse',
-    date: 'November 2024',
-    author: 'Industrials Team',
-    thesis: 'Synergy realization from the KCS merger creating the first single-line rail network connecting Canada, the US, and Mexico.',
-    link: '#',
-    type: 'Buy'
-  }
-];
+export const STOCK_PITCHES = [];

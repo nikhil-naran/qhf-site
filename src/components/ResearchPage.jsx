@@ -79,21 +79,43 @@ export default function ResearchPage() {
                 {/* Content Section */}
                 <section ref={contentRef} className="mt-12">
                     {activeTab === 'reports' ? (
-                        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-                            {ANNUAL_REPORTS.map((report, idx) => (
-                                <ReportCard key={idx} report={report} />
-                            ))}
-                        </div>
+                        ANNUAL_REPORTS.length > 0 ? (
+                            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+                                {ANNUAL_REPORTS.map((report, idx) => (
+                                    <ReportCard key={idx} report={report} />
+                                ))}
+                            </div>
+                        ) : (
+                            <ComingSoonCard label="Annual Reports" />
+                        )
                     ) : (
-                        <div className="grid gap-6 md:grid-cols-2">
-                            {STOCK_PITCHES.map((pitch, idx) => (
-                                <PitchCard key={idx} pitch={pitch} />
-                            ))}
-                        </div>
+                        STOCK_PITCHES.length > 0 ? (
+                            <div className="grid gap-6 md:grid-cols-2">
+                                {STOCK_PITCHES.map((pitch, idx) => (
+                                    <PitchCard key={idx} pitch={pitch} />
+                                ))}
+                            </div>
+                        ) : (
+                            <ComingSoonCard label="Stock Pitches" />
+                        )
                     )}
                 </section>
             </div>
         </main>
+    );
+}
+
+function ComingSoonCard({ label }) {
+    return (
+        <div className="glass rounded-3xl border border-white/10 p-10 sm:p-14 text-center">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-goldB">
+                <FileText size={28} />
+            </div>
+            <h3 className="text-xl font-bold text-slate-50">{label}</h3>
+            <p className="mt-3 text-sm text-slate-400 leading-relaxed max-w-md mx-auto">
+                Coming soon. Our team is preparing content for this section.
+            </p>
+        </div>
     );
 }
 
