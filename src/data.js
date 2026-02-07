@@ -157,7 +157,7 @@ export const FEATURED_EVENTS = [
     title: 'Wall Street Oasis X Queen\'s Hedge Fund',
     type: 'tutorial',
     dateISO: '2026-02-05T18:30:00',
-    displayDate: 'February 5, 2026 @ 6:30 PM',
+    displayDate: 'February 5, 2026',
     host: 'Patrick Curtis',
     meetingLink: '#',
     meetingLinkLabel: 'Join Meeting',
