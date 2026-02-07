@@ -11,7 +11,7 @@ export const TEAM_CATEGORIES = [
   { name: 'Mining & Materials', slug: 'mining-materials' },
   { name: 'Financials', slug: 'financials' },
   { name: 'Technology', slug: 'technology' },
-  { name: 'Consumers', slug: 'consumer-staples-retail' },
+  { name: 'Consumers', slug: 'consumers' },
   { name: 'Real Estate & Health Care', slug: 'real-estate-health-care' },
   { name: 'Crypto', slug: 'crypto' },
   { name: 'Communications', slug: 'communications' },
@@ -62,9 +62,9 @@ export const TEAMS = {
     ],
     reports: []
   },
-  'consumer-staples-retail': {
+  'consumers': {
     name: 'Consumers',
-    iconUrl: asset('icons/consumer-staples-retail.png'),
+    iconUrl: asset('icons/consumers.png'),
     holdings: [],
     portfolioManager: withHeadshot({ name: 'Jillian Dalton', bio: 'High ROIC retailers.' }),
     analysts: [
