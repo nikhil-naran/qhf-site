@@ -51,10 +51,10 @@ export default function ResearchPage() {
                         </header>
 
                         {/* Tab Switcher */}
-                        <div className="mt-10 flex flex-wrap gap-4">
+                        <div className="mt-10 flex flex-wrap gap-3 sm:gap-4">
                             <button
                                 onClick={() => setActiveTab('reports')}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-2xl border transition-all ${activeTab === 'reports'
+                                className={`flex items-center gap-2 px-4 py-3 sm:px-6 rounded-2xl border transition-all text-sm sm:text-base ${activeTab === 'reports'
                                     ? 'border-goldB/40 bg-goldA/10 text-goldB shadow-lg'
                                     : 'border-white/10 bg-white/5 text-slate-400 hover:bg-white/10 hover:text-slate-200'
                                     }`}
@@ -64,7 +64,7 @@ export default function ResearchPage() {
                             </button>
                             <button
                                 onClick={() => setActiveTab('pitches')}
-                                className={`flex items-center gap-2 px-6 py-3 rounded-2xl border transition-all ${activeTab === 'pitches'
+                                className={`flex items-center gap-2 px-4 py-3 sm:px-6 rounded-2xl border transition-all text-sm sm:text-base ${activeTab === 'pitches'
                                     ? 'border-goldB/40 bg-goldA/10 text-goldB shadow-lg'
                                     : 'border-white/10 bg-white/5 text-slate-400 hover:bg-white/10 hover:text-slate-200'
                                     }`}
@@ -146,7 +146,7 @@ function ReportCard({ report }) {
                     </div>
                     <a
                         href={report.link}
-                        className="btn py-2 px-4 text-xs font-semibold bg-white/5 hover:bg-goldA/20 border-white/10 hover:border-goldB/30"
+                        className="btn py-2.5 px-5 text-xs font-semibold bg-white/5 hover:bg-goldA/20 border-white/10 hover:border-goldB/30"
                         onClick={(e) => {
                             if (report.link === '#') {
                                 e.preventDefault();
@@ -195,7 +195,7 @@ function PitchCard({ pitch }) {
                 </div>
                 <a
                     href={pitch.link}
-                    className="p-3 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-goldB hover:border-goldB/40 transition-all"
+                    className="p-3 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-goldB hover:border-goldB/40 transition-all min-w-[44px] min-h-[44px] inline-flex items-center justify-center"
                     onClick={(e) => {
                         if (pitch.link === '#') {
                             e.preventDefault();

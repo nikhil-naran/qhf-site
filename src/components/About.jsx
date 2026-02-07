@@ -50,8 +50,8 @@ export default function About(){
           <div className="h-px w-12 bg-goldA/60 mb-6" />
           <h2 className="font-serif text-4xl font-semibold text-white sm:text-5xl">About</h2>
         </div>
-        <div className="grid gap-10 lg:grid-cols-2">
-          <div className="glass rounded-2xl border border-white/[0.07] p-8 sm:p-10">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+          <div className="glass rounded-2xl border border-white/[0.07] p-6 sm:p-10">
             <h3 className="text-2xl font-semibold text-white">What We Do</h3>
             <p className="mt-4 max-w-3xl text-slate-200/90 leading-relaxed">
               Queen's Hedge Fund (QHF) is Queen's University's student-managed hedge fund in Kingston, Ontario.
@@ -73,7 +73,7 @@ export default function About(){
             </div>
           </div>
 
-          <div className="glass rounded-2xl border border-white/[0.07] p-8 sm:p-10">
+          <div className="glass rounded-2xl border border-white/[0.07] p-6 sm:p-10">
             <h3 className="text-2xl font-semibold text-white">Why QHF</h3>
             <p className="mt-4 text-slate-200/80 leading-relaxed">
               QHF is designed for students who want more than just theory; by mirroring a professional hedge fund inside Queen's University, we provide the structure, discipline, and accountability required to pitch and manage real investment ideas.

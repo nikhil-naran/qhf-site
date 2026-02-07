@@ -67,7 +67,7 @@ export default function Founders(){
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={`Open ${f.name} LinkedIn`}
-                  className="mt-3 inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 text-slate-100"
+                  className="mt-3 inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/5 hover:bg-white/10 border border-white/5 text-slate-100"
                 >
                   <Linkedin size={16} />
                   <span className="sr-only">LinkedIn</span>
@@ -101,7 +101,7 @@ export default function Founders(){
                       >
                         <X />
                       </button>
-                      <div className="relative grid gap-10 px-6 pb-10 pt-16 md:grid-cols-[320px_minmax(0,1fr)] md:gap-16 md:px-12 md:pt-20">
+                      <div className="relative grid gap-8 px-5 pb-8 pt-14 md:grid-cols-[320px_minmax(0,1fr)] md:gap-16 md:px-12 md:pt-20">
                         <div className="flex flex-col gap-6 rounded-2xl border border-white/[0.07] bg-white/5 p-6 backdrop-blur-sm md:p-8">
                           <Headshot person={f} className="flex h-28 w-28 items-center justify-center rounded-2xl md:h-32 md:w-32" initialsClass="text-3xl md:text-4xl" />
                           <div>

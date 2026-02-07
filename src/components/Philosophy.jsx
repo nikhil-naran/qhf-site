@@ -63,9 +63,9 @@ export default function Philosophy(){
   return (
     <section id="philosophy" ref={ref} className="scroll-mt-20 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="glass relative overflow-hidden rounded-3xl border border-white/[0.07] px-6 py-14 sm:px-10 sm:py-16">
+        <div className="glass relative overflow-hidden rounded-3xl border border-white/[0.07] px-5 py-10 sm:px-10 sm:py-16">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.06),_transparent_62%)]" />
-          <div className="relative grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
             <div className="space-y-6">
               <div>
                 <div className="h-px w-12 bg-goldA/60 mb-6" />
