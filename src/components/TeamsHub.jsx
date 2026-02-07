@@ -39,7 +39,7 @@ export default function TeamsHub(){
           <div className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <header>
               <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-goldB">Our Teams</p>
-              <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl lg:text-5xl">Specialized pods. Long-term conviction.</h1>
+              <h1 className="mt-4 font-serif text-4xl font-semibold text-white sm:text-5xl">Specialized pods. Long-term conviction.</h1>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-200/90 sm:text-base">Every sector pod inside QHF runs a focused research mandate, publishes investment theses, and manages capital with a risk-aware mindset. Explore the pods to see the people, holdings, and reports driving our edge.</p>
             </header>
             {metrics.length > 0 && (

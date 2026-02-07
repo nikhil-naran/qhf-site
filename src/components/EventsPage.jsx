@@ -72,7 +72,7 @@ export default function EventsPage() {
                             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-goldB">
                                 Events
                             </p>
-                            <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl lg:text-5xl">
+                            <h1 className="mt-4 font-serif text-4xl font-semibold text-white sm:text-5xl">
                                 Upcoming Events
                             </h1>
                             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-200/90 sm:text-base">
@@ -167,7 +167,7 @@ function SpeakerEventCard({ event }) {
 
                 {/* Content Column */}
                 <div className="p-6 lg:p-8 flex flex-col">
-                    <h2 className="text-2xl lg:text-3xl font-bold text-slate-50">{event.title}</h2>
+                    <h2 className="font-serif text-2xl lg:text-3xl font-semibold text-white">{event.title}</h2>
 
                     {/* Meta Info */}
                     <div className="mt-4 flex flex-wrap gap-4 text-sm">
@@ -237,7 +237,7 @@ function TutorialEventCard({ event }) {
 
                 {/* Content Column */}
                 <div className="p-6 lg:p-8 flex flex-col order-1 lg:order-2">
-                    <h2 className="text-2xl lg:text-3xl font-bold text-slate-50">{event.title}</h2>
+                    <h2 className="font-serif text-2xl lg:text-3xl font-semibold text-white">{event.title}</h2>
 
                     {/* Meta Info */}
                     <div className="mt-4 flex flex-wrap gap-4 text-sm">

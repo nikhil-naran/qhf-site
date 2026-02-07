@@ -49,7 +49,7 @@ export default function TeamPage() {
             />
           )}
           <div>
-            <h1 className="text-3xl font-extrabold sm:text-4xl">{team.name}</h1>
+            <h1 className="font-serif text-4xl font-semibold text-white sm:text-5xl">{team.name}</h1>
             <p className="mt-2 text-sm text-slate-300 sm:text-base">Holdings, team members, and research &amp; reports.</p>
           </div>
         </header>
@@ -57,7 +57,7 @@ export default function TeamPage() {
         {/* A) Team Portfolio Holdings: hidden for teams that list `members` (e.g., Marketing, Macro) */}
         {!(team.members && team.members.length) && (
           <section className="glass rounded-2xl border border-white/10 p-6 sm:p-8">
-            <h2 className="text-2xl font-semibold">Portfolio Holdings</h2>
+            <h2 className="font-serif text-2xl font-semibold text-white">Portfolio Holdings</h2>
             <div className="mt-4 space-y-3 sm:hidden">
               {team.holdings.map((r) => (
                 <div key={r.ticker} className="glass rounded-xl border border-white/10 p-4">
@@ -106,7 +106,7 @@ export default function TeamPage() {
 
         {/* B) The Team */}
         <section className="glass rounded-2xl border border-white/10 p-6 sm:p-8">
-          <h2 className="text-2xl font-semibold">The Team</h2>
+          <h2 className="font-serif text-2xl font-semibold text-white">The Team</h2>
           <div className="mt-4">
             {(() => {
               // Do not show a Portfolio Manager block for teams that explicitly list `members`.
@@ -170,7 +170,7 @@ export default function TeamPage() {
 
         {/* C) Research & Reports */}
         <section className="glass rounded-2xl border border-white/10 p-6 sm:p-8">
-          <h2 className="text-2xl font-semibold">Research &amp; Reports</h2>
+          <h2 className="font-serif text-2xl font-semibold text-white">Research &amp; Reports</h2>
           <ul className="mt-4 space-y-2">
             {team.reports.map((r, i) => (
               <li key={i}>
