@@ -69,12 +69,12 @@ export default function Nav() {
   return (
     <header className="relative z-50" style={{ opacity, transition: 'opacity 250ms linear' }}>
       <div className="mx-auto max-w-7xl px-4">
-        <nav className="mt-3 flex items-center bg-transparent px-0 py-4 relative">
-          <Link to="/" className="font-serif text-xl font-semibold text-white tracking-wide hover:text-goldB transition-colors">
+        <nav className="mt-3 flex items-center justify-between bg-transparent px-0 py-4 relative">
+          <Link to="/" className="relative z-10 font-serif text-xl font-semibold text-white tracking-wide hover:text-goldB transition-colors">
             QHF
           </Link>
-          <div className="flex-1 flex justify-center">
-            <ul className="hidden md:flex gap-12 text-sm items-center">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <ul className="hidden md:flex gap-12 text-sm items-center pointer-events-auto">
               <li><a href="/#about" className="hover:text-goldB transition-colors">About</a></li>
               <li><a href="/#philosophy" className="hover:text-goldB transition-colors">Philosophy</a></li>
               <li><a href="/#alumni" className="hover:text-goldB transition-colors">Member Placements</a></li>
