@@ -26,9 +26,9 @@ export default function Performance(){
         <p className="text-slate-200/90 mt-2">Comparing our funds to standard market indexes (sample data).</p>
 
         <div className="mt-8 grid lg:grid-cols-2 gap-8">
-          <div className="glass rounded-2xl p-6 border border-white/10">
-            <h3 className="font-semibold mb-4">Canadian Portfolio vs S&amp;P/TSX Composite</h3>
-            <div className="h-64">
+          <div className="glass rounded-2xl p-4 sm:p-6 border border-white/10">
+            <h3 className="font-semibold mb-4 text-sm sm:text-base">Canadian Portfolio vs S&amp;P/TSX Composite</h3>
+            <div className="h-52 sm:h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={ca} margin={{ top: 10, left: 0, right: 10, bottom: 0 }}>
                   <CartesianGrid stroke="rgba(255,255,255,0.05)" />
@@ -43,9 +43,9 @@ export default function Performance(){
             </div>
           </div>
 
-          <div className="glass rounded-2xl p-6 border border-white/10">
-            <h3 className="font-semibold mb-4">US Portfolio vs S&amp;P 500</h3>
-            <div className="h-64">
+          <div className="glass rounded-2xl p-4 sm:p-6 border border-white/10">
+            <h3 className="font-semibold mb-4 text-sm sm:text-base">US Portfolio vs S&amp;P 500</h3>
+            <div className="h-52 sm:h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={us} margin={{ top: 10, left: 0, right: 10, bottom: 0 }}>
                   <CartesianGrid stroke="rgba(255,255,255,0.05)" />

@@ -10,8 +10,8 @@ export default function Join(){
       <div className="mx-auto max-w-7xl px-4">
         <div className="h-px w-12 bg-goldA/60 mb-6" />
         <h2 className="font-serif text-4xl font-semibold text-white sm:text-5xl mb-10">Join Us</h2>
-        <div className="grid items-start gap-8 md:grid-cols-2 md:gap-10">
-          <div className="glass rounded-2xl border border-white/[0.07] p-8 sm:p-10">
+        <div className="grid items-start gap-6 md:grid-cols-2 md:gap-10">
+          <div className="glass rounded-2xl border border-white/[0.07] p-6 sm:p-10">
             <h3 className="text-2xl font-semibold text-white">Eligibility</h3>
             <ul className="mt-5 list-disc list-inside text-slate-200/90 space-y-2">
               <li>Undergraduate students at Queen's University</li>
@@ -26,7 +26,7 @@ export default function Join(){
             name="contact"
             method="POST"
             data-netlify="true"
-            className="glass rounded-2xl border border-white/[0.07] p-8 sm:p-10"
+            className="glass rounded-2xl border border-white/[0.07] p-6 sm:p-10"
             onSubmit={(e)=>{e.preventDefault(); setSent(true);}}
           >
             <input type="hidden" name="form-name" value="contact" />
@@ -35,15 +35,15 @@ export default function Join(){
               <div className="mt-5 grid gap-4">
                 <label className="text-sm text-slate-200/90">
                   Name
-                  <input required name="name" className="mt-1.5 w-full bg-white/5 border border-white/[0.07] rounded-lg px-4 py-2.5 text-slate-100 placeholder-slate-400/60 focus:border-goldA/50 focus:ring-1 focus:ring-goldA/30 focus:outline-none transition"/>
+                  <input required name="name" className="mt-1.5 w-full bg-white/5 border border-white/[0.07] rounded-lg px-4 py-3 text-base text-slate-100 placeholder-slate-400/60 focus:border-goldA/50 focus:ring-1 focus:ring-goldA/30 focus:outline-none transition"/>
                 </label>
                 <label className="text-sm text-slate-200/90">
                   Email
-                  <input required type="email" name="email" className="mt-1.5 w-full bg-white/5 border border-white/[0.07] rounded-lg px-4 py-2.5 text-slate-100 placeholder-slate-400/60 focus:border-goldA/50 focus:ring-1 focus:ring-goldA/30 focus:outline-none transition"/>
+                  <input required type="email" name="email" className="mt-1.5 w-full bg-white/5 border border-white/[0.07] rounded-lg px-4 py-3 text-base text-slate-100 placeholder-slate-400/60 focus:border-goldA/50 focus:ring-1 focus:ring-goldA/30 focus:outline-none transition"/>
                 </label>
                 <label className="text-sm text-slate-200/90">
                   Message
-                  <textarea required name="message" rows="4" className="mt-1.5 w-full bg-white/5 border border-white/[0.07] rounded-lg px-4 py-2.5 text-slate-100 placeholder-slate-400/60 focus:border-goldA/50 focus:ring-1 focus:ring-goldA/30 focus:outline-none transition"></textarea>
+                  <textarea required name="message" rows="4" className="mt-1.5 w-full bg-white/5 border border-white/[0.07] rounded-lg px-4 py-3 text-base text-slate-100 placeholder-slate-400/60 focus:border-goldA/50 focus:ring-1 focus:ring-goldA/30 focus:outline-none transition"></textarea>
                 </label>
                 <button className="mt-2 btn">Send</button>
               </div>

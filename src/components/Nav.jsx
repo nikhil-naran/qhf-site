@@ -105,8 +105,8 @@ export default function Nav() {
             </ul>
           </div>
           <div className="flex items-center gap-2">
-            <button className="md:hidden p-2 rounded-full hover:bg-white/10" aria-label="Open menu" aria-haspopup="dialog" aria-expanded={open} aria-controls="mobileMenu" onClick={() => setOpen(true)}>
-              <Menu />
+            <button className="md:hidden p-2.5 -mr-2.5 rounded-full hover:bg-white/10" aria-label="Open menu" aria-haspopup="dialog" aria-expanded={open} aria-controls="mobileMenu" onClick={() => setOpen(true)}>
+              <Menu size={24} />
             </button>
           </div>
         </nav>
@@ -117,17 +117,17 @@ export default function Nav() {
           <div className="ml-auto w-[80%] max-w-sm h-full bg-burgundy glass p-6 shadow-glass border-l border-white/[0.07]">
             <div className="flex items-center justify-between mb-4">
               <span className="font-serif text-lg font-semibold">QHF</span>
-              <button aria-label="Close menu" onClick={() => setOpen(false)} className="p-2 rounded hover:bg-white/10"><X /></button>
+              <button aria-label="Close menu" onClick={() => setOpen(false)} className="p-2.5 -mr-2.5 rounded hover:bg-white/10"><X size={24} /></button>
             </div>
-            <div className="flex flex-col gap-2">
-              <Link to="/" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Home</Link>
-              <a href="/#about" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">About</a>
-              <a href="/#philosophy" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Philosophy</a>
-              <a href="/#alumni" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Member Placements</a>
+            <div className="flex flex-col gap-1">
+              <Link to="/" onClick={() => setOpen(false)} className="px-3 py-3 rounded-lg hover:bg-white/10">Home</Link>
+              <a href="/#about" onClick={() => setOpen(false)} className="px-3 py-3 rounded-lg hover:bg-white/10">About</a>
+              <a href="/#philosophy" onClick={() => setOpen(false)} className="px-3 py-3 rounded-lg hover:bg-white/10">Philosophy</a>
+              <a href="/#alumni" onClick={() => setOpen(false)} className="px-3 py-3 rounded-lg hover:bg-white/10">Member Placements</a>
               <button
                 type="button"
                 onClick={() => setMobileTeamsOpen(v => !v)}
-                className={`flex items-center justify-between px-2 py-2 rounded hover:bg-white/10 transition-colors ${mobileTeamsOpen ? 'text-goldB' : ''}`}
+                className={`flex items-center justify-between px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${mobileTeamsOpen ? 'text-goldB' : ''}`}
                 aria-expanded={mobileTeamsOpen}
                 aria-controls="mobileTeamsMenu"
               >
@@ -135,23 +135,23 @@ export default function Nav() {
                 <ChevronDown size={18} className={`transition-transform duration-200 ${mobileTeamsOpen ? 'rotate-180' : ''}`} />
               </button>
               {mobileTeamsOpen && (
-                <div id="mobileTeamsMenu" className="ml-2 flex flex-col gap-1 border-l border-white/[0.07] pl-3">
-                  <Link to="/teams" onClick={() => { setOpen(false); setMobileTeamsOpen(false); }} className="px-2 py-2 rounded hover:bg-white/10 text-sm">All Teams</Link>
+                <div id="mobileTeamsMenu" className="ml-2 flex flex-col gap-0.5 border-l border-white/[0.07] pl-3">
+                  <Link to="/teams" onClick={() => { setOpen(false); setMobileTeamsOpen(false); }} className="px-3 py-2.5 rounded-lg hover:bg-white/10 text-sm">All Teams</Link>
                   {TEAM_CATEGORIES.map(t => (
                     <NavLink
                       key={t.slug}
                       to={`/teams/${t.slug}`}
                       onClick={() => { setOpen(false); setMobileTeamsOpen(false); }}
-                      className="px-2 py-2 rounded hover:bg-white/10 text-sm"
+                      className="px-3 py-2.5 rounded-lg hover:bg-white/10 text-sm"
                     >
                       {t.name}
                     </NavLink>
                   ))}
                 </div>
               )}
-              <NavLink to="/events" onClick={() => setOpen(false)} className={({ isActive }) => `px-2 py-2 rounded hover:bg-white/10 ${isActive ? 'text-goldB' : ''}`}>Events</NavLink>
-              <NavLink to="/research" onClick={() => setOpen(false)} className={({ isActive }) => `px-2 py-2 rounded hover:bg-white/10 ${isActive ? 'text-goldB' : ''}`}>Research</NavLink>
-              <a href="/#join" onClick={() => setOpen(false)} className="px-2 py-2 rounded hover:bg-white/10">Join</a>
+              <NavLink to="/events" onClick={() => setOpen(false)} className={({ isActive }) => `px-3 py-3 rounded-lg hover:bg-white/10 ${isActive ? 'text-goldB' : ''}`}>Events</NavLink>
+              <NavLink to="/research" onClick={() => setOpen(false)} className={({ isActive }) => `px-3 py-3 rounded-lg hover:bg-white/10 ${isActive ? 'text-goldB' : ''}`}>Research</NavLink>
+              <a href="/#join" onClick={() => setOpen(false)} className="px-3 py-3 rounded-lg hover:bg-white/10">Join</a>
             </div>
           </div>
           <button className="flex-1" aria-label="Close menu" onClick={() => setOpen(false)} />
@@ -176,8 +176,8 @@ function BackToTop() {
   }, []);
   if (!show) return null;
   return (
-    <a href="#hero" className="fixed bottom-6 right-6 bg-white/10 hover:bg-white/20 border border-white/[0.07] rounded-full p-3 backdrop-blur">
-      <ChevronUp />
+    <a href="#hero" className="fixed bottom-5 right-5 bg-white/10 hover:bg-white/20 border border-white/[0.07] rounded-full p-3.5 backdrop-blur sm:bottom-6 sm:right-6">
+      <ChevronUp size={22} />
       <span className="sr-only">Back to top</span>
     </a>
   );

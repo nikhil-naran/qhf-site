@@ -88,7 +88,7 @@ export default function EventsPage() {
                                 aria-haspopup="listbox"
                                 aria-expanded={dropdownOpen}
                                 aria-controls="event-listbox"
-                                className={`event-selector inline-flex items-center gap-3 rounded-2xl border px-5 py-4 text-left transition-all w-full sm:w-auto sm:min-w-[400px] ${dropdownOpen
+                                className={`event-selector inline-flex items-center gap-3 rounded-2xl border px-5 py-4 text-left transition-all w-full md:w-auto md:min-w-[400px] ${dropdownOpen
                                     ? 'border-goldB/40 bg-white/10'
                                     : 'border-white/15 bg-white/5 hover:border-goldB/30 hover:bg-white/8'
                                     }`}
@@ -107,7 +107,7 @@ export default function EventsPage() {
                                 <ul
                                     id="event-listbox"
                                     role="listbox"
-                                    className="absolute top-full left-0 right-0 sm:right-auto mt-2 w-full sm:min-w-[400px] dropdown-panel rounded-2xl z-50"
+                                    className="absolute top-full left-0 right-0 md:right-auto mt-2 w-full md:min-w-[400px] dropdown-panel rounded-2xl z-50"
                                 >
                                     {FEATURED_EVENTS.map((event) => (
                                         <li key={event.id}>
@@ -148,17 +148,17 @@ export default function EventsPage() {
 function SpeakerEventCard({ event }) {
     return (
         <div className="glass rounded-3xl border border-white/10 overflow-hidden shadow-glass">
-            <div className="grid lg:grid-cols-[280px_1fr] gap-0">
+            <div className="grid md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr] gap-0">
                 {/* Headshot Column */}
                 <div className="relative bg-gradient-to-br from-goldA/10 to-burgundy/30 p-6 lg:p-8 flex items-center justify-center">
                     {event.headshot ? (
                         <img
                             src={event.headshot}
                             alt={`${event.title} speaker`}
-                            className="w-48 h-48 lg:w-full lg:h-auto aspect-square object-cover rounded-2xl border border-white/10 shadow-lg"
+                            className="w-40 h-40 sm:w-48 sm:h-48 md:w-full md:h-auto aspect-square object-cover rounded-2xl border border-white/10 shadow-lg"
                         />
                     ) : (
-                        <div className="w-48 h-48 lg:w-full lg:h-auto aspect-square rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center">
+                        <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-full md:h-auto aspect-square rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center">
                             <User size={64} className="text-slate-400" />
                             <span className="sr-only">Speaker photo placeholder</span>
                         </div>
