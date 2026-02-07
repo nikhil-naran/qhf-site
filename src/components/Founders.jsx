@@ -52,7 +52,7 @@ export default function Founders(){
       <div className="mx-auto max-w-7xl px-4">
         <div className="h-px w-12 bg-goldA/60 mb-6" />
         <h2 className="font-serif text-4xl font-semibold text-white sm:text-5xl">Founders</h2>
-        <p className="text-slate-300 mt-3 max-w-2xl">Meet the Queen's Hedge Fund student founders who shaped QHF's mandate and training culture.</p>
+        <p className="text-slate-300 mt-3 max-w-2xl">The people behind QHF.</p>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
           {founders.map((f, i) => (
             <div key={i} className="glass rounded-2xl border border-white/[0.07] p-5 sm:p-6 team-card">
