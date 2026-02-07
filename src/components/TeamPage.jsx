@@ -16,15 +16,15 @@ function PersonAvatar({ person = {}, size = 'md', className = '' }) {
   return (
     <div className={`relative flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-goldA/20 to-goldB/10 text-goldB ${classes} ${className}`}>
       {src ? (
-        <img src={src} alt={`${person.name} headshot`} className="headshot-img absolute inset-0 h-full w-full" />
+        <img src={src} alt={`${person.name}, ${person.role || 'Team Member'}`} className="headshot-img absolute inset-0 h-full w-full" />
       ) : (
-        <span className="relative z-10 font-semibold uppercase tracking-wide text-slate-100">{INITIALS_FALLBACK(person.name)}</span>
+        <span className="relative z-10 font-semibold uppercase tracking-wide text-slate-100" aria-label={person.name}>{INITIALS_FALLBACK(person.name)}</span>
       )}
     </div>
   );
 }
 
-export default function TeamPage(){
+export default function TeamPage() {
   const { slug } = useParams();
   const team = TEAMS[slug];
   if (!team) {
@@ -82,14 +82,14 @@ export default function TeamPage(){
                 <table className="w-full text-sm">
                   <thead className="sticky top-0 bg-burgundy/80 backdrop-blur">
                     <tr className="text-left text-slate-300">
-                      <th className="py-2">Ticker</th>
-                      <th>Company</th>
-                      <th className="text-right">Allocation</th>
-                      <th className="text-right">YTD</th>
+                      <th scope="col" className="py-2">Ticker</th>
+                      <th scope="col">Company</th>
+                      <th scope="col" className="text-right">Allocation</th>
+                      <th scope="col" className="text-right">YTD</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {team.holdings.map((r)=> (
+                    {team.holdings.map((r) => (
                       <tr key={r.ticker} className="border-t border-white/5 hover:bg-white/5 focus-within:bg-white/5">
                         <td className="py-2 font-semibold">{r.ticker}</td>
                         <td>{r.company}</td>
@@ -155,7 +155,7 @@ export default function TeamPage(){
                 <>
                   <h3 className="text-lg font-medium">{label}</h3>
                   <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-4">
-                    {list.map((a, i)=> (
+                    {list.map((a, i) => (
                       <div key={i} className="glass rounded-xl border border-white/10 p-4">
                         <PersonAvatar person={a} size="md" className="mb-3" />
                         <div className="font-semibold text-slate-50">{a.name}</div>
@@ -172,7 +172,7 @@ export default function TeamPage(){
         <section className="glass rounded-2xl border border-white/10 p-6 sm:p-8">
           <h2 className="text-2xl font-semibold">Research &amp; Reports</h2>
           <ul className="mt-4 space-y-2">
-            {team.reports.map((r, i)=> (
+            {team.reports.map((r, i) => (
               <li key={i}>
                 <a className="underline hover:text-goldB" href={r.url} target="_blank" rel="noreferrer noopener">{r.title}</a>
               </li>

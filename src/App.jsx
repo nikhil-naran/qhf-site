@@ -17,6 +17,7 @@ import TeamsHub from './components/TeamsHub.jsx';
 import TeamPage from './components/TeamPage.jsx';
 import EventsPage from './components/EventsPage.jsx';
 import Performance from './components/Performance.jsx';
+import ResearchPage from './components/ResearchPage.jsx';
 
 function ScrollToHash() {
   const loc = useLocation();
@@ -43,15 +44,35 @@ function DefaultSeo() {
   const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : 'https://www.queenshedgefund.com';
   const canonicalUrl = new URL(`${loc.pathname}${loc.search}`, origin).toString();
   const ogImage = `${origin}/QHF-home.png`;
-  const description = "Queen's Hedge Fund (QHF) is the student-run hedge fund at Queen's University in Kingston, Ontario, delivering real investment training, research, and portfolio experience.";
-  const title = "Queen's Hedge Fund (QHF) | Queen's University Student Hedge Fund";
+
+  // Dynamic Metadata based on path
+  let title = "Queen's Hedge Fund (QHF) | Queen's University Student Hedge Fund";
+  let description = "Queen's Hedge Fund (QHF) is the student-run hedge fund at Queen's University in Kingston, Ontario, delivering real investment training, research, and portfolio experience.";
+
+  if (loc.pathname.startsWith('/teams/')) {
+    const slug = loc.pathname.replace('/teams/', '');
+    const teamName = slug.charAt(0).toUpperCase() + slug.slice(1);
+    title = `${teamName} Team | Queen's Hedge Fund`;
+    description = `Meet the ${teamName} team at Queen's Hedge Fund. Explore our portfolio holdings, analysts, and research in the ${teamName} sector.`;
+  } else if (loc.pathname === '/teams') {
+    title = "Our Teams | Queen's Hedge Fund";
+    description = "Explore the various investment and operations teams at Queen's Hedge Fund, including Technology, Consumer, Healthcare, and more.";
+  } else if (loc.pathname === '/events') {
+    title = "Upcoming Events | Queen's Hedge Fund";
+    description = "Join Queen's Hedge Fund for upcoming speaker sessions, investment workshops, and tutorials at Queen's University.";
+  } else if (loc.pathname === '/research') {
+    title = "Investment Research | Queen's Hedge Fund";
+    description = "Access the latest investment research and stock pitches produced by our analysts at Queen's Hedge Fund.";
+  }
+
   const keywords = [
     "Queens Hedge Fund",
     "Queen's Hedge Fund",
     "Queen's University hedge fund",
     "QHF",
     "student investment fund",
-    "Queens student asset management"
+    "Queens student asset management",
+    "Kingston investment club"
   ].join(', ');
 
   const founders = [
@@ -175,6 +196,7 @@ export default function App() {
           <Route path="/teams" element={<TeamsHub />} />
           <Route path="/teams/:slug" element={<TeamPage />} />
           <Route path="/events" element={<EventsPage />} />
+          <Route path="/research" element={<ResearchPage />} />
         </Routes>
       </PageFade>
       <Footer reduced={reduced} />

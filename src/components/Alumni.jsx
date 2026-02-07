@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
 import { revealOnScroll, prefersReducedMotion } from '../lib/animation.js';
 import { asset } from '../lib/assets.js';
 
@@ -15,224 +14,66 @@ const placements = [
   { name: 'Blue Owl Capital', logo: asset('logos/blue-owl-capital.png') }
 ];
 
-const AUTO_ADVANCE_MS = 6000;
+function LogoItem({ company }) {
+  return (
+    <div className="marquee-item flex flex-col items-center gap-3 px-6 sm:px-8">
+      <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-lg sm:h-24 sm:w-24">
+        <img
+          src={company.logo}
+          alt={`${company.name} logo`}
+          loading="lazy"
+          className="h-full w-full object-contain p-3 opacity-80 transition-opacity duration-200 group-hover:opacity-100"
+        />
+      </div>
+      <span className="text-sm text-slate-300 font-medium text-center leading-tight whitespace-nowrap">{company.name}</span>
+    </div>
+  );
+}
 
-const getVisibleCount = (width) => {
-  if (width >= 1024) return 4;
-  if (width >= 768) return 3;
-  return 2;
-};
-
-export default function Alumni(){
+export default function Alumni() {
   const ref = useRef(null);
-  const sliderRef = useRef(null);
-  const autoTimerRef = useRef(null);
-  const [visibleCount, setVisibleCount] = useState(() => {
-    if (typeof window === 'undefined') return 3;
-    return getVisibleCount(window.innerWidth);
-  });
-  const [reduceMotion, setReduceMotion] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return prefersReducedMotion();
-  });
-  const [currentSlide, setCurrentSlide] = useState(0);
-
+  const trackRef = useRef(null);
   useEffect(() => revealOnScroll(ref.current, { translateY: 28 }), []);
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
-    const handleResize = () => setVisibleCount(getVisibleCount(window.innerWidth));
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const reduce = prefersReducedMotion();
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
-    const updateMotion = () => setReduceMotion(prefersReducedMotion());
-    updateMotion();
-
-    const handleCustom = (event) => setReduceMotion(!!event.detail);
-    window.addEventListener('qhf-reduce-motion-change', handleCustom);
-
-    let mediaQuery;
-    let handleMediaChange;
-    if ('matchMedia' in window) {
-      mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      handleMediaChange = (event) => setReduceMotion(event.matches);
-      if (mediaQuery.addEventListener) {
-        mediaQuery.addEventListener('change', handleMediaChange);
-      } else if (mediaQuery.addListener) {
-        mediaQuery.addListener(handleMediaChange);
-      }
-    }
-
-    return () => {
-      window.removeEventListener('qhf-reduce-motion-change', handleCustom);
-      if (mediaQuery && handleMediaChange) {
-        if (mediaQuery.removeEventListener) {
-          mediaQuery.removeEventListener('change', handleMediaChange);
-        } else if (mediaQuery.removeListener) {
-          mediaQuery.removeListener(handleMediaChange);
-        }
-      }
-    };
-  }, []);
-
-  const slides = useMemo(() => {
-    const chunkSize = Math.max(visibleCount, 1);
-    if (placements.length === 0) return [];
-    const result = [];
-    for (let start = 0; start < placements.length; start += chunkSize) {
-      const slice = placements.slice(start, start + chunkSize);
-      if (slice.length < chunkSize) {
-        const wrap = placements.slice(0, chunkSize - slice.length);
-        result.push([...slice, ...wrap]);
-      } else {
-        result.push(slice);
-      }
-    }
-    return result;
-  }, [visibleCount]);
-
-  const totalSlides = slides.length;
-  const showControls = totalSlides > 1;
-
-  useEffect(() => {
-    if (totalSlides === 0) {
-      setCurrentSlide(0);
-    } else {
-      setCurrentSlide((prev) => prev % totalSlides);
-    }
-  }, [totalSlides]);
-
-  const stopAuto = useCallback(() => {
-    if (autoTimerRef.current) {
-      window.clearInterval(autoTimerRef.current);
-      autoTimerRef.current = null;
-    }
-  }, []);
-
-  const startAuto = useCallback(() => {
-    if (!showControls || reduceMotion || totalSlides <= 1) {
-      stopAuto();
-      return;
-    }
-    stopAuto();
-    autoTimerRef.current = window.setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, AUTO_ADVANCE_MS);
-  }, [reduceMotion, showControls, stopAuto, totalSlides]);
-
-  useEffect(() => {
-    startAuto();
-    return () => stopAuto();
-  }, [startAuto, stopAuto]);
-
-  const handleFocus = useCallback(() => {
-    stopAuto();
-  }, [stopAuto]);
-
-  const handleBlur = useCallback((event) => {
-    if (!sliderRef.current) return;
-    if (event && sliderRef.current.contains(event.relatedTarget)) return;
-    startAuto();
-  }, [startAuto]);
-
-  const handleMouseEnter = useCallback(() => {
-    stopAuto();
-  }, [stopAuto]);
-
-  const handleMouseLeave = useCallback(() => {
-    startAuto();
-  }, [startAuto]);
-
-  const goPrev = useCallback(() => {
-    if (!showControls || totalSlides === 0) return;
-    stopAuto();
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-    startAuto();
-  }, [showControls, startAuto, stopAuto, totalSlides]);
-
-  const goNext = useCallback(() => {
-    if (!showControls || totalSlides === 0) return;
-    stopAuto();
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    startAuto();
-  }, [showControls, startAuto, stopAuto, totalSlides]);
-
-  const gridColumns = (groupLength) => Math.min(visibleCount, groupLength);
-
-  const trackStyle = useMemo(() => ({
-    transform: `translateX(-${currentSlide * 100}%)`
-  }), [currentSlide]);
+  // If reduced motion, fall back to a static grid
+  if (reduce) {
+    return (
+      <section id="alumni" ref={ref} className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="h-px w-12 bg-goldA/60 mb-6" />
+          <h2 className="font-serif text-4xl font-semibold text-white sm:text-5xl">Member Placements</h2>
+          <p className="text-slate-300 mt-3 max-w-2xl">Current and past placements from Queen's Hedge Fund members.</p>
+          <div className="mt-10 glass overflow-hidden rounded-2xl border border-white/[0.07] p-6 sm:p-8">
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {placements.map((company) => (
+                <div key={company.name} className="flex flex-col items-center gap-3 rounded-xl p-4">
+                  <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-lg sm:h-24 sm:w-24">
+                    <img src={company.logo} alt={`${company.name} logo`} loading="lazy" className="h-full w-full object-contain p-3" />
+                  </div>
+                  <span className="text-sm text-slate-300 font-medium text-center leading-tight">{company.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section id="alumni" ref={ref} className="py-16 sm:py-20">
+    <section id="alumni" ref={ref} className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4">
-        <h2 className="text-3xl font-bold">Member Placements</h2>
-        <div className="mt-6">
-          <div className="glass overflow-hidden rounded-2xl border border-white/10 p-5 sm:p-6">
-            <h3 className="text-xl font-semibold mb-4">Current / Past Placements</h3>
-            <div
-              className="placements-slider relative"
-              ref={sliderRef}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            >
-              {showControls && (
-                <button
-                  type="button"
-                  onClick={goPrev}
-                  className="slider-control left-2"
-                  aria-label="Show previous placements"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </button>
-              )}
-              <div className="placements-viewport">
-                <div
-                  className="placements-track"
-                  style={trackStyle}
-                >
-                  {slides.map((group, slideIndex) => (
-                    <div key={`placements-slide-${slideIndex}`} className="placements-slide">
-                      <div
-                        className="placements-grid gap-4"
-                        style={{ gridTemplateColumns: `repeat(${gridColumns(group.length)}, minmax(0, 1fr))` }}
-                      >
-                        {group.map((company, itemIndex) => (
-                          <div
-                            key={`${company.name}-${slideIndex}-${itemIndex}`}
-                            className="placement-card inline-flex items-center gap-3 opacity-95 hover:opacity-100"
-                          >
-                            <div className="placement-logo rounded flex items-center justify-center">
-                              <img
-                                src={company.logo}
-                                alt={`${company.name} logo`}
-                                loading="lazy"
-                                className="h-full w-full object-contain p-4"
-                              />
-                            </div>
-                            <span className="text-sm text-slate-200 font-medium leading-tight">{company.name}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {showControls && (
-                <button
-                  type="button"
-                  onClick={goNext}
-                  className="slider-control right-2"
-                  aria-label="Show next placements"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-              )}
+        <div className="h-px w-12 bg-goldA/60 mb-6" />
+        <h2 className="font-serif text-4xl font-semibold text-white sm:text-5xl">Member Placements</h2>
+        <p className="text-slate-300 mt-3 max-w-2xl">Current and past placements from Queen's Hedge Fund members.</p>
+        <div className="mt-10">
+          <div className="glass overflow-hidden rounded-2xl border border-white/[0.07] py-8 sm:py-10 group">
+            <div ref={trackRef} className="marquee-track flex w-max">
+              {[...placements, ...placements].map((company, i) => (
+                <LogoItem key={`${company.name}-${i}`} company={company} />
+              ))}
             </div>
           </div>
         </div>

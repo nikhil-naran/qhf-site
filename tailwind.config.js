@@ -4,6 +4,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+      },
       colors: {
         burgundy: '#4A1C27',
         goldA: '#C5A16D',

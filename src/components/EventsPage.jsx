@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ChevronDown, Calendar, User, Video, FileText, Users } from 'lucide-react';
+import { ChevronDown, Calendar, User, Video, FileText, Users, ExternalLink } from 'lucide-react';
 import { FEATURED_EVENTS } from '../data.js';
 import { revealOnScroll } from '../lib/animation.js';
 
@@ -87,6 +87,7 @@ export default function EventsPage() {
                                 onClick={() => setDropdownOpen((v) => !v)}
                                 aria-haspopup="listbox"
                                 aria-expanded={dropdownOpen}
+                                aria-controls="event-listbox"
                                 className={`event-selector inline-flex items-center gap-3 rounded-2xl border px-5 py-4 text-left transition-all w-full sm:w-auto sm:min-w-[400px] ${dropdownOpen
                                     ? 'border-goldB/40 bg-white/10'
                                     : 'border-white/15 bg-white/5 hover:border-goldB/30 hover:bg-white/8'
@@ -104,6 +105,7 @@ export default function EventsPage() {
 
                             {dropdownOpen && (
                                 <ul
+                                    id="event-listbox"
                                     role="listbox"
                                     className="absolute top-full left-0 right-0 sm:right-auto mt-2 w-full sm:min-w-[400px] dropdown-panel rounded-2xl z-50"
                                 >
@@ -190,8 +192,8 @@ function SpeakerEventCard({ event }) {
                         </div>
                     </div>
 
-                    {/* Meeting Link */}
-                    <div className="mt-6 pt-6 border-t border-white/10">
+                    {/* Action Links */}
+                    <div className="mt-6 pt-6 border-t border-white/10 flex flex-wrap gap-3">
                         <button
                             type="button"
                             onClick={() => window.alert('The event has already passed and is over.')}
@@ -200,6 +202,17 @@ function SpeakerEventCard({ event }) {
                             <Video size={18} />
                             {event.meetingLinkLabel}
                         </button>
+                        {event.signupLink && (
+                            <a
+                                href={event.signupLink}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="btn inline-flex items-center gap-2"
+                            >
+                                <ExternalLink size={18} />
+                                Sign Up
+                            </a>
+                        )}
                     </div>
                 </div>
             </div>
@@ -261,8 +274,8 @@ function TutorialEventCard({ event }) {
                         </div>
                     )}
 
-                    {/* Meeting Link */}
-                    <div className="mt-6 pt-6 border-t border-white/10">
+                    {/* Action Links */}
+                    <div className="mt-6 pt-6 border-t border-white/10 flex flex-wrap gap-3">
                         <button
                             type="button"
                             onClick={() => window.alert('The event has already passed and is over.')}
@@ -271,6 +284,17 @@ function TutorialEventCard({ event }) {
                             <Video size={18} />
                             {event.meetingLinkLabel}
                         </button>
+                        {event.signupLink && (
+                            <a
+                                href={event.signupLink}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className="btn inline-flex items-center gap-2"
+                            >
+                                <ExternalLink size={18} />
+                                Sign Up
+                            </a>
+                        )}
                     </div>
                 </div>
             </div>

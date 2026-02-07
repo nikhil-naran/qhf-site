@@ -1,38 +1,21 @@
 import React, { useRef, useEffect } from 'react';
 import { revealOnScroll } from '../lib/animation.js';
 
-function TiltCard({ step, title, children }){
-  const innerRef = React.useRef(null);
-  const onMove = (e) => {
-    const el = innerRef.current; if (!el) return;
-    const parent = el.parentElement;
-    const r = parent.getBoundingClientRect();
-    const dx = (e.clientX - (r.left + r.width/2)) / r.width;
-    const dy = (e.clientY - (r.top + r.height/2)) / r.height;
-    // apply rotation to inner wrapper so outer reveal transform is preserved
-    el.style.transform = `rotateX(${dy*-6}deg) rotateY(${dx*6}deg)`;
-  };
-  const onLeave = () => { if (innerRef.current) innerRef.current.style.transform = ''; };
+function PillarCard({ step, title, children }){
   return (
-    <div
-      onPointerMove={onMove}
-      onPointerLeave={onLeave}
-      className="glass group relative rounded-2xl border border-white/10 p-6 sm:p-7 transition-transform"
-    >
-      <div ref={innerRef} className="will-change-transform transition-transform">
-        <div className="flex items-center gap-4">
-          {step && (
-            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-goldA/40 bg-goldA/10 text-xs font-semibold uppercase tracking-[0.2em] text-goldA/90">
-              {step}
-            </span>
-          )}
-          <div className="text-xl font-semibold text-white">{title}</div>
-        </div>
-        <div className="mt-4 text-sm sm:text-base text-slate-200/90 leading-relaxed">
-          {children}
-        </div>
-        <div className="mt-5 h-[2px] w-full bg-gradient-to-r from-transparent via-goldA/80 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    <div className="glass group relative rounded-2xl border border-white/[0.07] p-6 sm:p-7">
+      <div className="flex items-center gap-4">
+        {step && (
+          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-goldA/40 bg-goldA/10 text-xs font-semibold uppercase tracking-[0.2em] text-goldA/90">
+            {step}
+          </span>
+        )}
+        <div className="text-xl font-semibold text-white">{title}</div>
       </div>
+      <div className="mt-4 text-sm sm:text-base text-slate-200/90 leading-relaxed">
+        {children}
+      </div>
+      <div className="mt-5 h-[2px] w-full bg-gradient-to-r from-transparent via-goldA/80 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
     </div>
   );
 }
@@ -78,16 +61,16 @@ export default function Philosophy(){
   ];
 
   return (
-    <section id="philosophy" ref={ref} className="scroll-mt-20 py-16 sm:py-20">
+    <section id="philosophy" ref={ref} className="scroll-mt-20 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="glass relative overflow-hidden rounded-3xl border border-white/10 px-6 py-12 sm:px-10">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.08),_transparent_62%)]" />
-          <div className="relative grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+        <div className="glass relative overflow-hidden rounded-3xl border border-white/[0.07] px-6 py-14 sm:px-10 sm:py-16">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.06),_transparent_62%)]" />
+          <div className="relative grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
             <div className="space-y-6">
-              <span className="inline-flex items-center gap-2 rounded-full border border-goldA/20 bg-goldA/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-goldA/80">
-                Process
-              </span>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">Investment Philosophy</h2>
+              <div>
+                <div className="h-px w-12 bg-goldA/60 mb-6" />
+                <h2 className="font-serif text-4xl font-semibold text-white sm:text-5xl">Investment Philosophy</h2>
+              </div>
               <p className="max-w-xl text-base text-slate-200/90 sm:text-lg">
                 At Queen's Hedge Fund we run a top-down, macro-driven multi strategy fund with a concentrated portfolio. Our process balances disciplined asset allocation with selective security selection, guided by four core pillars:
               </p>
@@ -103,9 +86,9 @@ export default function Philosophy(){
                 ))}
               </ol>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
               {pillars.map((pillar) => (
-                <TiltCard key={pillar.title} step={pillar.step} title={pillar.title}>
+                <PillarCard key={pillar.title} step={pillar.step} title={pillar.title}>
                   <ul className="space-y-2 text-left text-slate-200/90">
                     {pillar.points.map((point) => (
                       <li key={point} className="flex gap-3">
@@ -114,7 +97,7 @@ export default function Philosophy(){
                       </li>
                     ))}
                   </ul>
-                </TiltCard>
+                </PillarCard>
               ))}
             </div>
           </div>

@@ -14,7 +14,7 @@ const founders = [
 function Headshot({ person, className = '', initialsClass = '' }){
   const src = person?.headshot;
   return (
-    <div className={`relative flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-goldA/20 to-goldB/10 text-goldB ${className}`}>
+    <div className={`relative flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-white/[0.07] bg-gradient-to-br from-goldA/20 to-goldB/10 text-goldB ${className}`}>
       {src ? (
         <img src={src} alt={`${person.name} headshot`} className="headshot-img absolute inset-0 h-full w-full" />
       ) : (
@@ -27,13 +27,11 @@ function Headshot({ person, className = '', initialsClass = '' }){
 export default function Founders(){
   const ref = useRef(null);
   useEffect(()=> revealOnScroll(ref.current, { translateY: 28 }), []);
-  const [selected, setSelected] = useState(null); // will store selected index or null
+  const [selected, setSelected] = useState(null);
   const closeBtnRef = useRef(null);
 
-  // focus close button when modal opens
   useEffect(()=>{
     if (selected !== null) {
-      // small timeout so element is in DOM
       setTimeout(()=> closeBtnRef.current?.focus(), 50);
       const onKey = (e) => { if (e.key === 'Escape') setSelected(null); };
       window.addEventListener('keydown', onKey);
@@ -41,7 +39,6 @@ export default function Founders(){
     }
   }, [selected]);
 
-  // lock body scroll while modal is open
   useEffect(()=>{
     if (selected !== null) {
       const prev = document.body.style.overflow;
@@ -51,13 +48,14 @@ export default function Founders(){
   }, [selected]);
 
   return (
-    <section id="founders" ref={ref} className="py-16 sm:py-20">
+    <section id="founders" ref={ref} className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4">
-        <h2 className="text-3xl font-bold">Founders</h2>
-        <p className="text-slate-300 mt-2 max-w-2xl">Meet the Queen's Hedge Fund student founders who shaped QHF's mandate and training culture.</p>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+        <div className="h-px w-12 bg-goldA/60 mb-6" />
+        <h2 className="font-serif text-4xl font-semibold text-white sm:text-5xl">Founders</h2>
+        <p className="text-slate-300 mt-3 max-w-2xl">Meet the Queen's Hedge Fund student founders who shaped QHF's mandate and training culture.</p>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
           {founders.map((f, i) => (
-            <div key={i} className="glass rounded-2xl border border-white/10 p-5 sm:p-6 team-card">
+            <div key={i} className="glass rounded-2xl border border-white/[0.07] p-5 sm:p-6 team-card">
               <button onClick={()=> setSelected(i)} className="text-left w-full">
                 <Headshot person={f} className="mb-4 flex h-24 w-24 items-center justify-center sm:h-28 sm:w-28" initialsClass="text-2xl" />
                 <div className="font-semibold">{f.name}</div>
@@ -79,7 +77,6 @@ export default function Founders(){
           ))}
         </div>
 
-        {/* modal popup */}
         {selected !== null && (
           (() => {
             const f = founders[selected];
@@ -94,18 +91,18 @@ export default function Founders(){
                 <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={()=> setSelected(null)} />
                 <div className="relative z-10 flex h-full w-full overflow-y-auto">
                   <div className="mx-auto flex w-full max-w-6xl flex-col px-4 py-12 md:py-16">
-                    <div className="founder-modal glass relative w-full overflow-hidden rounded-3xl border border-white/12 shadow-glass">
+                    <div className="founder-modal glass relative w-full overflow-hidden rounded-3xl border border-white/[0.07] shadow-glass">
                       <div className="founder-modal__glow" aria-hidden="true" />
                       <button
                         ref={closeBtnRef}
                         aria-label="Close"
                         onClick={()=> setSelected(null)}
-                        className="absolute right-5 top-5 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/20 text-slate-100 transition hover:bg-black/30 hover:text-white"
+                        className="absolute right-5 top-5 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/[0.07] bg-black/20 text-slate-100 transition hover:bg-black/30 hover:text-white"
                       >
                         <X />
                       </button>
                       <div className="relative grid gap-10 px-6 pb-10 pt-16 md:grid-cols-[320px_minmax(0,1fr)] md:gap-16 md:px-12 md:pt-20">
-                        <div className="flex flex-col gap-6 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8">
+                        <div className="flex flex-col gap-6 rounded-2xl border border-white/[0.07] bg-white/5 p-6 backdrop-blur-sm md:p-8">
                           <Headshot person={f} className="flex h-28 w-28 items-center justify-center rounded-2xl md:h-32 md:w-32" initialsClass="text-3xl md:text-4xl" />
                           <div>
                             <div className="text-2xl font-semibold text-slate-50 md:text-3xl">{f.name}</div>
@@ -119,7 +116,7 @@ export default function Founders(){
                                 href={f.linkedin}
                                 target="_blank"
                                 rel="noreferrer noopener"
-                                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/20"
+                                className="inline-flex items-center gap-2 rounded-full border border-white/[0.07] bg-white/10 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/20"
                               >
                                 <Linkedin size={16}/> Connect on LinkedIn
                               </a>

@@ -23,7 +23,7 @@ const whatWeDoHighlights = [
 const whyQhfHighlights = [
   {
     title: 'Concentrated, high-conviction investing',
-    description: 'We don’t spread ourselves thin. Our portfolio is focused, research-driven, and built around macro-informed conviction.',
+    description: 'We don\'t spread ourselves thin. Our portfolio is focused, research-driven, and built around macro-informed conviction.',
   },
   {
     title: 'Industry advisors',
@@ -44,47 +44,49 @@ export default function About(){
   useEffect(()=> revealOnScroll(ref.current), []);
 
   return (
-    <section id="about" ref={ref} className="relative scroll-mt-20 py-16 sm:py-20">
+    <section id="about" ref={ref} className="relative scroll-mt-20 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4">
+        <div className="mb-12">
+          <div className="h-px w-12 bg-goldA/60 mb-6" />
+          <h2 className="font-serif text-4xl font-semibold text-white sm:text-5xl">About</h2>
+        </div>
         <div className="grid gap-10 lg:grid-cols-2">
-          <div className="glass rounded-2xl border border-white/10 p-8 shadow-sm">
-            <h2 className="text-3xl font-bold">What We Do</h2>
-            <p className="mt-3 max-w-3xl text-slate-200/90 leading-relaxed">
+          <div className="glass rounded-2xl border border-white/[0.07] p-8 sm:p-10">
+            <h3 className="text-2xl font-semibold text-white">What We Do</h3>
+            <p className="mt-4 max-w-3xl text-slate-200/90 leading-relaxed">
               Queen's Hedge Fund (QHF) is Queen's University's student-managed hedge fund in Kingston, Ontario.
               Our analysts research North American markets, operate a concentrated multi-strategy portfolio, and
               practice institutional-grade risk management while progressing through our training pipeline.
             </p>
             <p className="mt-6 text-slate-200/80 leading-relaxed">Our members gain experience through:</p>
 
-            <div className="mt-8 grid items-stretch gap-4 sm:grid-cols-2">
+            <div className="mt-6 space-y-4">
               {whatWeDoHighlights.map(({ title, description }) => (
                 <div
                   key={title}
-                  className="group flex h-full min-h-[200px] flex-col rounded-xl border border-white/10 bg-white/5 px-5 py-6 transition duration-300 hover:-translate-y-1 hover:border-goldA/60 hover:bg-white/10"
+                  className="border-l-2 border-goldA/40 pl-5 py-1"
                 >
-                  <div className="h-1 w-12 rounded-full bg-gradient-to-r from-goldA/0 via-goldA/70 to-goldA/0 transition-opacity group-hover:opacity-100"/>
-                  <h3 className="mt-3 text-lg font-semibold text-white">{title}</h3>
-                  <p className="mt-2 text-sm text-slate-200/80 leading-relaxed">{description}</p>
+                  <h4 className="text-base font-semibold text-white">{title}</h4>
+                  <p className="mt-1 text-sm text-slate-200/80 leading-relaxed">{description}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="glass rounded-2xl border border-white/10 p-8 shadow-sm">
-            <h3 className="text-3xl font-bold">Why QHF</h3>
+          <div className="glass rounded-2xl border border-white/[0.07] p-8 sm:p-10">
+            <h3 className="text-2xl font-semibold text-white">Why QHF</h3>
             <p className="mt-4 text-slate-200/80 leading-relaxed">
               QHF is designed for students who want more than just theory; by mirroring a professional hedge fund inside Queen's University, we provide the structure, discipline, and accountability required to pitch and manage real investment ideas.
             </p>
 
-            <div className="mt-8 lg:mt-12 grid items-stretch gap-4 sm:grid-cols-2">
+            <div className="mt-8 space-y-4">
               {whyQhfHighlights.map(({ title, description }) => (
                 <div
                   key={title}
-                  className="group flex h-full min-h-[200px] flex-col rounded-xl border border-white/10 bg-white/5 px-5 py-6 transition duration-300 hover:-translate-y-1 hover:border-goldA/60 hover:bg-white/10"
+                  className="border-l-2 border-goldA/40 pl-5 py-1"
                 >
-                  <div className="h-1 w-12 rounded-full bg-gradient-to-r from-goldA/0 via-goldA/70 to-goldA/0 transition-opacity group-hover:opacity-100"/>
-                  <h4 className="mt-3 text-lg font-semibold text-white">{title}</h4>
-                  <p className="mt-2 text-sm text-slate-200/80 leading-relaxed">{description}</p>
+                  <h4 className="text-base font-semibold text-white">{title}</h4>
+                  <p className="mt-1 text-sm text-slate-200/80 leading-relaxed">{description}</p>
                 </div>
               ))}
             </div>

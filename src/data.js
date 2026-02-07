@@ -153,6 +153,27 @@ export const alumniStats = { alumniCount: 200, cities: 18, industries: 12 };
 
 export const FEATURED_EVENTS = [
   {
+    id: 'wso-x-qhf',
+    title: 'Wall Street Oasis X Queen\'s Hedge Fund',
+    type: 'tutorial',
+    dateISO: '2026-02-05T18:30:00',
+    displayDate: 'February 5, 2026 @ 6:30 PM',
+    host: 'Patrick Curtis',
+    meetingLink: '#',
+    meetingLinkLabel: 'Join Meeting',
+    eventGraphic: null,
+    description: `Q&A Session with Patrick Curtis — Break Into High Finance.
+
+As promised, you're eligible for free access to two of WSO's top bootcamps sponsored by your club:
+
+• Financial Modeling Bootcamp ($497) — February 8, 2026 (3 hours)
+• Investment Banking Interview Bootcamp ($297) — February 7, 2026 (4.5 hours)
+
+Attendance will be taken! If you attend the Q&A session you'll also receive access to the LARGEST high finance application tracker. Fill out your email to secure your spot in both bootcamps, and we'll be in touch with more details.`,
+    diagnosticSection: null,
+    signupLink: 'https://docs.google.com/forms/d/e/1FAIpQLSfT9Bqi_bzficpWx31VMl5Eegru6R8B8jryjQgH-Hc-FwAQMA/viewform',
+  },
+  {
     id: 'jane-shantz-speaker',
     title: 'Jane Shantz Management Consulting Speaker Event',
     type: 'speaker',
@@ -183,4 +204,45 @@ Jane holds two degrees from Queen's University—one in Kinesiology and one in H
     description: `Join us for a hands-on tutorial covering the core components of investment analysis, including fundamental, technical, and company-level analysis. This session will walk through how these frameworks are applied in real-world decision-making and is designed to support students preparing for the CSC or looking to strengthen their analytical toolkit. Open to all experience levels.`,
     diagnosticSection: null,
   },
+];
+export const ANNUAL_REPORTS = [
+  {
+    year: '2024',
+    title: '2024 Year-End Performance Report',
+    date: 'December 2024',
+    description: 'A comprehensive review of QHF\'s investment strategy, portfolio performance, and organizational milestones throughout the 2024 fiscal year.',
+    link: '#', // Placeholder
+    thumbnail: null
+  },
+  {
+    year: '2023',
+    title: '2023 Annual Report',
+    date: 'December 2023',
+    description: 'Detailed analysis of our sector allocations, key holdings performance, and the expansion of our analyst program.',
+    link: '#',
+    thumbnail: null
+  }
+];
+
+export const STOCK_PITCHES = [
+  {
+    ticker: 'SHOP',
+    company: 'Shopify Inc.',
+    title: 'Shopify: The Backbone of Modern Commerce',
+    date: 'October 2024',
+    author: 'Technology Team',
+    thesis: 'Long-term growth driven by expansion into enterprise retail and merchant solutions monetization.',
+    link: '#',
+    type: 'Buy'
+  },
+  {
+    ticker: 'CP',
+    company: 'Canadian Pacific Kansas City',
+    title: 'CPKC: A Continental Powerhouse',
+    date: 'November 2024',
+    author: 'Industrials Team',
+    thesis: 'Synergy realization from the KCS merger creating the first single-line rail network connecting Canada, the US, and Mexico.',
+    link: '#',
+    type: 'Buy'
+  }
 ];

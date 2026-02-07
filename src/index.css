@@ -4,7 +4,7 @@
 
 /* Global page background to ensure the home hero blends seamlessly into other sections */
 :root{
-  --page-bg: radial-gradient(1200px 800px at 20% -10%, rgba(197,161,109,0.12), transparent 60%), radial-gradient(1000px 700px at 80% 10%, rgba(226,199,132,0.08), transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.48), rgba(0,0,0,0.06));
+  --page-bg: radial-gradient(1200px 800px at 20% -10%, rgba(197,161,109,0.10), transparent 60%), radial-gradient(1000px 700px at 80% 10%, rgba(226,199,132,0.06), transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.52), rgba(0,0,0,0.08));
 }
 
 html, body, #root {
@@ -22,7 +22,6 @@ body {
 /* Make the hero-specific overlay less opinionated so it layers on top of the global background */
 .bg-hero-gradient {
   background-image: radial-gradient(1200px 800px at 20% -10%, rgba(197,161,109,0.08), transparent 60%), radial-gradient(1000px 700px at 80% 10%, rgba(226,199,132,0.06), transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.16), rgba(0,0,0,0.02));
-  /* subtle blend so underlying body background shows through */
   mix-blend-mode: normal;
   opacity: 0.95;
   transition: opacity 700ms cubic-bezier(0.22,1,0.36,1), background 700ms cubic-bezier(0.22,1,0.36,1);
@@ -36,23 +35,23 @@ body {
 
 /* Fluid button baseline */
 .btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-slate-50 backdrop-blur transition-all;
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.07] bg-white/10 px-5 py-3 text-slate-50 backdrop-blur transition-all duration-200;
 }
 .btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
   border-color: #C5A16D;
 }
 .btn:active {
   transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
 
 /* Glassmorphism helpers */
 .glass {
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Slightly more opaque panel for dropdowns where we want less transparency */
@@ -100,7 +99,7 @@ body {
 .dropdown-panel a:hover,
 .dropdown-panel .block:hover {
   background: rgba(197,161,109,0.14);
-  color: #E2C784; /* gold on hover to match theme */
+  color: #E2C784;
   transform: translateX(4px);
 }
 .dropdown-panel a:focus-visible,
@@ -123,8 +122,8 @@ body {
 .founder-modal__glow {
   position: absolute;
   inset: -1px;
-  background: radial-gradient(580px at 20% 20%, rgba(197,161,109,0.18), transparent 60%), radial-gradient(480px at 80% 30%, rgba(226,199,132,0.12), transparent 65%);
-  opacity: 0.6;
+  background: radial-gradient(480px at 20% 20%, rgba(197,161,109,0.12), transparent 60%), radial-gradient(400px at 80% 30%, rgba(226,199,132,0.08), transparent 65%);
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -189,19 +188,18 @@ body {
 .page-fade-exit { opacity: 1; }
 .page-fade-exit-active { opacity: 0; transition: opacity 240ms cubic-bezier(0.22,1,0.36,1); }
 
-/* Reveal animation: soft fade + slide-up for elements on page load */
+/* Reveal animation: soft fade + slide-up */
 .reveal {
   opacity: 0;
-  transform: translateY(8px) scale(0.998);
-  /* snappier reveal (3x faster) */
+  transform: translateY(6px);
   transition: opacity 60ms cubic-bezier(0.22,1,0.36,1), transform 60ms cubic-bezier(0.22,1,0.36,1);
 }
 .reveal.revealed {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
-/* Helpful delay utilities (increased for longer, more cinematic reveal) */
+/* Helpful delay utilities */
 .reveal-delay-0   { transition-delay:   0ms; }
 .reveal-delay-100 { transition-delay:  13ms; }
 .reveal-delay-200 { transition-delay:  27ms; }
@@ -233,39 +231,6 @@ body {
   .type-cursor::after { animation: none; opacity: 0; }
 }
 
-/* Typing color states: gold while typing, fade to white when done */
-.typing-gold { color: #C5A16D; transition: color 13200ms cubic-bezier(0.22,1,0.36,1); }
-.typing-done { color: rgba(255,255,255,0.95); transition: color 13200ms cubic-bezier(0.22,1,0.36,1); }
-
-/* Stronger specificity for hero to override other utilities */
-#hero .typing-gold, .typing-gold { 
-  color: #C5A16D;
-  -webkit-text-fill-color: #C5A16D;
-  transition: color 13200ms cubic-bezier(0.22,1,0.36,1), -webkit-text-fill-color 13200ms cubic-bezier(0.22,1,0.36,1);
-}
-#hero .typing-done, .typing-done {
-  color: rgba(255,255,255,0.95);
-  -webkit-text-fill-color: rgba(255,255,255,0.95);
-  transition: color 13200ms cubic-bezier(0.22,1,0.36,1), -webkit-text-fill-color 13200ms cubic-bezier(0.22,1,0.36,1);
-}
-
-/* Keyframe-driven fade to ensure the color animates reliably across renderers */
-@keyframes typingColorFade {
-  0% {
-    color: #C5A16D;
-    -webkit-text-fill-color: #C5A16D;
-  }
-  100% {
-    color: rgba(255,255,255,0.95);
-    -webkit-text-fill-color: rgba(255,255,255,0.95);
-  }
-}
-
-/* animation class applied on typing completion */
-.typing-fade {
-  animation: typingColorFade 13.2s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-
 /* Team card hover interaction for Our Teams */
 .team-card {
   transition: transform 220ms cubic-bezier(0.22,1,0.36,1), box-shadow 220ms cubic-bezier(0.22,1,0.36,1), border-color 220ms;
@@ -273,11 +238,11 @@ body {
 }
 .team-card:hover,
 .team-card:focus-within {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 18px 40px rgba(2,6,23,0.55);
-  border-color: rgba(197,161,109,0.18);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(2,6,23,0.45);
+  border-color: rgba(197,161,109,0.15);
 }
-.team-card:active { transform: translateY(-2px) scale(1.02); }
+.team-card:active { transform: translateY(-2px) scale(1.01); }
 
 @media (prefers-reduced-motion: reduce) {
   .team-card, .team-card:hover, .team-card:focus-within, .team-card:active { transition: none !important; transform: none !important; box-shadow: none !important; }
@@ -288,7 +253,7 @@ body {
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: 1rem;
   padding: 1.25rem;
   display: flex;
@@ -296,7 +261,7 @@ body {
   justify-content: space-between;
   transition: transform 260ms cubic-bezier(0.22,1,0.36,1), box-shadow 260ms;
 }
-.team-grid-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 48px rgba(2,6,23,0.6); }
+.team-grid-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 16px 40px rgba(2,6,23,0.5); }
 .team-logo { width: 64px; height: 64px; min-width: 64px; min-height: 64px; border-radius: 10px; display:inline-flex; align-items:center; justify-content:center; overflow:hidden; }
 
 @media (max-width: 640px) {
@@ -309,89 +274,21 @@ body {
   }
 }
 
-
-/* Placements slider replaces marquee auto-scroll */
-.placements-slider {
-  position: relative;
-}
-.placements-viewport {
-  overflow: hidden;
-}
-.placements-track {
-  display: flex;
-  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.placements-slide {
-  flex: 0 0 100%;
-  padding: 8px 0;
-}
-.placements-grid {
-  display: grid;
-}
-.placement-card {
-  height: 100%;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 14px;
-}
-.placement-logo {
-  width: 84px;
-  height: 84px;
-  min-width: 84px;
-  min-height: 84px;
-  border-radius: 10px;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.slider-control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 9999px;
-  border: 1px solid rgba(255,255,255,0.28);
-  background: rgba(15, 23, 42, 0.78);
-  color: #f8fafc;
-  transition: background 180ms ease, border-color 180ms ease, transform 200ms ease;
-}
-.slider-control:hover {
-  background: rgba(37, 99, 235, 0.85);
-  border-color: rgba(255,255,255,0.4);
-}
-.slider-control:focus-visible {
-  outline: 2px solid rgba(96, 165, 250, 0.9);
-  outline-offset: 2px;
-}
-.slider-control:active {
-  transform: translateY(-50%) scale(0.96);
+/* Infinite marquee for placement logos */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-@media (max-width: 900px) {
-  .placement-logo {
-    width: 80px;
-    height: 80px;
-    min-width: 80px;
-    min-height: 80px;
-  }
+.marquee-track {
+  animation: marquee-scroll 35s linear infinite;
 }
-@media (max-width: 640px) {
-  .placement-logo {
-    width: 64px;
-    height: 64px;
-    min-width: 64px;
-    min-height: 64px;
-  }
-  .placement-card {
-    padding: 10px 12px;
-  }
-  .slider-control {
-    width: 36px;
-    height: 36px;
-  }
+
+/* Pause on hover */
+.group:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }
