@@ -7,16 +7,14 @@ import About from './components/About.jsx';
 import Philosophy from './components/Philosophy.jsx';
 import Founders from './components/Founders.jsx';
 import Industries from './components/Industries.jsx';
-import Events from './components/Events.jsx';
-// Team section removed from Home
 import Alumni from './components/Alumni.jsx';
+import Performance from './components/Performance.jsx';
 import Join from './components/Join.jsx';
 import Footer from './components/Footer.jsx';
 import ProgressBar from './components/ProgressBar.jsx';
 import TeamsHub from './components/TeamsHub.jsx';
 import TeamPage from './components/TeamPage.jsx';
 import EventsPage from './components/EventsPage.jsx';
-import Performance from './components/Performance.jsx';
 import ResearchPage from './components/ResearchPage.jsx';
 
 function ScrollToHash() {
@@ -56,7 +54,7 @@ function DefaultSeo() {
     description = `Meet the ${teamName} team at Queen's Hedge Fund. Explore our portfolio holdings, analysts, and research in the ${teamName} sector.`;
   } else if (loc.pathname === '/teams') {
     title = "Our Teams | Queen's Hedge Fund";
-    description = "Explore the various investment and operations teams at Queen's Hedge Fund, including Technology, Consumer, Healthcare, and more.";
+    description = "Explore the PM teams at Queen's Hedge Fund, running independent strategies across global equities, fixed income, commodities, foreign exchange, crypto, and quantitative strategies.";
   } else if (loc.pathname === '/events') {
     title = "Upcoming Events | Queen's Hedge Fund";
     description = "Join Queen's Hedge Fund for upcoming speaker sessions, investment workshops, and tutorials at Queen's University.";
@@ -163,27 +161,17 @@ function Home() {
     <main id="main">
       <Hero />
       <About />
+      <Alumni />
       <Philosophy />
+      <Performance />
       <Founders />
       <Industries />
-      {/* <Performance /> removed */}
-      {/* <Events /> removed */}
-      <Alumni />
       <Join />
     </main>
   );
 }
 
 export default function App() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const val = JSON.parse(localStorage.getItem('qhf-reduce-motion') || 'false');
-    setReduced(val);
-    const onChange = (e) => setReduced(!!e.detail);
-    window.addEventListener('qhf-reduce-motion-change', onChange);
-    return () => window.removeEventListener('qhf-reduce-motion-change', onChange);
-  }, []);
-
   return (
     <BrowserRouter>
       <DefaultSeo />
@@ -199,7 +187,7 @@ export default function App() {
           <Route path="/research" element={<ResearchPage />} />
         </Routes>
       </PageFade>
-      <Footer reduced={reduced} />
+      <Footer />
       <ProgressBar />
     </BrowserRouter>
   );

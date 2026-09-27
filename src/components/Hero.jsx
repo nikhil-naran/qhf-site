@@ -1,136 +1,51 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
-import ParticleCanvas from './ParticleCanvas.jsx';
-import { prefersReducedMotion } from '../lib/animation.js';
+import React, { useEffect, useRef } from 'react';
+import { revealOnScroll } from '../lib/animation.js';
 import { asset } from '../lib/assets.js';
+import { PERFORMANCE_2025 } from '../data.js';
+
+const [canadianEquity, americanEquity] = PERFORMANCE_2025.returns;
+const [sharpe] = PERFORMANCE_2025.stats;
 
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const ref = useRef(null);
+  useEffect(() => revealOnScroll(ref.current, { translateY: 16, delay: 80 }), []);
 
   return (
-    <section
+    <header
       id="hero"
-      className="relative flex min-h-[82vh] items-start overflow-hidden pt-20 pb-32 sm:pt-24 sm:pb-36 md:min-h-[92vh]"
+      className="relative overflow-hidden border-b border-rule bg-cover bg-no-repeat text-paper"
+      style={{
+        backgroundImage: `linear-gradient(180deg, rgba(18,14,11,0.42) 0%, rgba(18,14,11,0.60) 48%, rgba(15,11,9,0.86) 100%), url('${asset('hero-campus.jpg')}')`,
+        backgroundPosition: 'center, 72% 42%',
+      }}
     >
-      <div className="absolute inset-0 bg-hero-gradient" aria-hidden="true"></div>
-      <div className="hero-noise"></div>
-      <ParticleCanvas />
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-8 pb-24 sm:pt-10 sm:pb-28 lg:pt-12 lg:pb-32">
-        <div className="flex flex-col items-center">
-          <div className="flex justify-center">
-            <h1 className="sr-only">Queen's Hedge Fund</h1>
-            <img
-              src={asset('QHF-2.svg')}
-              alt="Queen's Hedge Fund crest"
-              loading="eager"
-              className="w-[19rem] max-w-[92vw] object-contain drop-shadow-[0_20px_60px_rgba(8,15,30,0.35)] sm:w-[23rem] md:w-[27rem] lg:w-[31rem] xl:w-[36rem]"
-            />
-          </div>
-          <TypingParagraph mounted={mounted} />
+      <div className="relative z-[2] mx-auto max-w-7xl px-4 py-24 sm:py-28">
+        <h1 className="font-serif text-[2.6rem] font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl lg:text-[3.6rem]">
+          Student Managed, Multi-Strategy Investing
+        </h1>
+        <p className="mt-5 max-w-[46ch] text-[16px] leading-relaxed text-paper/85 sm:text-[17px]">
+          PM teams run independent strategies across global equities, fixed income, commodities, foreign exchange, and crypto.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a href="#about" className="btn hero-btn-primary">Learn More</a>
+          <a href="#philosophy" className="btn btn-ghost hero-btn-ghost" style={{ borderColor: 'rgba(255,255,255,0.35)', color: '#fff' }}>Our Strategy</a>
         </div>
-        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-          <a href="#about" className={`btn reveal reveal-delay-200 ${mounted ? 'revealed' : ''} text-base sm:text-lg`}>Learn More</a>
-          <a
-            href="#philosophy"
-            className={`inline-flex items-center gap-2 text-slate-200 hover:text-goldB reveal reveal-delay-300 ${mounted ? 'revealed' : ''} text-base sm:text-lg`}
-          >
-            Our Strategy <ArrowRight size={20} />
-          </a>
+
+        <div ref={ref} className="reveal mt-12 grid max-w-xl grid-cols-3 border-t border-white/20">
+          <Stat value={`+${canadianEquity.return}%`} label="Canadian Equity, FY2025" first />
+          <Stat value={`+${americanEquity.return}%`} label="American Equity, FY2025" />
+          <Stat value={sharpe.value} label={sharpe.label} />
         </div>
       </div>
-    </section>
+    </header>
   );
 }
 
-function TypingParagraph({ mounted }) {
-  const base = "Equipping students with ";
-  const variants = [
-    'real-world investment experience.',
-    'financial expertise.',
-    'practical portfolio management skills.',
-    'industry connections and mentorship.'
-  ];
-  const [display, setDisplay] = useState(base + variants[0]);
-  const reduce = prefersReducedMotion();
-  const ref = React.useRef(null);
-
-  useEffect(() => {
-    if (!mounted) return;
-    if (reduce) { setDisplay(base + variants[0]); return; }
-
-    const typeSpeed = 40;
-    const deleteSpeed = 30;
-    const pauseAfterType = 1200;
-    const shortGap = 160;
-
-    const cancelRef = { current: false };
-    const currentVariant = { current: 0 };
-
-    const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
-
-    const runLoop = async () => {
-      while (!cancelRef.current) {
-        const idx = currentVariant.current;
-        const variant = variants[idx];
-        const full = base + variant;
-
-        for (let i = base.length; i <= full.length; i++) {
-          if (cancelRef.current) return;
-          setDisplay(full.slice(0, i));
-          // eslint-disable-next-line no-await-in-loop
-          await sleep(typeSpeed);
-        }
-
-        if (cancelRef.current) return;
-        // eslint-disable-next-line no-await-in-loop
-        await sleep(pauseAfterType);
-
-        for (let j = full.length; j >= base.length; j--) {
-          if (cancelRef.current) return;
-          setDisplay(full.slice(0, j));
-          // eslint-disable-next-line no-await-in-loop
-          await sleep(deleteSpeed);
-        }
-
-        if (cancelRef.current) return;
-        currentVariant.current = (currentVariant.current + 1) % variants.length;
-        // eslint-disable-next-line no-await-in-loop
-        await sleep(shortGap);
-      }
-    };
-
-    const startWhenVisible = () => {
-      const el = ref.current;
-      if (el && 'IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              io.disconnect();
-              runLoop();
-            }
-          });
-        }, { threshold: 0.25 });
-        io.observe(el);
-        return () => io.disconnect();
-      }
-      runLoop();
-      return () => { };
-    };
-
-    const disconnect = startWhenVisible();
-    return () => {
-      cancelRef.current = true;
-      if (disconnect) disconnect();
-    };
-  }, [mounted, reduce]);
-
+function Stat({ value, label, first = false }) {
   return (
-    <p
-      ref={ref}
-      className={`mt-6 max-w-2xl text-center text-base sm:text-lg md:text-xl leading-relaxed text-slate-100/90 reveal reveal-delay-100 ${mounted ? 'revealed' : ''} ${!reduce ? 'type-cursor' : ''}`}
-    >
-      {display}
-    </p>
+    <div className={`py-6 pr-4 ${first ? '' : 'border-l border-white/20 pl-5'}`}>
+      <div className="font-serif text-[1.6rem] font-semibold text-white">{value}</div>
+      <div className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.06em] text-paper/55">{label}</div>
+    </div>
   );
 }

@@ -11,44 +11,34 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.queenshedgefund.com/teams/industrials</loc>
+    <loc>https://www.queenshedgefund.com/teams/global-equities</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.queenshedgefund.com/teams/mining-materials</loc>
+    <loc>https://www.queenshedgefund.com/teams/fixed-income</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.queenshedgefund.com/teams/financials</loc>
+    <loc>https://www.queenshedgefund.com/teams/commodities</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.queenshedgefund.com/teams/technology</loc>
+    <loc>https://www.queenshedgefund.com/teams/foreign-exchange</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://www.queenshedgefund.com/teams/consumer-staples-retail</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://www.queenshedgefund.com/teams/real-estate-health-care</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.queenshedgefund.com/teams/crypto</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.queenshedgefund.com/teams/communications</loc>
+    <loc>https://www.queenshedgefund.com/teams/quantitative-strategies</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.queenshedgefund.com/teams/marketing</loc>
@@ -56,8 +46,13 @@
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.queenshedgefund.com/teams/macro-economics</loc>
+    <loc>https://www.queenshedgefund.com/events</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.queenshedgefund.com/research</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

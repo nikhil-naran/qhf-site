@@ -7,133 +7,124 @@ const withHeadshot = (person = {}) => ({
 });
 
 export const TEAM_CATEGORIES = [
-  { name: 'Industrials', slug: 'industrials' },
-  { name: 'Mining & Materials', slug: 'mining-materials' },
-  { name: 'Financials', slug: 'financials' },
-  { name: 'Technology', slug: 'technology' },
-  { name: 'Consumers', slug: 'consumers' },
-  { name: 'Real Estate & Health Care', slug: 'real-estate-health-care' },
+  { name: 'Global Equities', slug: 'global-equities' },
+  { name: 'Fixed Income', slug: 'fixed-income' },
+  { name: 'Commodities', slug: 'commodities' },
+  { name: 'Foreign Exchange', slug: 'foreign-exchange' },
   { name: 'Crypto', slug: 'crypto' },
-  { name: 'Communications', slug: 'communications' },
+  { name: 'Quantitative Strategies', slug: 'quantitative-strategies' },
   { name: 'Marketing', slug: 'marketing' },
-  { name: 'Macro Economics', slug: 'macro-economics' }
 ];
 
 export const TEAMS = {
-  technology: {
-    name: 'Technology',
-    iconUrl: asset('icons/technology.png'),
+  'global-equities': {
+    name: 'Global Equities',
+    strategy: 'Runs a concentrated, multi-strategy equity mandate — from event-driven situations to deep-value analysis — across global markets.',
     holdings: [],
-    portfolioManager: withHeadshot({ name: 'James Simone', bio: 'Sector lead.' }),
+    coPortfolioManagers: [
+      withHeadshot({ name: 'Jill Dalton' }),
+      withHeadshot({ name: 'Alex Papadopoulos' }),
+      withHeadshot({ name: 'Finn Goodall' }),
+      withHeadshot({ name: 'Anson El-Ayari' })
+    ],
     analysts: [
-      withHeadshot({ name: 'Alicia Wang', bio: 'Software & platforms.' })
+      withHeadshot({ name: 'James Simone' }),
+      withHeadshot({ name: 'Marcus Cvitak' }),
+      withHeadshot({ name: 'Ronin Kinloch Varga' }),
+      withHeadshot({ name: 'Brandon Scheidler' }),
+      withHeadshot({ name: 'Daniel Thompson' }),
+      withHeadshot({ name: 'Alicia Wang' }),
+      withHeadshot({ name: 'Angela Chen' }),
+      withHeadshot({ name: 'Gavin Cameron' }),
+      withHeadshot({ name: 'Jayanth Dirisanapu' }),
+      withHeadshot({ name: 'Thomas Skippon' }),
+      withHeadshot({ name: 'Matthew Harrison' }),
+      withHeadshot({ name: 'Nick Page' })
     ],
     reports: []
   },
-  financials: {
-    name: 'Financials',
-    iconUrl: asset('icons/financials.png'),
+  'fixed-income': {
+    name: 'Fixed Income',
+    strategy: 'Runs relative-value and directional strategies across sovereign and corporate rates markets.',
     holdings: [],
-    portfolioManager: withHeadshot({ name: 'Bianca Rotariu', bio: 'Focus on balance sheet resilience and ROE.' }),
+    portfolioManager: withHeadshot({ name: 'Russell Weir' }),
     analysts: [
-      withHeadshot({ name: 'Thomas Skippon', bio: 'Canadian banks & insurers.' })
+      withHeadshot({ name: 'Nicholas Moretta' })
     ],
     reports: []
   },
-  'mining-materials': {
-    name: 'Mining & Materials',
-    iconUrl: asset('icons/mining-materials.png'),
+  commodities: {
+    name: 'Commodities',
+    strategy: 'Trades relative-value and directional strategies across metals, mining, and broader commodity markets.',
     holdings: [],
-    portfolioManager: withHeadshot({ name: 'Findlay Goodall', bio: 'Quality miners with disciplined capex.' }),
+    portfolioManager: withHeadshot({ name: 'Finn Goodall' }),
     analysts: [
-      withHeadshot({ name: 'Iain Brady', bio: 'Base metals & gold.' }),
-      withHeadshot({ name: 'Emory Geho', bio: 'Exploration & commodities.' })
+      withHeadshot({ name: 'Ben Shearing' })
     ],
     reports: []
   },
-  industrials: {
-    name: 'Industrials',
-    iconUrl: asset('icons/industrials.png'),
+  'foreign-exchange': {
+    name: 'Foreign Exchange',
+    strategy: 'Runs relative-value and directional strategies across G10 and select emerging-market currencies.',
     holdings: [],
-    portfolioManager: withHeadshot({ name: 'Beau Leone', bio: 'Compounders with durable moats.' }),
+    portfolioManager: withHeadshot({ name: 'Ethan Cairns' }),
     analysts: [
-      withHeadshot({ name: 'Jay Diri', bio: 'Transport & engineering services.' }),
-      withHeadshot({ name: 'Camran Jiwani', bio: 'Industrial analytics.' })
+      withHeadshot({ name: 'Logan Michaud' })
     ],
-    reports: []
-  },
-  'consumers': {
-    name: 'Consumers',
-    iconUrl: asset('icons/consumers.png'),
-    holdings: [],
-    portfolioManager: withHeadshot({ name: 'Jillian Dalton', bio: 'High ROIC retailers.' }),
-    analysts: [
-      withHeadshot({ name: 'Ivan Bardziyan', bio: 'Global staples coverage.' }),
-      withHeadshot({ name: 'Gavin Cameron', bio: 'Retail comps & margins.' })
-    ],
-    reports: []
-  },
-  'real-estate-health-care': {
-    name: 'Real Estate & Health Care',
-    iconUrl: asset('icons/real-estate-health-care.png'),
-    holdings: [],
-    portfolioManager: withHeadshot({ name: 'Alex Papadopoulos', bio: 'Defensive yield + growth.' }),
-    analysts: [withHeadshot({ name: 'Daniel Thompson', bio: 'HC services & REITs.' })],
     reports: []
   },
   crypto: {
     name: 'Crypto',
-    iconUrl: asset('icons/crypto.png'),
+    strategy: 'Runs risk-managed strategies across digital assets.',
     holdings: [],
-    portfolioManager: withHeadshot({ name: 'Nikhil Naran', bio: 'Risk-managed exposure to digital assets.' }),
-    analysts: [withHeadshot({ name: 'Aaron Feng', bio: 'On-chain & L2s.' })],
+    portfolioManager: withHeadshot({ name: 'Aaron Feng' }),
+    analysts: [
+      withHeadshot({ name: 'Marius Cotet' })
+    ],
     reports: []
   },
-  communications: {
-    name: 'Communications',
-    iconUrl: asset('icons/communications.png'),
+  'quantitative-strategies': {
+    name: 'Quantitative Strategies',
+    strategy: 'Runs systematic, model-driven strategies across asset classes.',
     holdings: [],
-    portfolioManager: withHeadshot({ name: 'Edan Kroi', bio: 'Leads member communications and external media.' }),
+    portfolioManager: withHeadshot({ name: 'Simon Jarvis' }),
     analysts: [
-      withHeadshot({ name: 'Andy Quinn', bio: 'Focuses on digital storytelling and outreach.' })
+      withHeadshot({ name: 'Isaac Bennett' }),
+      withHeadshot({ name: 'Krishan Muni' })
     ],
     reports: []
   },
   marketing: {
     name: 'Marketing',
-    iconUrl: asset('icons/marketing.png'),
     holdings: [],
-    portfolioManager: withHeadshot({ name: 'Nora Malik', bio: 'Brand, outreach, and events.' }),
     members: [
-      withHeadshot({ name: 'Jessica Cook', bio: 'Events & partnerships.' }),
-      withHeadshot({ name: 'Adam Bizios', bio: 'Content & campaigns.' }),
-      withHeadshot({ name: 'Sydney Garrah', bio: 'Creative & design.' })
+      withHeadshot({ name: 'Jane Shi' }),
+      withHeadshot({ name: 'Oliver Bell' })
     ],
-    reports: []
-  },
-  'macro-economics': {
-    name: 'Macro Economics',
-    iconUrl: asset('icons/macro-economics.png'),
-    holdings: [],
-    portfolioManager: withHeadshot({ name: 'Dr. Samuel Grant', bio: 'Leads macroeconomic research and scenario analysis.' }),
-    members: [
-      { name: 'Ravjot Sarao' },
-      { name: 'Roscoe Sze' }
-    ].map(withHeadshot),
     reports: []
   }
 };
 
-// Home performance (index = month number)
-export const perfSeries = {
-  canadian: {
-    our: [100, 103, 105, 108, 112, 115, 117, 118, 120, 124, 127, 129],
-    tsx: [100, 101, 102, 104, 106, 107, 109, 110, 111, 113, 115, 116]
-  },
-  us: {
-    our: [100, 104, 108, 111, 115, 120, 123, 125, 127, 130, 134, 137],
-    sp500: [100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 121]
-  }
+export const PERFORMANCE_2025 = {
+  year: 'FY2025',
+  returns: [
+    {
+      label: 'Canadian Equity',
+      return: 30.30,
+      benchmark: { label: 'S&P/TSX Composite', return: 28.5 }
+    },
+    {
+      label: 'American Equity',
+      return: 37.32,
+      benchmark: { label: 'S&P 500', return: 16.39 }
+    }
+  ],
+  stats: [
+    { value: '1.39', label: 'Sharpe Ratio' },
+    { value: '86%', label: 'Win Rate' },
+    { value: '132', label: 'Total Trades', sublabel: '73 buys / 59 sells' },
+    { value: '62', label: 'Median Holding (days)' }
+  ]
 };
 
 export const sponsors = [
@@ -143,15 +134,33 @@ export const sponsors = [
   { name: 'Scotiabank (placeholder)', logoUrl: asset('sponsor-placeholder.svg') }
 ];
 
-export const events = [
-  { dateISO: '2025-09-15', title: 'Fall Info Session', description: 'Overview of QHF, selection process, and Q&A.', location: 'Queen\'s University Campus' },
-  { dateISO: '2025-10-02', title: 'Equity Research Workshop', description: 'Hands-on session building an investment thesis.', location: 'Goodes Hall 104' },
-  { dateISO: '2025-11-12', title: 'Alumni Panel Night', description: 'Hear from alumni at leading firms.', location: 'Virtual' },
-];
-
-export const alumniStats = { alumniCount: 200, cities: 18, industries: 12 };
-
 export const FEATURED_EVENTS = [
+  {
+    id: 'cfa-level-1-tutorial-one',
+    title: 'CFA Level 1 - Tutorial One',
+    type: 'tutorial',
+    dateISO: '2026-09-10',
+    displayDate: 'September 10, 2026',
+    host: 'Anson El-Ayari',
+    meetingLink: 'https://teams.microsoft.com/meet/273427765484907?p=zFCz5kaki096QHKxCk',
+    meetingLinkLabel: 'Join Meeting',
+    eventGraphic: null,
+    description: 'Tune in to join Anson in a short tutorial on quantitative methods used directly from the CFA Level 1 curriculum.',
+    diagnosticSection: null,
+  },
+  {
+    id: 'pm-strategy-tutorial-and-roast',
+    title: 'PM Strategy Tutorial and Roast',
+    type: 'tutorial',
+    dateISO: '2026-09-23',
+    displayDate: 'September 23, 2026',
+    host: null,
+    meetingLink: 'https://teams.microsoft.com/meet/273427765484907?p=zFCz5kaki096QHKxCk',
+    meetingLinkLabel: 'Join Meeting',
+    eventGraphic: null,
+    description: 'Tune in to hear about the different strategies PMs will be running throughout the year, and the thought process behind each — from strategy development to deployment.',
+    diagnosticSection: null,
+  },
   {
     id: 'wso-x-qhf',
     title: 'Wall Street Oasis X Queen\'s Hedge Fund',
