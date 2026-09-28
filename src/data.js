@@ -215,6 +215,33 @@ Jane holds two degrees from Queen's University—one in Kinesiology and one in H
     diagnosticSection: null,
   },
 ];
-export const ANNUAL_REPORTS = [];
+export const ANNUAL_REPORTS = [
+  {
+    year: '2025–2026',
+    title: 'QHF Annual Report',
+    description: 'Our inaugural year in review — the founding exec team, FY2025 performance (+37.32% USD portfolio, +30.30% CAD portfolio, +44.00% crypto portfolio), macro strategy & outlook, and investment team perspectives heading into 2026.',
+    date: '2025–2026',
+    link: asset('reports/qhf-annual-report-2025-2026.pdf'),
+  },
+];
 
-export const STOCK_PITCHES = [];
+export const STOCK_PITCHES = [
+  {
+    type: 'Buy',
+    ticker: 'NYSE: BNS',
+    company: 'Scotiabank',
+    title: 'Red Means Go',
+    thesis: 'Scotiabank pairs a fortress-grade 13.3% CET1 ratio with a strategic refocus on its core Pacific Alliance markets, positioning it for margin recovery, cost efficiency through its "Ignite" program, and a re-rating from its current 0.9x P/B discount toward its historical 1.2–1.4x range.',
+    author: 'Bianca Rotariu, Thomas Skippon, Logan Michaud',
+    link: asset('pitches/bns-stock-pitch.pdf'),
+  },
+  {
+    type: 'Buy',
+    ticker: 'NYSE: AG',
+    company: 'First Majestic Silver',
+    title: 'The Silver Narrative',
+    thesis: 'As the purest public play on silver, First Majestic captures maximum torque to the metal through the newly integrated Los Gatos Complex, an ~82% production increase guided for 2025-26, and its own minting facility — against a silver market running its fifth consecutive year of structural deficit.',
+    author: 'Finn Goodall — Global Equities',
+    link: asset('pitches/first-majestic-silver-pitch.pdf'),
+  },
+];
