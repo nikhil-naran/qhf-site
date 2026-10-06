@@ -136,6 +136,19 @@ export const sponsors = [
 
 export const FEATURED_EVENTS = [
   {
+    id: 'pm-strategy-tutorial-and-roast',
+    title: 'PM Strategy Tutorial and Roast',
+    type: 'tutorial',
+    dateISO: '2026-09-22',
+    displayDate: 'September 22, 2026',
+    host: null,
+    meetingLink: 'https://teams.microsoft.com/meet/273427765484907?p=zFCz5kaki096QHKxCk',
+    meetingLinkLabel: 'Join Meeting',
+    eventGraphic: null,
+    description: `Each Portfolio Manager took the floor to walk through the strategy they're running for the year ahead — the thesis behind it, the risk parameters guiding it, and why it earned a place in the book. After every pitch, the floor opened up: teammates and other PMs stress-tested the ideas, challenged assumptions, and probed for weaknesses before any real capital moved. Part strategy session, part public defense, the "roast" format is designed to sharpen every mandate under the same scrutiny a real portfolio manager would face from a risk committee — before the market does it for us.`,
+    diagnosticSection: null,
+  },
+  {
     id: 'cfa-level-1-tutorial-one',
     title: 'CFA Level 1 - Tutorial One',
     type: 'speaker',
@@ -148,19 +161,6 @@ export const FEATURED_EVENTS = [
     bio: `For our first CFA Level 1 tutorial, we welcomed Mounir El-Ayari — Senior Portfolio Manager and Senior Investment Advisor at Richardson Wealth — to walk through the quantitative methods covered in the CFA Level 1 curriculum and share how those concepts apply to real-world portfolio management.
 
 Senior Portfolio Manager, Senior Investment Advisor. After graduating from university in 1995, Mounir joined a bank-owned investment dealer as an Investment Advisor. Early in his career, he learned the importance of developing a deep understanding of his clients' financial needs and objectives. He also learned the value of investing in only the highest-quality securities and managing risk to preserve capital. As his career progressed, Mounir added four designations to his credentials: he became a Chartered Investment Manager (CIM), a Certified International Wealth Manager (CIWM), a Professional Financial Planner (PFP), and a Fellow of the Canadian Securities Institute (FCSI) and is licensed to trade options and futures. Mounir is also licensed to provide life, disability and accident & sickness insurance. Mounir advises broadly diversified investors who include high-net-worth families, C-level executives, trusts, foundations and businesses. He goes beyond portfolio management, with the help of firm's trusted in-house professionals, to provide tax, insurance and estate planning strategies that address all private wealth needs from top to bottom. All of his client relationships begin the same way - a relaxed meeting consisting of a straightforward exchange of ideas. He encourages people to openly share their personal and business circumstances, concerns, risk tolerance, hopes and goals. Mounir listens carefully to gather key insights from his meetings that inform his actions. In 2016, Mounir joined Richardson Wealth (formerly Richardson GMP) to better serve the needs of his clients with a firm that specializes in wealth management. Believing strongly in the importance of trust, integrity and an elevated code of service, Richardson Wealth's reputation for client care and heritage of high ethical standards resonated with him. More specifically, Mounir appreciates that Richardson Wealth is the first wealth management firm in Canada to earn Centre for Fiduciary Excellence Certification as an Investment Advisory firm.`,
-  },
-  {
-    id: 'pm-strategy-tutorial-and-roast',
-    title: 'PM Strategy Tutorial and Roast',
-    type: 'tutorial',
-    dateISO: '2026-09-22',
-    displayDate: 'September 22, 2026',
-    host: null,
-    meetingLink: 'https://teams.microsoft.com/meet/273427765484907?p=zFCz5kaki096QHKxCk',
-    meetingLinkLabel: 'Join Meeting',
-    eventGraphic: null,
-    description: `Each Portfolio Manager took the floor to walk through the strategy they're running for the year ahead — the thesis behind it, the risk parameters guiding it, and why it earned a place in the book. After every pitch, the floor opened up: teammates and other PMs stress-tested the ideas, challenged assumptions, and probed for weaknesses before any real capital moved. Part strategy session, part public defense, the "roast" format is designed to sharpen every mandate under the same scrutiny a real portfolio manager would face from a risk committee — before the market does it for us.`,
-    diagnosticSection: null,
   },
   {
     id: 'wso-x-qhf',
